@@ -5,12 +5,16 @@ namespace App\Entity;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
+ * @Vich\Uploadable()
  * @ORM\HasLifecycleCallbacks()
  *  @UniqueEntity
  * (
@@ -26,6 +30,21 @@ class Ad
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     *
+     * @var string|null
+     * @ORM\Column{type="string", length=255}
+     */
+    private $filename;
+
+    /**
+     * Correspond à l'imagé uploadé
+     *
+     * @var File|null
+     * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -366,6 +385,54 @@ class Ad
                 $comment->setAd(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get correspond à l'imagé uploadé
+     *
+     * @return  File|null
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set correspond à l'imagé uploadé
+     *
+     * @param  File|null  $imageFile  Correspond à l'imagé uploadé
+     *
+     * @return  self
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of filename
+     *
+     * @return  string|null
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * Set the value of filename
+     *
+     * @param  string|null  $filename
+     *
+     * @return  self
+     */
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
 
         return $this;
     }
