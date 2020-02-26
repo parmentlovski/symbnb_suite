@@ -84,7 +84,8 @@ class AppFixtures extends Fixture
 
             $title      = $faker->sentence();
             $slug       = $slugify->slugify($title);
-            $coverImage = $faker->imageUrl(350, 100);
+            $coverImageId = $faker->numberBetween(1, 85);
+            $coverImage = "https://i.picsum.photos/id/". $coverImageId . "/200/200.jpg";
             $introduction = $faker->paragraph(2);
             $content    = '<p>' . join('</p><p>', $faker->paragraphs(5)) . '</p>';
             $user = $users[mt_rand(0, count($users) - 1)];
@@ -102,7 +103,9 @@ class AppFixtures extends Fixture
 
                 $image = new Image();
 
-                $image->setUrl($faker->imageUrl())
+                $pictureId = $faker->numberBetween(1, 85);
+                $picture = "https://i.picsum.photos/id/". $pictureId . "/200/200.jpg";
+                $image->setUrl($picture)
                     ->setCaption($faker->sentence())
                     ->setAd($ad);
 
