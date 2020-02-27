@@ -97,7 +97,8 @@ class AppFixtures extends Fixture
                 ->setContent($content)
                 ->setPrice(mt_rand(40, 200))
                 ->setRooms(mt_rand(1, 5))
-                ->setAuthor($user);
+                ->setAuthor($user)
+                ->setUpdatedAt($faker->dateTime('now', null));
 
             for ($j = 0; $j < mt_rand(2, 5); $j++) {
 
