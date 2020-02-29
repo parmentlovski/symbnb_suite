@@ -3,16 +3,18 @@
 namespace App\DataFixtures;
 
 use App\Entity\Ad;
-use App\Entity\Booking;
-use App\Entity\Comment;
-use App\Entity\Image;
+use Faker\Factory;
 use App\Entity\Role;
 use App\Entity\User;
-use Faker\Factory;
+use App\Entity\Image;
+use App\Entity\Booking;
+use App\Entity\Comment;
 use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+
 
 class AppFixtures extends Fixture
 {
@@ -85,7 +87,7 @@ class AppFixtures extends Fixture
             $title      = $faker->sentence();
             $slug       = $slugify->slugify($title);
             $coverImageId = $faker->numberBetween(1, 85);
-            $coverImage = "https://i.picsum.photos/id/". $coverImageId . "/800/800.jpg";
+            $coverImage = "https://i.picsum.photos/id/" . $coverImageId . "/800/800.jpg";
             $introduction = $faker->paragraph(2);
             $content    = '<p>' . join('</p><p>', $faker->paragraphs(5)) . '</p>';
             $user = $users[mt_rand(0, count($users) - 1)];
@@ -97,14 +99,15 @@ class AppFixtures extends Fixture
                 ->setContent($content)
                 ->setPrice(mt_rand(40, 200))
                 ->setRooms(mt_rand(1, 5))
-                ->setAuthor($user);
+                ->setAuthor($user)
+                ->setUpdatedAt($faker->dateTime('now', null));
 
             for ($j = 0; $j < mt_rand(2, 5); $j++) {
 
                 $image = new Image();
 
                 $pictureId = $faker->numberBetween(1, 85);
-                $picture = "https://i.picsum.photos/id/". $pictureId . "/200/200.jpg";
+                $picture = "https://i.picsum.photos/id/" . $pictureId . "/200/200.jpg";
                 $image->setUrl($picture)
                     ->setCaption($faker->sentence())
                     ->setAd($ad);
