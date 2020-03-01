@@ -5,32 +5,23 @@
 
 {% block header %}{% endblock %}
 
+{% block stylesheets %}
+	<link href="css.php" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
 
-	{% set ad = booking.ad %}
+	<style>
+		body {
+			background-color: red !important;
+		}
+	</style>
+
+	{# {% set ad = booking.ad %} #}
 	{% set author = ad.author %}
 
 	<div class="container d-flex flex-column align-items center">
 		<h1 class="my-5">Votre réservation (n°{{ booking.id }})</h1>
-
-		{% if app.request.query.get('success') %}
-			<div class="alert alert-success">
-				<h4 class="alert-heading">Bravo votre réservation a eu lieux avec succès !</h4>
-
-				<p>
-					Votre réservation auprès de
-					<strong>
-						<a href="{{ path('user_show', {'slug' : author.slug}) }}">{{ author.fullName }}</a>
-					</strong>
-					pour l'annonce
-					<strong>
-						<a href="{{ path('ads_show', {'slug' : ad.slug}) }}">{{ ad.title }}</a>
-					</strong>
-					a bien été prise en compte !
-				</p>
-			</div>
-		{% endif %}
-
 
 		<div class="row">
 			<div class="col">
@@ -88,12 +79,6 @@
 
 					<div style="color: black;">
 						{{ ad.content | raw }}
-					</div>
-
-					<div class="d-flex justify-content-between">
-						<a href="{{ path('ads_show', { 'slug' : ad.slug }) }}" class="btn btn-primary">Plus d'informations</a>
-						<a href="{{ path('booking_pdf', { 'id' : ad.id }) }}" class="btn btn-info">Visualiser PDF</a>
-
 					</div>
 				</div>
 			</div>

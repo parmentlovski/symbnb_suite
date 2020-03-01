@@ -7,24 +7,16 @@ use App\Entity\Booking;
 use App\Entity\Comment;
 use App\Form\BookingType;
 use App\Form\CommentType;
-use App\Repository\BookingRepository;
+use App\Service\GeneratePdfService;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 
 class BookingController extends AbstractController
 {
-
-    public function __construct(\Knp\Snappy\Pdf $knpSnappy)
-    {
-        $this->knpSnappy = $knpSnappy;
-    }
 
     /**
      * @Route("/ads/{slug}/book", name="booking_create")
@@ -111,53 +103,15 @@ class BookingController extends AbstractController
     }
 
     /**
-     * Permet de visualiser la facture en pdf
+     * Permet de télécharger la facture en pdf
      * 
-     * @Route("/booking/{id}/show_pdf", name="booking_pdf")
+     * @Route("/booking/{id}/download", name="booking_pdf")
      *
-     * @return PdfResponse
+     * @return void
      */
-    public function doanwloadBookingPDF(Booking $booking, BookingRepository $repo)
+    public function doanwloadBookingPDF(Booking $id, GeneratePdfService $pdf)
     {
-
-        // Configure Dompdf according to your needs
-        $pdfOptions = new Options();
-        $pdfOptions->set('defaultFont', 'Arial');
-
-        // Instantiate Dompdf with our options
-        $dompdf = new Dompdf($pdfOptions);
-
-        $html = $this->renderView('download/booking.html.twig', [
-            'booking' => $repo->find($booking)
-        ]);
-
-        $html .= '<link type="text/css" href="/assets/css/app.scss" rel="stylesheet" />';
-        $html .= '<link type="text/css" href="/assets/css/bootstrap.css" rel="stylesheet" />';
-
-        // Load HTML to Dompdf
-        $dompdf->loadHtml($html);
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser (force download)
-        $dompdf->stream("mypdf.pdf", [
-            "Attachment" => true
-        ]);
-    }
-
-    /**
-     * Fichier PDF
-     * 
-     * @Route("/booking/pdf", name="booking_pdfFile")
-     *
-     * @return Response
-     */
-    public function filePDF(BookingRepository $repo)
-    {
-
-        return $this->render("download/booking.html.twig", [
-            'booking' => $repo->find('106')
-        ]);
+        $pdf->setEntityClass(Booking::class);
+        $pdf->download($id->getId(), 'download/booking.html.twig', "reservation_" . $id->getId());
     }
 }
