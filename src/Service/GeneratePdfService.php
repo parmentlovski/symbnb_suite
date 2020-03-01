@@ -4,7 +4,6 @@ namespace App\Service;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GeneratePdfService extends AbstractController
@@ -24,28 +23,17 @@ class GeneratePdfService extends AbstractController
     private $templatePath;
 
     /**
-     * Le manager de Doctrine qui nous permet notamment de trouver le repository dont on a besoin
+     * Permet de télécharger une page HTML en PDF
      *
-     * @var EntityManagerInterface
-     */
-    private $manager;
-
-    /**
-     * Constructeur du service de PDF qui sera appelé par Symfony
+     * @param integer $id
+     * @param string $fileName
+     * @param string $templatePath
+     * @param string $templateParams
      * 
-     *
-     * @param EntityManagerInterface $manager
+     * @return void
      */
-    public function __construct(EntityManagerInterface $manager)
+    public function download(string $fileName, string $templatePath, array $templateParams = null)
     {
-        // Autres initialisations
-        $this->manager      = $manager;
-    }
-
-
-    public function download(int $id, string $templatePath, string $fileName)
-    {
-
         // Instanciation et configuration de Dompdf
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
@@ -53,14 +41,9 @@ class GeneratePdfService extends AbstractController
         // Initialisation des options
         $dompdf = new Dompdf($pdfOptions);
 
-        $booking = $this->manager->getRepository($this->entityClass)->find($id);
+        // $booking = $this->manager->getRepository($this->entityClass)->find($id);
 
-        $html = $this->renderView($templatePath, [
-            'booking' => $booking,
-            'ad' => $booking->getAd()
-        ]);
-
-        // dd($this->entityClass);
+        $html = $this->renderView($templatePath, $templateParams);
 
         // Chargement du PDF dans Dompdf
         $dompdf->loadHtml($html);

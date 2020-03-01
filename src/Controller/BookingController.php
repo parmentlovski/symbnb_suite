@@ -112,6 +112,14 @@ class BookingController extends AbstractController
     public function doanwloadBookingPDF(Booking $id, GeneratePdfService $pdf)
     {
         $pdf->setEntityClass(Booking::class);
-        $pdf->download($id->getId(), 'download/booking.html.twig', "reservation_" . $id->getId());
+
+        //download prend en parametre :
+        // le nom du fichier à télécharger
+        // le chemin du template twig
+        // et les paramettre de ce template
+        $pdf->download("reservation_" . $id->getId(), 'download/booking.html.twig', [
+            'booking' => $id,
+            'ad' => $id->getAd()
+        ]);
     }
 }
