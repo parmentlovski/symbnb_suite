@@ -37,6 +37,7 @@ class GeneratePdfService extends AbstractController
         // Instanciation et configuration de Dompdf
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->setIsRemoteEnabled(true);
 
         // Initialisation des options
         $dompdf = new Dompdf($pdfOptions);

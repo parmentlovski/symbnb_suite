@@ -106,11 +106,15 @@ class BookingController extends AbstractController
      * Permet de télécharger la facture en pdf
      * 
      * @Route("/booking/{id}/download", name="booking_pdf")
+     * 
+     * @param Booking $id
+     * @param GeneratePdfService $pdf
      *
      * @return void
      */
     public function doanwloadBookingPDF(Booking $id, GeneratePdfService $pdf)
     {
+        // On renseigne l'entité relié au PDF
         $pdf->setEntityClass(Booking::class);
 
         //download prend en parametre :
