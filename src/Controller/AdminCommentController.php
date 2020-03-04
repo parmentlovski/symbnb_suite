@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use League\Csv\Writer;
 use App\Entity\Comment;
 use App\Form\AdminCommentType;
+use App\Service\ExportCsvService;
 use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +33,20 @@ class AdminCommentController extends AbstractController
         return $this->render('admin/comment/index.html.twig', [
             'pagination' => $pagination
         ]);
+    }
+    
+    /**
+     * Permet d'exporter les données en fichier csv
+     *
+     * @Route("/admin/comments/exportcsv", name="admin_comments_exportcsv")
+     *
+     * @return Response
+     */
+    public function exportCsv(ExportCsvService $exportCsvService)
+    {
+        $exportCsvService->loadCsvComments();
+
+        exit;
     }
 
     /**

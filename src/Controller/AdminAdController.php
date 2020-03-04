@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Form\AdType;
+use League\Csv\Writer;
 use App\Repository\AdRepository;
+use App\Service\ExportCsvService;
 use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +36,21 @@ class AdminAdController extends AbstractController
             'pagination' => $pagination
         ]);
     }
+
+     /**
+     * Permet d'exporter les données en fichier csv
+     *
+     * @Route("/admin/ads/exportcsv", name="admin_ads_exportcsv")
+     *
+     * @return Response
+     */
+    public function exportCsv(ExportCsvService $exportCsvService)
+    {
+        $exportCsvService->loadCsvAds();
+       
+        exit;
+    }
+
 
     /**
      * Permet d'afficher le formulaire d'édition

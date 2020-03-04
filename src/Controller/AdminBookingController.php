@@ -2,18 +2,23 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Booking;
 use App\Form\AdminBookingType;
-use App\Repository\BookingRepository;
 use App\Service\PaginationService;
+use App\Repository\BookingRepository;
+use App\Service\ExportCsvService;
+use League\Csv\Writer;
 use Doctrine\ORM\EntityManagerInterface;
+use Egyg33k\CsvBundle\DependencyInjection\Configuration;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class AdminBookingController extends AbstractController
 {
+
     /**
      * Permet d'afficher la liste des réservations
      * 
@@ -33,6 +38,21 @@ class AdminBookingController extends AbstractController
         return $this->render('admin/booking/index.html.twig', [
             'pagination' => $pagination
         ]);
+    }
+
+    /**
+     * Permet d'exporter les données en fichier csv
+     *
+     * @Route("/admin/bookings/exportcsv", name="admin_bookings_exportcsv")
+     *
+     * @return Response
+     */
+    public function exportCsv(ExportCsvService $exportCsvService)
+    {
+
+        $exportCsvService->loadCsvBookings();
+    
+        exit;
     }
 
     /**

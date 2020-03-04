@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use League\Csv\Writer;
+use App\Service\ExportCsvService;
 use App\Repository\UserRepository;
 use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminUserController extends AbstractController
@@ -35,6 +39,20 @@ class AdminUserController extends AbstractController
     }
 
     /**
+     * Permet d'exporter les données en fichier csv
+     *
+     * @Route("/admin/user/exportcsv", name="admin_user_exportcsv")
+     *
+     * @return Response
+     */
+    public function exportCsv(ExportCsvService $exportCsvService)
+    {
+        $exportCsvService->loadCsvUsers();
+        
+        exit;
+    }
+
+    /**
      * Permet de supprimer un utilisateur
      * 
      * @Route("/admin/user/{id}/delete", name="admin_user_delete")
@@ -52,7 +70,6 @@ class AdminUserController extends AbstractController
                 'warning',
                 "Vous ne pouvez pas supprimer l'utilisateur <strong>{$user->getFullName()}</strong> car il déjà posté / réservé des annonces !"
             );
-
         } else {
 
             $manager->remove($user);
