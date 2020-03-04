@@ -5,9 +5,13 @@
 
 {% block body %}
 	<div class="container-fluid">
-		<h1 class="my-5">Administrtion des utilisateurs</h1>
-        
-        <table class="table table-hover">
+		<h1 class="my-5">Administration des utilisateurs</h1>
+		<a href="{{path('admin_user_exportcsv')}}" class=" mb-3 btn btn-success float-right">
+			<i class="fas fa-file-csv"></i>
+			Exporter en fichier csv
+		</a>
+
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -23,7 +27,7 @@
 			<tbody>
 				{% for user in pagination.data %}
 					<tr>
-						<td>{{ user.id }}
+						<td>{{ user.id }}</td>
 						<td>{{ user.firstName }}
 							{{ user.lastName | upper }}</td>
 						<td>{{ user.email }}</td>
@@ -54,7 +58,8 @@
 			</tbody>
 		</table>
 
-        {# Affichage de la pagination #}
+
+		{# Affichage de la pagination #}
 		{{ pagination.display() }}
 	</div>
 {% endblock %}
