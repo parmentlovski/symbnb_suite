@@ -108,6 +108,9 @@
     "egulias/email-validator": {
         "version": "2.1.11"
     },
+    "egyg33k/csv-bundle": {
+        "version": "1.0.1"
+    },
     "fzaninotto/faker": {
         "version": "v1.9.0"
     },
@@ -116,6 +119,9 @@
     },
     "jms/metadata": {
         "version": "2.1.0"
+    },
+    "league/csv": {
+        "version": "9.5.0"
     },
     "monolog/monolog": {
         "version": "2.0.1"
