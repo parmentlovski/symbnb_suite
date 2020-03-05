@@ -6,10 +6,9 @@
 {% block body %}
 	<div class="container-fluid">
 		<h1 class="my-5">Administration des utilisateurs</h1>
-		<a href="{{path('admin_user_exportcsv')}}" class=" mb-3 btn btn-success float-right">
-			<i class="fas fa-file-csv"></i>
-			Exporter en fichier csv
-		</a>
+		
+		{# Affichage du bouton pour exports les données dans un fichier csv#}
+		{% include "admin/partials/exportcsv.html.twig" %}
 
 		<table class="table table-hover">
 			<thead>
