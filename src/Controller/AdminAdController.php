@@ -32,8 +32,11 @@ class AdminAdController extends AbstractController
         $pagination->setEntityClass(Ad::class)
             ->setPage($page);
 
+        $export = 'admin_ads_exportcsv';
+
         return $this->render('admin/ad/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'export' => $export
         ]);
     }
 

@@ -32,9 +32,11 @@ class AdminUserController extends AbstractController
         $pagination->setEntityClass(User::class)
             ->setPage($page);
 
+        $export = 'admin_user_exportcsv';
 
         return $this->render('admin/user/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'export' => $export
         ]);
     }
 

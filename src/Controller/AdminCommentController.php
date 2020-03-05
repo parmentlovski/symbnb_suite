@@ -29,9 +29,11 @@ class AdminCommentController extends AbstractController
     {
         $pagination->setEntityClass(Comment::class)
             ->setPage($page);
+        $export = 'admin_comments_exportcsv';
 
         return $this->render('admin/comment/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'export' => $export
         ]);
     }
     
@@ -42,9 +44,9 @@ class AdminCommentController extends AbstractController
      *
      * @return Response
      */
-    public function exportCsv(ExportCsvService $exportCsvService)
+    public function exportCsv(ExportCsvService $exportCsv)
     {
-        $exportCsvService->loadCsvComments();
+        $exportCsv->loadCsvComments();
 
         exit;
     }

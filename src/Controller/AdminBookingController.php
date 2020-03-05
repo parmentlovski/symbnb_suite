@@ -34,9 +34,12 @@ class AdminBookingController extends AbstractController
 
         $pagination->setEntityClass(Booking::class)
             ->setPage($page);
+        
+        $export = 'admin_bookings_exportcsv';
 
         return $this->render('admin/booking/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'export' => $export
         ]);
     }
 
