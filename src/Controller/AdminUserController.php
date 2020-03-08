@@ -47,10 +47,29 @@ class AdminUserController extends AbstractController
      *
      * @return Response
      */
-    public function exportCsv(ExportCsvService $exportCsvService)
+    public function exportCsv(ExportCsvService $exportCsv, EntityManagerInterface $manager)
     {
-        $exportCsvService->loadCsvUsers();
+        $users = $manager->getRepository(User::class)->findAll();
+        $exportCsv->createCsv([
+            'Prénom', 
+            'Nom', 
+            'Email', 
+            "Nombre d'annonces",
+            "Nombre de réservations"]
+        );
         
+        foreach($users as $user) {
+            $exportCsv->insertCsv([
+            $user->getFirstName(),
+            $user->getLastName(),
+            $user->getEmail(),
+            count($user->getAds()),
+            count($user->getBookings())
+            ]);
+        }
+
+        $exportCsv->getOutput('users.csv');
+
         exit;
     }
 

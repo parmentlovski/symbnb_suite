@@ -16,6 +16,20 @@ class ExportCsvService
 {
 
     /**
+     * Le nom de l'entité sur laquelle on veut effectuer une pagination
+     *
+     * @var string
+     */
+    private $entityClass;
+
+    /**
+     * La function permettant de créer un fichier csv
+     *
+     * 
+     */
+    private $csv;
+
+    /**
      * Le manager de Doctrine qui nous permet notamment de trouver le repository dont on a besoin
      *
      * @var EntityManagerInterface
@@ -30,118 +44,88 @@ class ExportCsvService
 
     public function __construct(EntityManagerInterface $manager)
     {
+
         $this->manager = $manager;
+        $this->csv = Writer::createFromString('');
+    }
+    
+     /**
+     * Permet de spécifier l'entité sur laquelle on souhaite paginer
+     * Par exemple :
+     * - App\Entity\Ad::class
+     * - App\Entity\Comment::class
+     *
+     * @param string $entityClass
+     * @return self
+     */
+    public function setEntityClass(string $entityClass): self
+    {
+        $this->entityClass = $entityClass;
+        return $this;
+    }
+    /**
+     * Permet de récupérer l'entité sur laquelle on est en train de paginer
+     *
+     * @return string
+     */
+    public function getEntityClass(): string
+    {
+        return $this->entityClass;
     }
 
      /**
-     * Permet d'exporter les données concernant les annonces
+     * Permet de récupérer les données paginées pour une entité spécifique
+     * 
+     * Elle se sert de Doctrine afin de récupérer le repository pour l'entité spécifiée
+     * puis grâce au repository et à sa fonction findBy() on récupère les données dans une 
+     * certaine limite et en partant d'un offset
+     * 
+     * @throws Exception si la propriété $entityClass n'est pas définie
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        if (empty($this->entityClass)) {
+            throw new \Exception("Vous n'avez pas spécifié l'entité sur laquelle nous devons paginer ! Utilisez la méthode setEntityClass() de votre objet PaginationService !");
+        }
+        // 1) Demander au repository de trouver tout les éléments
+        return $this->manager
+            ->getRepository($this->entityClass)
+            ->findAll();
+    }
+
+   
+    /**
+     * Permet de récupérer le nom de fichier d'export csv
      *
      * @return void
      */
-    public function loadCsvAds(){
-        $ads = $this->manager->getRepository(Ad::class)->findAll();
-        $header = ['Titre', 'Auteur', 'Nombre de réservations', 'Note'];
+    public function getOutput(string $output)
+    {
+        return $this->csv->output($output);
+    }
 
-        //load the CSV document from a string
-        $csv = Writer::createFromString('');
-
+      /**
+     * Permet de créer un fichier csv et d'inclure un header
+     *
+     * @return void
+     */
+    public function createCsv($header)
+    {
         //insert the header
-        $csv->insertOne($header);
-
-        foreach ($ads as $ad) {
-            $csv->insertOne([
-                $ad->getTitle(),
-                $ad->getAuthor()->getFirstName() . " " . $ad->getAuthor()->getLastName(),
-                count($ad->getBookings()),
-                $ad->getAvgRating()
-            ]);
-
-        }
-
-        $csv->output('annonces.csv');
+        $this->csv->insertOne($header);
     }
 
     /**
-     * Permet d'exporter les données concernant les réservations
+     * Permet d'insérer les données d'une entité quelconque 
      *
      * @return void
      */
-    public function loadCsvBookings()
+    public function insertCsv($insert)
     {
-        $bookings = $this->manager->getRepository(Booking::class)->findAll();
-        $header = ['Date', 'Visiteur', 'Annonce', 'Prix'];
-
-        //load the CSV document from a string
-        $csv = Writer::createFromString('');
-
-        //insert the header
-        $csv->insertOne($header);
-
-        foreach ($bookings as $booking) {
-            $csv->insertOne([
-                $booking->getCreatedAt()->format('Y-m-d H:i:s'),
-                $booking->getBooker()->getFirstName() . " " . $booking->getBooker()->getLastName(),
-                $booking->getAd()->getTitle(),
-                $booking->getAmount() . " €",
-            ]);
-        }
-
-        $csv->output('reservations.csv');
-    }
-
-     /**
-     * Permet d'exporter les données concernant les commentaires
-     *
-     * @return void
-     */
-    public function loadCsvComments(){
-        $comments = $this->manager->getRepository(Comment::class)->findAll();
-        $header = ['Date', 'Auteur', 'Commentaire', 'Note', 'Annonce'];
- 
-        //load the CSV document from a string
-        $csv = Writer::createFromString('');
-
-        //insert the header
-        $csv->insertOne($header);
-
-        foreach ($comments as $comment) {
-            $csv->insertOne([
-                $comment->getCreatedAt()->format('Y-m-d H:i:s'),
-                $comment->getAuthor()->getFirstName() . " " . $comment->getAuthor()->getLastName(),
-                $comment->getContent(),
-                $comment->getRating(),
-                $comment->getAd()->getTitle()
-            ]);
-        }
-
-        $csv->output('commentaires.csv');
-    }
-
-     /**
-     * Permet d'exporter les données concernant les utilisateurs
-     *
-     * @return void
-     */
-    public function loadCsvUsers(){
-        $bookings = $this->manager->getRepository(User::class)->findAll();
-        $header = ['Prénom', 'Nom', 'Email', "Nombre d'annonces", "Nombre de réservations"];
-
-        //load the CSV document from a string
-        $csv = Writer::createFromString('');
-
-         //insert the header
-         $csv->insertOne($header);
-
-        foreach($bookings as $booking) {
-            $csv->insertOne([
-            $booking->getFirstName(),
-            $booking->getLastName(),
-            $booking->getEmail(),
-            count($booking->getAds()),
-            count($booking->getBookings())
-            ]);
-        }
-    
-        $csv->output('users.csv');
+        return $this->csv->insertOne($insert);
     }
 }
+
+

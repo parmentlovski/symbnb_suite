@@ -40,20 +40,38 @@ class AdminAdController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * Permet d'exporter les données en fichier csv
      *
      * @Route("/admin/ads/exportcsv", name="admin_ads_exportcsv")
      *
      * @return Response
      */
-    public function exportCsv(ExportCsvService $exportCsvService)
+    public function exportCsv(ExportCsvService $exportCsv, EntityManagerInterface $manager)
     {
-        $exportCsvService->loadCsvAds();
-       
+        $ads = $manager->getRepository(Ad::class)->findAll();
+        $exportCsv->createCsv(
+            [
+                'Titre', 
+                'Auteur', 
+                'Nombre de réservations', 
+                'Note'
+            ]
+        );
+
+        foreach ($ads as $ad) {
+            $exportCsv->insertCsv([
+                $ad->getTitle(),
+                $ad->getAuthor()->getFirstName() . " " . $ad->getAuthor()->getLastName(),
+                count($ad->getBookings()),
+                $ad->getAvgRating()
+            ]);
+        }
+
+        $exportCsv->getOutput('annonces.csv');
+
         exit;
     }
-
 
     /**
      * Permet d'afficher le formulaire d'édition

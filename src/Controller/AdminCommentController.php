@@ -44,9 +44,28 @@ class AdminCommentController extends AbstractController
      *
      * @return Response
      */
-    public function exportCsv(ExportCsvService $exportCsv)
+    public function exportCsv(ExportCsvService $exportCsv, EntityManagerInterface $manager)
     {
-        $exportCsv->loadCsvComments();
+        $comments = $manager->getRepository(Comment::class)->findAll();
+        $exportCsv->createCsv([
+            'Date', 
+            'Auteur', 
+            'Commentaire', 
+            'Note', 
+            'Annonce']
+        );
+
+        foreach ($comments as $comment) {
+            $exportCsv->insertCsv([
+                $comment->getCreatedAt()->format('Y-m-d H:i:s'),
+                $comment->getAuthor()->getFirstName() . " " . $comment->getAuthor()->getLastName(),
+                $comment->getContent(),
+                $comment->getRating(),
+                $comment->getAd()->getTitle()
+            ]);
+        }
+
+        $exportCsv->getOutput('commentaires.csv');
 
         exit;
     }
