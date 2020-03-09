@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+// use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 class AdminAdController extends AbstractController
 {
@@ -135,3 +136,14 @@ class AdminAdController extends AbstractController
         return $this->redirectToRoute('admin_ads_index');
     }
 }
+
+
+//  public function  pdfAction()
+//     {
+//         $pageUrl = $this->generateUrl('homepage', array(), true); // use absolute path!
+
+//         return new PdfResponse(
+//             $this->get('knp_snappy.pdf')->getOutput($pageUrl),
+//             'file.pdf'
+//         );
+//     }

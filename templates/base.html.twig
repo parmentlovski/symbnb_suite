@@ -6,16 +6,21 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 		{{ encore_entry_link_tags('css/app') }}
 		{% block stylesheets %}{% endblock %}
-		</head>
-		<body>
-			{% include "partials/header.html.twig" %}
+	</head>
+	<body>
+		{% block header %}
 
-			{% block body %}{% endblock %}
+
+			{% include "partials/header.html.twig" %}
+		{% endblock %}
+
+		{% block body %}{% endblock %}
+		{% block footer %}
 
 			{% include "partials/footer.html.twig" %}
+		{% endblock %}
 
 		{{ encore_entry_script_tags('js/app') }}
-			{% block javascripts %}{% endblock %}
-		</body>
-	</html>
-
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

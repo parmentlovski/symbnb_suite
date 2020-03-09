@@ -7,6 +7,7 @@ use App\Entity\Booking;
 use App\Entity\Comment;
 use App\Form\BookingType;
 use App\Form\CommentType;
+use App\Service\GeneratePdfService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BookingController extends AbstractController
 {
+
     /**
      * @Route("/ads/{slug}/book", name="booking_create")
      * @IsGranted("ROLE_USER")
@@ -83,8 +85,8 @@ class BookingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setAd($booking->getAd())
-                    ->setAuthor($this->getUser()); // $this->getUser() nous renvoie l'utilisateur connecté 
-                
+                ->setAuthor($this->getUser()); // $this->getUser() nous renvoie l'utilisateur connecté 
+
             $manager->persist($comment);
             $manager->flush();
 
@@ -97,6 +99,27 @@ class BookingController extends AbstractController
         return $this->render('booking/show.html.twig', [
             'booking' => $booking,
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Permet de télécharger la facture en pdf
+     * 
+     * @Route("/booking/{id}/download", name="booking_pdf")
+     *
+     * @return void
+     */
+    public function doanwloadBookingPDF(Booking $id, GeneratePdfService $pdf)
+    {
+        $pdf->setEntityClass(Booking::class);
+
+        //download prend en parametre :
+        // le nom du fichier à télécharger
+        // le chemin du template twig
+        // et les paramettre de ce template
+        $pdf->download("reservation_" . $id->getId(), 'download/booking.html.twig', [
+            'booking' => $id,
+            'ad' => $id->getAd()
         ]);
     }
 }

@@ -44,7 +44,8 @@
 						<dt class="col-md-4">Nombre de nuits</dt>
 						<dd class="col-md-8">{{ booking.duration }}</dd>
 						<dt class="col-md-4">Montant total</dt>
-						<dd class="col-md-8">{{ booking.amount | number_format(2,',','')}} &euro;</dd>
+						<dd class="col-md-8">{{ booking.amount | number_format(2,',','')}}
+							&euro;</dd>
 						<dt class="col-md-4">Commentaire</dt>
 						<dd class="col-md-8">{{ booking.comment | default('Aucun commentaire ..')}}</dd>
 					</dl>
@@ -84,14 +85,15 @@
 								{{ comment.content }}
 							</blockquote>
 
-							<strong>Note: {% include "partials/rating.html.twig" with {'rating' : comment.rating} %}</strong>
+							<strong>Note:
+								{% include "partials/rating.html.twig" with {'rating' : comment.rating} %}</strong>
 
-							{% else %}
+						{% else %}
 
-								{{ form_start(form) }}
-								{{ form_widget(form) }}
-								<button type="submit" class="btn btn-success">Envoyer</button>
-								{{ form_end(form) }}
+							{{ form_start(form) }}
+							{{ form_widget(form) }}
+							<button type="submit" class="btn btn-success">Envoyer</button>
+							{{ form_end(form) }}
 						{% endif %}
 					{% else %}
 						<p>Vous ne pourrez pas noter cette annonce tant que votre voyage ne sera pas complet !</p>
@@ -111,9 +113,14 @@
 					<img src="{{ ad.coverImage }}" alt="Image de {{ ad.title }}" class="img-fluid">
 
 					<div style="color: black;">
-						{{ ad.content | raw }}</div>
+						{{ ad.content | raw }}
+					</div>
 
-					<a href="{{ path('ads_show', { 'slug' : ad.slug }) }}" class="btn btn-primary">Plus d'informations</a>
+					<div class="d-flex justify-content-between">
+						<a href="{{ path('ads_show', { 'slug' : ad.slug }) }}" class="btn btn-primary">Plus d'informations</a>
+						<a href="{{ path('booking_pdf', { 'id' : booking.id }) }}" class="btn btn-info">Télécharger le PDF</a>
+
+					</div>
 				</div>
 			</div>
 		</div>
