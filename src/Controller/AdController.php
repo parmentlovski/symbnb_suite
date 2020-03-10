@@ -22,7 +22,7 @@ class AdController extends AbstractController
      * 
      * @return Response
      */
-    public function index(AdRepository $repo)
+    public function index(AdRepository $repo, Request $request)
     {
         $ads = $repo->findAll();
 
@@ -57,6 +57,7 @@ class AdController extends AbstractController
                 $manager->persist($image);
             }
             $ad->setAuthor($this->getUser());
+            $ad->setUpdatedAt(new \DateTime('now'));
             $ad->initializeSlug();
             $manager->persist($ad);
             $manager->flush();
@@ -110,7 +111,7 @@ class AdController extends AbstractController
             ]);
         }
 
-        return $this->render('ad/edit.html.twig',[
+        return $this->render('ad/edit.html.twig', [
             'form' => $form->createView(),
             'ad' => $ad
         ]);
@@ -149,7 +150,7 @@ class AdController extends AbstractController
             'success',
             "L'annonce <strong>{$ad->getTitle()}</strong> a bien été supprimé"
         );
-        
+
         return $this->redirectToRoute("ads_index");
     }
 }

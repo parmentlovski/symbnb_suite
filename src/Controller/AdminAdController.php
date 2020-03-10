@@ -98,14 +98,3 @@ class AdminAdController extends AbstractController
         return $this->redirectToRoute('admin_ads_index');
     }
 }
-
-
-//  public function  pdfAction()
-//     {
-//         $pageUrl = $this->generateUrl('homepage', array(), true); // use absolute path!
-
-//         return new PdfResponse(
-//             $this->get('knp_snappy.pdf')->getOutput($pageUrl),
-//             'file.pdf'
-//         );
-//     }
