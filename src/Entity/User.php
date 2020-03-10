@@ -284,7 +284,8 @@ class User implements UserInterface
     }
 
     public function getSalt()
-    { }
+    {
+    }
 
     public function getUsername()
     {
@@ -292,7 +293,8 @@ class User implements UserInterface
     }
 
     public function eraseCredentials()
-    { }
+    {
+    }
 
     /**
      * @return Collection|Role[]

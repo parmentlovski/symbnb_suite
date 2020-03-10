@@ -18,6 +18,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    private $encoders;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
     {

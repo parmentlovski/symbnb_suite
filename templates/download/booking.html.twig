@@ -6,17 +6,10 @@
 {% block header %}{% endblock %}
 
 {% block stylesheets %}
-	<link href="assets/css/app.scss" rel="stylesheet">
+	{{ encore_entry_link_tags('css/app') }}
 {% endblock %}
 
 {% block body %}
-
-	<style>
-		body {
-			background-color: red !important;
-		}
-	</style>
-
 	{% set author = ad.author %}
 
 	<div class="container d-flex flex-column align-items center">
