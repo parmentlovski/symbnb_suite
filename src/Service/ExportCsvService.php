@@ -96,16 +96,7 @@ class ExportCsvService
     }
 
    
-    /**
-     * Permet de récupérer le nom de fichier d'export csv
-     *
-     * @return void
-     */
-    public function getOutput(string $output)
-    {
-        return $this->csv->output($output);
-    }
-
+    
       /**
      * Permet de créer un fichier csv et d'inclure un header
      *
@@ -126,6 +117,17 @@ class ExportCsvService
     {
         return $this->csv->insertOne($insert);
     }
+
+    /**
+     * Permet de récupérer le nom de fichier d'export csv
+     *
+     * @return void
+     */
+    public function getOutput(string $output)
+    {
+        return $this->csv->output($output);
+    }
+
 }
 
 
