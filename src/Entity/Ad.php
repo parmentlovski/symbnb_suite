@@ -113,6 +113,11 @@ class Ad
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -454,6 +459,18 @@ class Ad
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

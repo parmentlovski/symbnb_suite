@@ -32,6 +32,21 @@ class AdRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function search($criteria)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.city = :city')
+            ->setParameter('city', $criteria['villes'])
+            ->andWhere('a.rooms = :rooms')
+            ->setParameter('rooms', $criteria['chambres'])
+            ->andWhere('a.price > :minimumPrice')
+            ->setParameter('minimumPrice', $criteria['minimumPrice'])
+            ->andWhere('a.price < :maximumPrice')
+            ->setParameter('maximumPrice', $criteria['maximumPrice'])
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Ad[] Returns an array of Ad objects
     //  */
