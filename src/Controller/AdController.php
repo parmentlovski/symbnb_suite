@@ -156,27 +156,26 @@ class AdController extends AbstractController
     }
 
     /**
-     * Permet de faire une recherche
-     *
-     * @Route("/search/ads", name="ads_search")
+     * Permet d'afficher la page de recherche
      * 
+     * @Route("/search/ads", name="ads_search")
+     *
      * @return Response
      */
     public function search(Request $request, AdRepository $adRepository)
     {
 
-        $searchForm = $this->createForm(SearchAdType::class);
-        $searchForm->handleRequest($request);
-        $criteria = $searchForm->getData();
+        $ads = [];
+        $searchAdForm = $this->createForm(SearchAdType::class);
 
-        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-
-            $ads = $adRepository->searchAd($criteria);
-            dd($criteria);
+        if ($searchAdForm->handleRequest($request)->isSubmitted() && $searchAdForm->isValid()) {
+            $criteria = $searchAdForm->getData();
+            $ads = $adRepository->search($criteria);
         }
 
         return $this->render('ad/search.html.twig', [
-            'searchForm' => $searchForm->createView()
+            'search_form' => $searchAdForm->createView(),
+            'ads' => $ads
         ]);
     }
 }

@@ -1,15 +1,35 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	Recherche avancée
+	Rechercher une annonce
 {% endblock %}
 
 {% block body %}
-	<h1>Recherche</h1>
-	{{form_start(searchForm) }}
+	<div class="container">
+		<div class="row">
+			<div class="col-6 offset-3">
+				<h1 class="my-3 text-center">Effectuer une recherche</h1>
 
-	{{form_widget(searchForm) }}
+				{{ form(search_form) }}
 
-	{{form_end(searchForm) }}
+				</div>
+			</div>
+			{% if app.request.method == 'POST' %}
+				<div class="row">
+					<div class="col-6 offset-3">
+						{% if ads | length == 0 %}
+							<h2 class="my-5 text-center">Aucun résultat pour votre recherche</h2>
+						{% else %}
+							<h2 class="my-5 text-center">Résultats de la recherche</h2>
+						</div>
+						<div class="row d-flex justify-content-center">
+							{% for ad in ads %}
+								{% include "ad/_ad.html.twig" %}
+							{% endfor %}
+						{% endif %}
+					</div>
+				</div>
+			{% endif %}
+		</div>
 
-{% endblock %}
+	{% endblock %}

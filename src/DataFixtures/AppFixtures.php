@@ -81,10 +81,20 @@ class AppFixtures extends Fixture
             $users[] = $user;
         }
 
+        $cities = [
+            "Besançon",
+            "Bordeaux",
+            "Paris",
+            "Lyon",
+            "Nantes",
+            "Reims",
+            "Marseille",
+            "Rennes",
+            "Dijon",
+            "Monaco"
+        ];
+
         // Gestion des annonces
-
-        $cities = ["Besançon", "Bordeaux", "Paris", "Lyon", "Nantes", "Reims", "Marseille", "Rennes", "Dijon", "Monaco"];
-
         for ($i = 1; $i <= 15; $i++) {
 
             $ad = new Ad();
