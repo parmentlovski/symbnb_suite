@@ -164,16 +164,17 @@ class AdController extends AbstractController
      */
     public function search(Request $request, AdRepository $adRepository){
 
+        $ads = [];
         $searchAdForm = $this->createForm(SearchAdType::class);
 
         if($searchAdForm->handleRequest($request)->isSubmitted() && $searchAdForm->isValid()){
             $criteria = $searchAdForm->getData();
             $ads = $adRepository->search($criteria);
-            dd($ads);
         }
 
         return $this->render('ad/search.html.twig', [
-            'search_form' => $searchAdForm->createView()
+            'search_form' => $searchAdForm->createView(),
+            'ads' => $ads
         ]);
     }
 }
