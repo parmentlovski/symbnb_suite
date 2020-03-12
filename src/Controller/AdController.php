@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ad;
 use App\Form\AdType;
 use App\Entity\Image;
+use App\Form\SearchAdType;
 use App\Repository\AdRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -152,5 +153,30 @@ class AdController extends AbstractController
         );
 
         return $this->redirectToRoute("ads_index");
+    }
+
+    /**
+     * Permet de faire une recherche
+     *
+     * @Route("/search/ads", name="ads_search")
+     * 
+     * @return Response
+     */
+    public function search(Request $request, AdRepository $adRepository)
+    {
+
+        $searchForm = $this->createForm(SearchAdType::class);
+        $searchForm->handleRequest($request);
+        $criteria = $searchForm->getData();
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+
+            $ads = $adRepository->searchAd($criteria);
+            dd($criteria);
+        }
+
+        return $this->render('ad/search.html.twig', [
+            'searchForm' => $searchForm->createView()
+        ]);
     }
 }

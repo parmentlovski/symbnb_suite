@@ -6,11 +6,18 @@
 {% block body %}
 
 	<div class="container">
-		<h1 class="my-35">Voicis les annonces des hôtes !</h1>
+		<div class="my-3 d-flex justify-content-between align-items-center">
+			<h1>Voici les annonces des hôtes !</h1>
+			<span>
+				<a href="{{ path('ads_search') }}" class="btn btn-primary">Recherche avancée</a>
+			</span>
+
+
+		</div>
 
 		<div class="row">
 			{% for ad in ads %}
-			{% include "ad/_ad.html.twig" %}
+				{% include "ad/_ad.html.twig" %}
 			{% endfor %}
 		</div>
 	</div>

@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Recherche avancée
+{% endblock %}
+
+{% block body %}
+	<h1>Recherche</h1>
+	{{form_start(searchForm) }}
+
+	{{form_widget(searchForm) }}
+
+	{{form_end(searchForm) }}
+
+{% endblock %}

@@ -25,10 +25,11 @@ class AppFixtures extends Fixture
         $this->encoder = $encoder;
     }
 
+
     public function load(ObjectManager $manager)
     {
 
-        $faker = Factory::create('FR-fr');
+        $faker = Factory::create('fr_FR');
         $slugify = new Slugify();
 
         $adminRole = new Role();
@@ -81,7 +82,10 @@ class AppFixtures extends Fixture
         }
 
         // Gestion des annonces
-        for ($i = 1; $i <= 30; $i++) {
+
+        $cities = ["Besançon", "Bordeaux", "Paris", "Lyon", "Nantes", "Reims", "Marseille", "Rennes", "Dijon", "Monaco"];
+
+        for ($i = 1; $i <= 15; $i++) {
 
             $ad = new Ad();
 
@@ -101,7 +105,8 @@ class AppFixtures extends Fixture
                 ->setPrice(mt_rand(40, 200))
                 ->setRooms(mt_rand(1, 5))
                 ->setAuthor($user)
-                ->setUpdatedAt($faker->dateTime('now', null));
+                ->setUpdatedAt($faker->dateTime('now', null))
+                ->setCity($faker->randomElement($cities));
 
             for ($j = 0; $j < mt_rand(2, 5); $j++) {
 
