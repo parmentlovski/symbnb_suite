@@ -6,7 +6,7 @@
 {% block body %}
 	<div class="container-fluid">
 		<h1 class="my-5">Administration des utilisateurs</h1>
-		
+
 		{# Affichage du bouton pour exports les données dans un fichier csv#}
 		{% include "admin/partials/exportcsv.html.twig" %}
 
@@ -45,7 +45,7 @@
 							</span>
 						</td>
 						<td>
-							<a href="#" class="btn btn-primary">
+							<a href="{{ path('admin_account_profile', {'slug' : user.slug}) }}" class="btn btn-primary">
 								<i class="fas fa-edit"></i>
 							</a>
 							<a href="{{ path('admin_user_delete', {'id' : user.id}) }}" id="delete-comment" class="btn btn-danger">
