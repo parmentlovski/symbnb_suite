@@ -25,7 +25,8 @@ div.carousel-caption {
     text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
-.carousel-inner { // le slider qui affichent les images d'une annonce
+.carousel-inner {
+    // le slider qui affichent les images d'une annonce
     img {
         max-height: 350px; // diminution de la taille de l'image
     }
@@ -64,5 +65,12 @@ span.rating i {
     }
     .btn {
         color: white;
+    }
+}
+
+// Titre H4 Dashboard
+.col-8 {
+    h4 {
+        font-size: 20px;
     }
 }
