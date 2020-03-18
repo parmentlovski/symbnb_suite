@@ -1,0 +1,73 @@
+#pdf {
+
+    #title {
+        text-align: center;
+        background-color: #158cba;
+        color: white;
+        border-radius: 2px;
+    }
+
+    #content-pdf {
+
+        #reservation,
+        #hote,
+        #hebergement {
+            color: #818182;
+
+            .little-title {
+                color: black;
+            }
+        }
+
+        #hote {
+            width: 100%;
+
+            .hote-content {
+                width: 100%;
+                margin-left: 39%;
+
+                .avatar {
+                    border-radius: 100%;
+                }
+
+                .annonce {
+                    margin-top: 20px;
+                    padding-top: 20px;
+                    padding-left: 30px;
+                }
+            }
+        }
+
+        #hebergement {
+
+            .hebergement-title {
+                text-align: center;
+                padding-top: 30px;
+            }
+
+            .hebergement-content {
+                width: 100%;
+                position: relative;
+
+                img {
+                    max-width: 80%;
+                    max-height: 50%;
+                    position: absolute;
+                    top: 50px;
+                    left: 30px;
+                }
+
+                .espacement {
+                    width: 60%;
+                    font-size: 12px;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                }
+            }
+
+        }
+
+    }
+
+}

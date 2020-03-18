@@ -12,71 +12,85 @@
 {% block body %}
 	{% set author = ad.author %}
 
-	<div class="container d-flex flex-column align-items center">
-		<h1 class="my-5">Votre réservation (n°{{ booking.id }})</h1>
+	<div
+		id="pdf">
+		<!-- Début pdf -->
 
-		<div class="row">
-			<div class="col">
-				<div class="alert alert-light">
-					<h2>Détails</h2>
-					<dl class="row">
-						<dt class="col-md-4">Numéro</dt>
-						<dd class="col-md-8">{{ booking.id }}</dd>
-						<dt class="col-md-4">Date d'arrivée</dt>
-						<dd class="col-md-8">{{ booking.startDate | date('d/m/Y') }}</dd>
-						<dt class="col-md-4">Date de départ</dt>
-						<dd class="col-md-8">{{ booking.endDate | date('d/m/Y') }}</dd>
-						<dt class="col-md-4">Nombre de nuits</dt>
-						<dd class="col-md-8">{{ booking.duration }}</dd>
-						<dt class="col-md-4">Montant total</dt>
-						<dd class="col-md-8">{{ booking.amount | number_format(2,',','')}}
-							&euro;</dd>
-						<dt class="col-md-4">Commentaire</dt>
-						<dd class="col-md-8">{{ booking.comment | default('Aucun commentaire ..')}}</dd>
-					</dl>
 
-					<hr>
+		<h1 id="title">Votre réservation (n°{{ booking.id }})</h1>
 
-					<h2 class="alert-heading">Votre hôte</h2>
-					<div class="row mb-3">
-						<div class="col-3">
-							<img src="{{ author.picture }}" class="avatar avatar-medium" alt="L'avatar de {{ author.fullName }}">
+		<div
+			id="content-pdf">
+			<!-- Début content pdf -->
+
+			<div
+				id="reservation">
+				<!-- Début détails réservations -->
+					<h2 class="little-title">Détails</h2>
+					<ul>
+						<li>Réservation au nombre de
+							{{ booking.duration }}
+							nuits à
+							{{ad.city}}
+							pour un montant de
+							{{ booking.amount | number_format(2,',','')}}
+							&euro;</li>
+						<li>Date d'arrivée :
+							{{ booking.startDate | date('d/m/Y') }}</li>
+						<li>Date de départ :
+							{{ booking.endDate | date('d/m/Y') }}</li>
+					</ul>
+				<!-- Fin détails réservations -->
+
+				<hr>
+
+				<div
+					id="hote">
+					<!-- Début hote -->
+
+					<h2 class="little-title">Votre hôte</h2>
+					<div class="hote-content"> <!-- Début hote-content -->
+						<h4>
+							{{ author.fullName }}
+						</h4>
+						<div>
+							<img src="{{ author.picture }}" class="avatar" alt="L'avatar de {{ author.fullName }}">
 						</div>
-						<div class="col">
-							<h4>
-								<a href="{{ path('user_show', {'slug' : author.slug}) }}">{{ author.fullName }}</a>
-							</h4>
-							<span class="badge badge-primary">{{ author.ads | length }}
-								annonces</span>
-						</div>
-					</div>
-
-					{{ author.description | raw }}
-
-					<a href="{{ path('user_show', {'slug' : author.slug}) }}" class="btn btn-primary">Plus d'infos sur
-						{{ author.firstName }}</a>
+						<span class="annonce">{{ author.ads | length }}
+							annonces</span>
+					</div> <!-- fin hote-content -->
+	
 				</div>
-			</div>
+				<!-- Fin hote -->
 
-			<div class="col">
+				<hr>
 
-				<div class="alert laert-light">
-					<h2 class="alert-heading">Votre hébergement</h2>
+				<div
+					id="hebergement">
+					<!-- Début hébergement -->
+					<h2 class="little-title">Votre hébergement</h2>
 
-					<h4>
-						<a href="{{ path('ads_show', { 'slug' : ad.slug }) }}">{{ ad.title }}</a>
+					<h4 class="hebergement-title">
+						{{ ad.title }}
 					</h4>
 
-					<img src="{{ ad.coverImage }}" alt="Image de {{ ad.title }}" class="img-fluid">
+					<div class="hebergement-content"><!-- Début hébergement-content -->
+						<img src="{{ ad.coverImage }}" alt="Image de {{ ad.title }}" class="img-hebergement">
 
-					<div style="color: black;">
-						{{ ad.content | raw }}
-					</div>
+						<div class="espacement">
+							{{ ad.content | raw }}
+						</div>
+					</div><!-- Fin hébergement-content -->
+
+
 				</div>
+				<!-- Fin hébergement -->
+
 			</div>
+			<!-- Fin content-pdf -->
 		</div>
-	</div>
+		<!-- Fin pdf -->
 
-{% endblock %}
+	{% endblock %}
 
-{% block footer %}{% endblock %}
+	{% block footer %}{% endblock %}
