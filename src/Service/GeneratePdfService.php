@@ -46,12 +46,12 @@ class GeneratePdfService extends AbstractController
 
         $html = $this->renderView($templatePath, $templateParams);
 
+        // Ajout du CSS 
         $html .= '<link rel="stylesheet" href="build/css/pdf.css">';
-    //   dd($html);
-    //     die();
+
         // Chargement du PDF dans Dompdf
         $dompdf->loadHtml($html);
-  
+
         // Rendu du HTML en PDF
         $dompdf->render();
         // Génération du PDF et téléchargement sur l'espace local
