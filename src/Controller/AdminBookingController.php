@@ -7,7 +7,6 @@ use App\Entity\Booking;
 use App\Form\AdminBookingType;
 use App\Service\PaginationService;
 use App\Service\ExportCsvService;
-use League\Csv\Writer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +31,7 @@ class AdminBookingController extends AbstractController
 
         $pagination->setEntityClass(Booking::class)
             ->setPage($page);
-        
+
         $export = 'admin_bookings_exportcsv';
 
         return $this->render('admin/booking/index.html.twig', [
@@ -51,24 +50,28 @@ class AdminBookingController extends AbstractController
     public function exportCsv(ExportCsvService $exportCsv, EntityManagerInterface $manager)
     {
         $bookings = $manager->getRepository(Booking::class)->findAll();
-        $exportCsv->createCsv([
-            'Date', 
-            'Visiteur', 
-            'Annonce', 
-            'Prix']
+        $exportCsv->createCsv(
+            [
+                'Date',
+                'Visiteur',
+                'Annonce',
+                'Prix'
+            ]
         );
 
-        foreach($bookings as $booking) {
-            $exportCsv->insertCsv([
-                $booking->getCreatedAt()->format('Y-m-d H:i:s'),
-                $booking->getBooker()->getFirstName() . " " . $booking->getBooker()->getLastName(),
-                $booking->getAd()->getTitle(),
-                $booking->getAmount() . " €"]
+        foreach ($bookings as $booking) {
+            $exportCsv->insertCsv(
+                [
+                    $booking->getCreatedAt()->format('Y-m-d H:i:s'),
+                    $booking->getBooker()->getFirstName() . " " . $booking->getBooker()->getLastName(),
+                    $booking->getAd()->getTitle(),
+                    $booking->getAmount() . " €"
+                ]
             );
         }
 
         $exportCsv->getOutput('reservations.csv');
-                        
+
         exit;
     }
 

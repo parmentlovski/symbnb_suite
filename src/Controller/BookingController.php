@@ -112,7 +112,7 @@ class BookingController extends AbstractController
      *
      * @return void
      */
-    public function doanwloadBookingPDF(Booking $id, GeneratePdfService $pdf)
+    public function donwloadBookingPDF(Booking $id, GeneratePdfService $pdf)
     {
         // On renseigne l'entité relié au PDF
         $pdf->setEntityClass(Booking::class);

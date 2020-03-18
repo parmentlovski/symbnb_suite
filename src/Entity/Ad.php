@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -32,7 +31,7 @@ class Ad
      */
     private $id;
 
-  /**
+    /**
      *
      * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)

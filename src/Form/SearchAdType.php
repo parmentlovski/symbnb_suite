@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class SearchAdType extends AbstractType 
+class SearchAdType extends AbstractType
 {
 
     const CITIES = [
@@ -46,16 +46,16 @@ class SearchAdType extends AbstractType
         $builder
             ->add('villes', ChoiceType::class, [
                 'choices' =>
-                    array_combine(self::CITIES, self::CITIES)
+                array_combine(self::CITIES, self::CITIES)
             ])
             ->add('chambres', ChoiceType::class, [
-                'choices' => 
-                    array_combine(self::ROOMS, self::ROOMS)
+                'choices' =>
+                array_combine(self::ROOMS, self::ROOMS)
             ])
             ->add('minimumPrice', ChoiceType::class, [
                 'label' => 'Prix Minimum',
                 'choices' =>
-                    array_combine(self::PRICE, self::PRICE)
+                array_combine(self::PRICE, self::PRICE)
             ])
             ->add('maximumPrice', ChoiceType::class, [
                 'label' => 'Prix Maximum',
@@ -65,5 +65,4 @@ class SearchAdType extends AbstractType
             ])
             ->add('recherche', SubmitType::class);
     }
-
 }

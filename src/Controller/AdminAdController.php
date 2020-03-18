@@ -53,10 +53,11 @@ class AdminAdController extends AbstractController
         $ads = $manager->getRepository(Ad::class)->findAll();
         $exportCsv->createCsv(
             [
-                'Titre', 
-                'Auteur', 
-                'Nombre de réservations', 
-                'Note'
+                'Titre',
+                'Auteur',
+                'Nombre de réservations',
+                'Note',
+                'Ville'
             ]
         );
 
@@ -65,7 +66,8 @@ class AdminAdController extends AbstractController
                 $ad->getTitle(),
                 $ad->getAuthor()->getFirstName() . " " . $ad->getAuthor()->getLastName(),
                 count($ad->getBookings()),
-                $ad->getAvgRating()
+                $ad->getAvgRating(),
+                $ad->getCity()
             ]);
         }
 

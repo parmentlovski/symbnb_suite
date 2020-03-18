@@ -12,24 +12,24 @@
 
 				{{ form(search_form) }}
 
+				</div>
 			</div>
-        </div>
 			{% if app.request.method == 'POST' %}
 				<div class="row">
-                    <div class="col-6 offset-3">
+					<div class="col-6 offset-3">
 						{% if ads | length == 0 %}
 							<h2 class="my-5 text-center">Aucun résultat pour votre recherche</h2>
 						{% else %}
 							<h2 class="my-5 text-center">Résultats de la recherche</h2>
-                    </div>
-                        <div class="row d-flex justify-content-center">
-							{% for ad in ads %}
-							{% include "ad/_ad.html.twig" %}
-								{% endfor %}
-							{% endif %}
 						</div>
+						<div class="row d-flex justify-content-center">
+							{% for ad in ads %}
+								{% include "ad/_ad.html.twig" %}
+							{% endfor %}
+						{% endif %}
 					</div>
-				{% endif %}
-	</div>
+				</div>
+			{% endif %}
+		</div>
 
-{% endblock %}
+	{% endblock %}

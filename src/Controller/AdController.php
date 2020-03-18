@@ -154,7 +154,7 @@ class AdController extends AbstractController
 
         return $this->redirectToRoute("ads_index");
     }
-    
+
     /**
      * Permet d'afficher la page de recherche
      * 
@@ -162,12 +162,13 @@ class AdController extends AbstractController
      *
      * @return Response
      */
-    public function search(Request $request, AdRepository $adRepository){
+    public function search(Request $request, AdRepository $adRepository)
+    {
 
         $ads = [];
         $searchAdForm = $this->createForm(SearchAdType::class);
 
-        if($searchAdForm->handleRequest($request)->isSubmitted() && $searchAdForm->isValid()){
+        if ($searchAdForm->handleRequest($request)->isSubmitted() && $searchAdForm->isValid()) {
             $criteria = $searchAdForm->getData();
             $ads = $adRepository->search($criteria);
         }

@@ -1,5 +1,5 @@
-var $ = require('jquery');
+var $ = require("jquery");
 
 global.$ = global.jQuery = $;
 
-require('bootstrap');
+require("bootstrap");

@@ -54,15 +54,14 @@ class AdRepository extends ServiceEntityRepository
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('a.price > :minPrice')
+            ->setParameter('minPrice', $criteria['minPrice'])
+            ->andWhere('a.price < :maxPrice')
+            ->setParameter('maxPrice', $criteria['maxPrice'])
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Ad

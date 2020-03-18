@@ -28,6 +28,7 @@ Encore
     // .addEntry('css/bootstrap', './assets/css/bootstrap.min.css')
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/ad', './assets/js/ad.js')
+    .addEntry('js/alert', './assets/js/alert.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
