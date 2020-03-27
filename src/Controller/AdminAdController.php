@@ -55,9 +55,9 @@ class AdminAdController extends AbstractController
             [
                 'Titre',
                 'Auteur',
+                'Ville',
                 'Nombre de réservations',
-                'Note',
-                'Ville'
+                'Note'
             ]
         );
 
@@ -65,9 +65,9 @@ class AdminAdController extends AbstractController
             $exportCsv->insertCsv([
                 $ad->getTitle(),
                 $ad->getAuthor()->getFirstName() . " " . $ad->getAuthor()->getLastName(),
+                $ad->getCity(),
                 count($ad->getBookings()),
-                $ad->getAvgRating(),
-                $ad->getCity()
+                $ad->getAvgRating()
             ]);
         }
 

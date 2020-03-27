@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
+use Gregwar\CaptchaBundle\Type\CaptchaType;
+
 
 class RegistrationType extends ApplicationType
 {
@@ -25,7 +27,15 @@ class RegistrationType extends ApplicationType
             ->add('passwordConfirm',  PasswordType::class, $this->getConfiguration("Confirmation du mot de passe", "euillez confirmer votre mot de passe"))
             ->add('introduction', TextType::class, $this->getConfiguration("Introduction", "Présentez-vous en quelques mots"))
             ->add('description', TextType::class, $this->getConfiguration("Description détaillée", "C'est le moment de vous présentez
-            "));
+            "))
+            ->add('captcha', CaptchaType::class, 
+            array(
+                'invalid_message' => "Le captcha est invalide, veuillez réessayer",
+                'label' => 'Captcha',
+                'attr' => [
+                'placeholder' => "Veuillez renseigner les caractères affichés sur le captcha"
+                ]
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

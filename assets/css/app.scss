@@ -74,3 +74,14 @@ span.rating i {
         font-size: 20px;
     }
 }
+
+// l'image du captcha
+.captcha_image {
+    display: block; 
+    margin: 4px 0;
+}
+
+// le code error en rouge si captcha incorrecte
+.form-error-icon{ 
+    display: none; 
+}

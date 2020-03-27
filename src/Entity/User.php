@@ -99,6 +99,8 @@ class User implements UserInterface
      */
     private $comments;
 
+    protected $captchaCode;
+
     /**
      * Affiche le nom complet
      *
@@ -294,6 +296,16 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function getCaptchaCode()
+    {
+      return $this->captchaCode;
+    }
+  
+    public function setCaptchaCode($captchaCode)
+    {
+      $this->captchaCode = $captchaCode;
     }
 
     /**
