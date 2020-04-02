@@ -13,7 +13,7 @@
 
 		{% if app.request.query.get('success') %}
 			<div class="alert alert-success">
-				<h4 class="alert-heading">Bravo votre réservation a eu lieux avec succès !</h4>
+				<h4 class="alert-heading">Bravo votre réservation a eu lieu avec succès !</h4>
 
 				<p>
 					Votre réservation auprès de
@@ -26,6 +26,13 @@
 					</strong>
 					a bien été prise en compte !
 				</p>
+				<p>
+				Veuillez valider votre panier afin de finaliser votre réservation
+				</p>
+
+			<a href="{{path('cart_index')}}" class="btn btn-info">Voir le panier 
+				<i class="fas fa-shopping-basket"></i>
+			</a>
 			</div>
 		{% endif %}
 
