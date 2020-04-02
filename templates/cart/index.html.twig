@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier
+{% endblock %}
+
+{% block body %}
+	<div class="bg-light p-3">
+		<h1>Votre panier</h1>
+	</div>
+
+
+	{% if items | length > 0 %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Titre de l'annonce</th>
+					<th>Ville</th>
+					<th>Prix</th>
+					<th>
+						Nombre de nuits</th>
+					<th>Quantité</th>
+					<th>Total</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{% for item in items %}
+					<tr>
+						<td>{{item.ad.title}}</td>
+						<td>{{item.ad.city}}</td>
+						<td>{{item.ad.price}}</td>
+						<td>test</td>
+						<td>{{item.quantity}}</td>
+						<td>{{item.ad.price * item.quantity}}</td>
+						<td>
+							{# {% if is_granted('IS_AUTHENTICATED_FULLY') %} #}
+
+							{% set users = item.ad.bookings.snapshot %}
+							{% set bookings = app.user.bookings.owner.bookings.snapshot %}
+					
+								{% for user in users %}
+
+								{% for booking in bookings %}
+
+
+									{% if booking.id == user.id  %}
+									<a href="{{path('booking_edit', {'id' : booking.id }) }}" class="btn btn-primary btn-sm">
+										<i class="fas fa-edit"></i>
+									</a>
+									{% endif %}
+
+								{% endfor %}
+
+								{% endfor %}
+							{# {% endif %} #}
+						
+
+							<a href="{{path('cart_remove', {'id': item.ad.id}) }}" class="btn btn-danger btn-sm">
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+
+
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3" class="text-right">Total :
+					</td>
+					<td>
+						{{ total }}
+					</td>
+					<td></td>
+				</tr>
+			</tfoot>
+		</table>
+	{% else %}
+
+		<p>Surprise, c'est vide !</p>
+	{% endif %}
+{% endblock %}
