@@ -26,20 +26,20 @@
 			<div
 				id="reservation">
 				<!-- Début détails réservations -->
-					<h2 class="little-title">Détails</h2>
-					<ul>
-						<li>Réservation au nombre de
-							{{ booking.duration }}
-							nuits à
-							{{ad.city}}
-							pour un montant de
-							{{ booking.amount | number_format(2,',','')}}
-							&euro;</li>
-						<li>Date d'arrivée :
-							{{ booking.startDate | date('d/m/Y') }}</li>
-						<li>Date de départ :
-							{{ booking.endDate | date('d/m/Y') }}</li>
-					</ul>
+				<h2 class="little-title">Détails</h2>
+				<ul>
+					<li>Réservation au nombre de
+						{{ booking.duration }}
+						nuits à
+						{{ad.city}}
+						pour un montant de
+						{{ booking.amount | number_format(2,',','')}}
+						&euro;</li>
+					<li>Date d'arrivée :
+						{{ booking.startDate | date('d/m/Y') }}</li>
+					<li>Date de départ :
+						{{ booking.endDate | date('d/m/Y') }}</li>
+				</ul>
 				<!-- Fin détails réservations -->
 
 				<hr>
@@ -49,7 +49,9 @@
 					<!-- Début hote -->
 
 					<h2 class="little-title">Votre hôte</h2>
-					<div class="hote-content"> <!-- Début hote-content -->
+					<div
+						class="hote-content">
+						<!-- Début hote-content -->
 						<h4>
 							{{ author.fullName }}
 						</h4>
@@ -58,8 +60,9 @@
 						</div>
 						<span class="annonce">{{ author.ads | length }}
 							annonces</span>
-					</div> <!-- fin hote-content -->
-	
+					</div>
+					<!-- fin hote-content -->
+
 				</div>
 				<!-- Fin hote -->
 
@@ -74,13 +77,16 @@
 						{{ ad.title }}
 					</h4>
 
-					<div class="hebergement-content"><!-- Début hébergement-content -->
-						<img src="{{ ad.coverImage }}" alt="Image de {{ ad.title }}" class="img-hebergement">
+					<div
+						class="hebergement-content">
+						<!-- Début hébergement-content -->
+						<img src="filenamee" alt="Image de {{ ad.title }}" class="img-hebergement">
 
 						<div class="espacement">
 							{{ ad.content | raw }}
 						</div>
-					</div><!-- Fin hébergement-content -->
+					</div>
+					<!-- Fin hébergement-content -->
 
 
 				</div>

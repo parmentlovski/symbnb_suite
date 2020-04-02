@@ -24,7 +24,6 @@ class AdType extends ApplicationType
             ->add('slug', TextType::class, $this->getConfiguration("Adresse web", "Tapez l'adresse web (automatique)", [
                 'required' => false
             ]))
-            ->add('coverImage', UrlType::class, $this->getConfiguration("Url de l'image principale", "Donnez l'adresse d'une image qui donne envie"))
             ->add('introduction', TextType::class, $this->getConfiguration("Introduction", "Donnez une description grlobal de l'annonce"))
             ->add('content', TextareaType::class, $this->getConfiguration("Description détaillé", "Tapez une description qui donn envie de venir chez vous"))
             ->add('rooms', IntegerType::class, $this->getConfiguration("Nombre de chambres", "Le nombre de chambres disponible"))

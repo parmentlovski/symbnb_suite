@@ -75,12 +75,6 @@ class Ad
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Url()
-     */
-    private $coverImage;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $rooms;
@@ -266,18 +260,6 @@ class Ad
     public function setContent(string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getCoverImage(): ?string
-    {
-        return $this->coverImage;
-    }
-
-    public function setCoverImage(string $coverImage): self
-    {
-        $this->coverImage = $coverImage;
 
         return $this;
     }

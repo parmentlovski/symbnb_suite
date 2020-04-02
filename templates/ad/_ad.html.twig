@@ -14,7 +14,9 @@
 			{% endif %}
 		</div>
 		<a href="{{ url }}">
-			<img src="{{ ad.coverImage }}" alt="Image de l'appartement" style="height: 200px; width: 100%; display: block;">
+			<img src="{{ vich_uploader_asset(ad, 'imageFile') }}" alt="Image de l'annonce {{ ad.slug }}" style="height: 200px; width: 100%; display: block;">
+
+
 		</a>
 		<div class="card-body">
 			<h4 class="card-title">

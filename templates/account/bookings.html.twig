@@ -17,7 +17,7 @@
 			{% set ad = booking.ad %}
 			<div class="row mt-5">
 				<div class="col-md-4">
-					<img src="{{ ad.coverImage }}" alt="Photo de l'annonce {{ ad.title }}" class="img-fluid">
+					<img src="filenamee" alt="Photo de l'annonce {{ ad.title }}" class="img-fluid">
 
 					<div class="mt-3">
 						{% set comment = ad.commentFromAuthor(app.user) %}
@@ -28,7 +28,7 @@
 							{% include "partials/rating.html.twig" with {'rating' : comment.rating} %}
 						{% else %}
 							<p>Vous n'avez pas encore donné de note.
-								
+
 								<a href="{{ path('booking_show', {'id' : booking.id}) }} #comment">Je donne mon avis !
 								</a>
 							</p>
@@ -47,7 +47,8 @@
 						au
 						{{ booking.endDate | date('m/m/Y') }}
 						(
-						{{ booking.amount | number_format(2,',','')}} &euro;)
+						{{ booking.amount | number_format(2,',','')}}
+						&euro;)
 					</p>
 					<a href="{{ path('booking_show', {'id' : booking.id}) }}" class="btn btn-info">+ d'infos</a>
 				</div>
