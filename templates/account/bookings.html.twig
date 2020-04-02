@@ -6,7 +6,7 @@
 {% block body %}
 
 	<div class="container">
-		<h1 class="my-5">Mesréservations</h1>
+		<h1 class="my-5">Mes réservations</h1>
 		<div class="alert alert-info mt-5">
 			<p>Retrouver ci-dessous toutes vos réservations passées et avenir</p>
 		</div>
@@ -28,7 +28,7 @@
 							{% include "partials/rating.html.twig" with {'rating' : comment.rating} %}
 						{% else %}
 							<p>Vous n'avez pas encore donné de note.
-								
+
 								<a href="{{ path('booking_show', {'id' : booking.id}) }} #comment">Je donne mon avis !
 								</a>
 							</p>
@@ -38,6 +38,7 @@
 				</div>
 				<div class="col-md-8">
 					<h4>{{ ad.title }}</h4>
+					
 					<p>
 						Réservation
 						<strong>n°
@@ -47,7 +48,8 @@
 						au
 						{{ booking.endDate | date('m/m/Y') }}
 						(
-						{{ booking.amount | number_format(2,',','')}} &euro;)
+						{{ booking.amount | number_format(2,',','')}}
+						&euro;)
 					</p>
 					<a href="{{ path('booking_show', {'id' : booking.id}) }}" class="btn btn-info">+ d'infos</a>
 				</div>
