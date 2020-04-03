@@ -27,12 +27,12 @@
 					a bien été prise en compte !
 				</p>
 				<p>
-				Veuillez valider votre panier afin de finaliser votre réservation
+					Veuillez valider votre panier afin de finaliser votre réservation
 				</p>
 
-			<a href="{{path('cart_index')}}" class="btn btn-info">Voir le panier 
-				<i class="fas fa-shopping-basket"></i>
-			</a>
+				<a href="{{path('cart_index')}}" class="btn btn-info">Voir le panier
+					<i class="fas fa-shopping-basket"></i>
+				</a>
 			</div>
 		{% endif %}
 
@@ -128,8 +128,10 @@
 						<a title="Télécharger ma réservation" href="{{ path('booking_pdf', { 'id' : booking.id }) }}" class="btn btn-info">
 							<i class="fas fa-download"></i>
 						</a>
-
-
+					</div>
+					<div class="mt-4 d-flex justify-content-between">
+						<a href="{{ path('booking_delete', {'id' : booking.id}) }}" class="btn btn-danger">Annuler la réservation</a>
+						<a href="#" class="btn btn-info">Valider et payer la réservation</a>
 					</div>
 				</div>
 			</div>

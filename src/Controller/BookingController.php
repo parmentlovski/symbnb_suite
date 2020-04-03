@@ -7,7 +7,7 @@ use App\Entity\Booking;
 use App\Entity\Comment;
 use App\Form\BookingType;
 use App\Form\CommentType;
-use App\Service \CartService;
+use App\Service\CartService;
 use App\Service\GeneratePdfService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,7 +47,7 @@ class BookingController extends AbstractController
                 $manager->persist($booking);
                 $manager->flush();
                 $cartService->add($id);
-            
+
                 // $this->addFlash(
                 //     'success',
                 //     "Votre réservation pour l'annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrer !"
@@ -104,7 +104,7 @@ class BookingController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * Permet de modifier une réservation 
      * 
      * @Route("/booking/{id}/edit", name="booking_edit")
@@ -138,7 +138,7 @@ class BookingController extends AbstractController
 
         return $this->render('booking/edit.html.twig', [
             'form' => $form->createView(),
-            'booking' => $booking, 
+            'booking' => $booking,
         ]);
     }
 
@@ -165,5 +165,28 @@ class BookingController extends AbstractController
             'booking' => $id,
             'ad' => $id->getAd()
         ]);
+    }
+
+    /**
+     * Permet d'annuler une réservation
+     * 
+     * @Route("/booking/{id}/delete", name="booking_delete")
+     *
+     * @param Booking $booking
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    public function delete(Booking $booking, EntityManagerInterface $manager)
+    {
+        $id = $booking->getId();
+        $manager->remove($booking);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            "La réservation " . $id . " a bien été supprimé"
+        );
+
+        return $this->redirectToRoute("account_bookings");
     }
 }

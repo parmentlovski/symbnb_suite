@@ -77,13 +77,11 @@
 						{{ ad.title }}
 					</h4>
 
-					<div
-						class="hebergement-content">
+					<div class="hebergement-content">
 						<!-- Début hébergement-content -->
-						<img src="filenamee" alt="Image de {{ ad.title }}" class="img-hebergement">
+						{# <img src="filenamee" alt="Image de {{ ad.title }}" class="img-hebergement"> #}
 
-						<div class="espacement">
-							{{ ad.content | raw }}
+							<div class="espacement"> {{ ad.content | raw }}
 						</div>
 					</div>
 					<!-- Fin hébergement-content -->

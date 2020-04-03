@@ -6,10 +6,11 @@
 
 {% block body %}
 
-	<div class="new-title" style=' background-image: url("/images/ads/5e7e26bb38d18237527319.jpg);'>
+	<div
+		class="new-title" style="background-image: url({{ vich_uploader_asset(ad, 'imageFile') }});">
 
 
-		<img class="img-fluid" src="{{ vich_uploader_asset(ad, 'imageFile') }}" alt="{{ ad.imageFile }}" style"height: 200px; width:400px;">
+		{# <img class="img-fluid" src="{{ vich_uploader_asset(ad, 'imageFile') }}" alt="{{ ad.imageFile }}" style"height: 200px; width:400px;"> #}
 
 
 		<div class="container">
@@ -24,7 +25,7 @@
 					&euro; / nuit</strong>
 			</p>
 			<a href="{{ path('booking_create', {'slug' : ad.slug, 'id': ad.id}) }}" class="btn btn-primary">Réserver !</a>
-		
+
 			{% if app.user and app.user == ad.author %}
 
 				<a href="{{ path('ads_edit', {'slug' : ad.slug }) }}" class="btn btn-secondary ml-4 mr-4">Modifier l'annonce</a>

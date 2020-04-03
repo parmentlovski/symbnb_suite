@@ -8,11 +8,11 @@
 		<h1>Votre panier</h1>
 	</div>
 
-
 	{% if items | length > 0 %}
 		<table class="table">
 			<thead>
 				<tr>
+					<th>Titre de l'annonce</th>
 					<th>Titre de l'annonce</th>
 					<th>Ville</th>
 					<th>Prix</th>
@@ -38,46 +38,53 @@
 
 							{% set users = item.ad.bookings.snapshot %}
 							{% set bookings = app.user.bookings.owner.bookings.snapshot %}
-					
-								{% for user in users %}
 
-								{% for booking in bookings %}
-
-
-									{% if booking.id == user.id  %}
-									<a href="{{path('booking_edit', {'id' : booking.id }) }}" class="btn btn-primary btn-sm">
-										<i class="fas fa-edit"></i>
-									</a>
-									{% endif %}
-
-								{% endfor %}
-
-								{% endfor %}
+							{# <pre>
+																																																																																																																																																																																														{{ dump(bookings, users) }}
+																																																																																																																																																																																													</pre>
+																																																																																																																																																																																						
+																																																																																																																																																																																													{% for user in users %}
+																																																																																																																																																																																						
+																																																																																																																																																																																														{% for booking in bookings %}
+																																																																																																																																																																																						
+																																																																																																																																																																																						
+																																																																																																																																																																																															{% if booking.id == user.id  %}
+																																																																																																																																																																																																<a href="{{path('booking_edit', {'id' : booking.id }) }}" class="btn btn-primary btn-sm">
+																																																																																																																																																																																																	<i class="fas fa-edit"></i>
+																																																																																																																																																																																																</a>
+																																																																																																																																																																																															{% endif %}
+																																																																																																																																																																																						
+																																																																																																																																																																																														{% endfor %}
+																																																																																																																																																																																						
+																																																																																																																																																																																													{% endfor %} #}
 							{# {% endif %} #}
-						
+							<pre>
+																{{ dump(book) }}
+															</pre>
+
+
+								<a href="{{ path('booking_edit', {'id' : book.0.reservation.id})}}" class="btn btn-primary btn-sm"> <i class="fas fa-edit"></i>
+							</a>
 
 							<a href="{{path('cart_remove', {'id': item.ad.id}) }}" class="btn btn-danger btn-sm">
 								<i class="fas fa-trash"></i>
 							</a>
 						</td>
 					</tr>
-				{% endfor %}
-
-
+				</td>
 			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="3" class="text-right">Total :
-					</td>
-					<td>
-						{{ total }}
-					</td>
-					<td></td>
-				</tr>
-			</tfoot>
-		</table>
-	{% else %}
+		</tr>
+	{% endfor %}
 
-		<p>Surprise, c'est vide !</p>
-	{% endif %}
-{% endblock %}
+
+</tbody>
+<tfoot>
+	<tr>
+		<td colspan="3" class="text-right">Total :
+		</td>
+		<td>
+			{{ total }}
+		</td>
+		<td></td>
+	</tr>
+</tfoot></table>{% else %}<p>Surprise, c'est vide !</p>{% endif %}{% endblock %}

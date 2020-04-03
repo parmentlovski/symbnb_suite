@@ -38,20 +38,21 @@
 				</div>
 				<div class="col-md-8">
 					<h4>{{ ad.title }}</h4>
-					
+
 					<p>
 						Réservation
 						<strong>n°
 							{{ booking.id}}</strong><br>
 						Du
-						{{ booking.startDate | date('m/m/Y') }}
+						{{ booking.startDate | date('d/m/Y') }}
 						au
-						{{ booking.endDate | date('m/m/Y') }}
+						{{ booking.endDate | date('d/m/Y') }}
 						(
 						{{ booking.amount | number_format(2,',','')}}
 						&euro;)
 					</p>
 					<a href="{{ path('booking_show', {'id' : booking.id}) }}" class="btn btn-info">+ d'infos</a>
+					<a href="{{ path('booking_delete', {'id' : booking.id}) }}" class="btn btn-danger">Annuler la réservation</a>
 				</div>
 			</div>
 		{% endfor %}
