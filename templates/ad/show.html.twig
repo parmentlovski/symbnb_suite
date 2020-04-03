@@ -6,11 +6,7 @@
 
 {% block body %}
 
-	<div class="new-title" style=' background-image: url("/images/ads/5e7e26bb38d18237527319.jpg);'>
-
-
-		<img class="img-fluid" src="{{ vich_uploader_asset(ad, 'imageFile') }}" alt="{{ ad.imageFile }}" style"height: 200px; width:400px;">
-
+	<div class="new-title" style="background-image: url({{ vich_uploader_asset(ad, 'imageFile') }});">
 
 		<div class="container">
 			<h1>{{ ad.title }}</h1>
