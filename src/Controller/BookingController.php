@@ -46,7 +46,7 @@ class BookingController extends AbstractController
                 // Sinon enregistrement et redirection
                 $manager->persist($booking);
                 $manager->flush();
-                $cartService->add($id);
+                // $cartService->add($id);
 
                 // $this->addFlash(
                 //     'success',

@@ -52,7 +52,12 @@
 						&euro;)
 					</p>
 					<a href="{{ path('booking_show', {'id' : booking.id}) }}" class="btn btn-info">+ d'infos</a>
+					{# TODO: Vérifier si la réervation est dans le panier #}
+					<a href="{{path('cart_add', {'id' : ad.id}) }}" class="btn btn-success">Ajouter au panier
+						<i class="fas fa-shopping-basket"></i>
+					</a>
 					<a href="{{ path('booking_delete', {'id' : booking.id}) }}" class="btn btn-danger">Annuler la réservation</a>
+
 				</div>
 			</div>
 		{% endfor %}

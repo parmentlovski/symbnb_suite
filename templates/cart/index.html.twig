@@ -13,13 +13,9 @@
 			<thead>
 				<tr>
 					<th>Titre de l'annonce</th>
-					<th>Titre de l'annonce</th>
 					<th>Ville</th>
 					<th>Prix</th>
-					<th>
-						Nombre de nuits</th>
-					<th>Quantité</th>
-					<th>Total</th>
+					<th>Nombre de nuits</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -29,45 +25,25 @@
 					<tr>
 						<td>{{item.ad.title}}</td>
 						<td>{{item.ad.city}}</td>
-						<td>{{item.ad.price}}</td>
-						<td>test</td>
+						<td>{{item.ad.price}}
+							&euro;</td>
 						<td>{{item.quantity}}</td>
-						<td>{{item.ad.price * item.quantity}}</td>
 						<td>
 							{# {% if is_granted('IS_AUTHENTICATED_FULLY') %} #}
-
-							{% set users = item.ad.bookings.snapshot %}
-							{% set bookings = app.user.bookings.owner.bookings.snapshot %}
+							{# 
+														{% set users = item.ad.bookings.snapshot %}
+														{% set bookings = app.user.bookings.owner.bookings.snapshot %} #}
 
 							{# <pre>
-																																																																																																																																																																																														{{ dump(bookings, users) }}
-																																																																																																																																																																																													</pre>
-																																																																																																																																																																																						
-																																																																																																																																																																																													{% for user in users %}
-																																																																																																																																																																																						
-																																																																																																																																																																																														{% for booking in bookings %}
-																																																																																																																																																																																						
-																																																																																																																																																																																						
-																																																																																																																																																																																															{% if booking.id == user.id  %}
-																																																																																																																																																																																																<a href="{{path('booking_edit', {'id' : booking.id }) }}" class="btn btn-primary btn-sm">
-																																																																																																																																																																																																	<i class="fas fa-edit"></i>
-																																																																																																																																																																																																</a>
-																																																																																																																																																																																															{% endif %}
-																																																																																																																																																																																						
-																																																																																																																																																																																														{% endfor %}
-																																																																																																																																																																																						
-																																																																																																																																																																																													{% endfor %} #}
-							{# {% endif %} #}
-							<pre>
-																{{ dump(book) }}
-															</pre>
+																																																																																											{{ dump(book) }}
+																																																																																											</pre> #}
 
 
-								<a href="{{ path('booking_edit', {'id' : book.0.reservation.id})}}" class="btn btn-primary btn-sm"> <i class="fas fa-edit"></i>
-							</a>
+							{# <a href="{{ path('booking_edit', {'id' : book.0.reservation.id})}}" class="btn btn-primary btn-sm">
+																																				<i class="fas fa-edit"></i>
+																																			</a> #}
 
-							<a href="{{path('cart_remove', {'id': item.ad.id}) }}" class="btn btn-danger btn-sm">
-								<i class="fas fa-trash"></i>
+								<a title="supprimer du panier" href="{{path('cart_remove', {'id': item.ad.id}) }}" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i>
 							</a>
 						</td>
 					</tr>
@@ -84,7 +60,10 @@
 		</td>
 		<td>
 			{{ total }}
+			&euro;
 		</td>
 		<td></td>
 	</tr>
-</tfoot></table>{% else %}<p>Surprise, c'est vide !</p>{% endif %}{% endblock %}
+</tfoot></table>{% else %}<p>Surprise, c'est vide !</p>{% endif %}<pre>
+	{{ dump(items) }}
+</pre>{% endblock %}
