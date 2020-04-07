@@ -36,8 +36,17 @@ class CartController extends AbstractController
      */
     public function add($id, CartService $cartService)
     {
+        if ($cartService->isAlreadyInCart($id) == true) {
+            $cartService->add($id);
+        } else {
+            $this->addFlash(
+                'danger',
+                "Cette réservation est déjà dans votre panier"
+            );
 
-        $cartService->add($id);
+            return $this->redirectToRoute("account_bookings");
+        }
+
 
         return $this->redirectToRoute("cart_index");
     }

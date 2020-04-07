@@ -13,9 +13,11 @@
 			<thead>
 				<tr>
 					<th>Titre de l'annonce</th>
+					<th>Arrivée</th>
+					<th>Départ</th>
 					<th>Ville</th>
-					<th>Prix</th>
 					<th>Nombre de nuits</th>
+					<th>Prix</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -23,27 +25,17 @@
 
 				{% for item in items %}
 					<tr>
-						<td>{{item.ad.title}}</td>
-						<td>{{item.ad.city}}</td>
-						<td>{{item.ad.price}}
-							&euro;</td>
+						<td>{{item.booking.ad.title}}</td>
+						<td>{{item.booking.startDate | date('d/m/Y') }}</td>
+						<td>{{item.booking.endDate | date('d/m/Y') }}</td>
+						<td>{{item.booking.ad.city}}</td>
 						<td>{{item.quantity}}</td>
+						<td>{{item.booking.amount}}
+							&euro;
+						</td>
 						<td>
-							{# {% if is_granted('IS_AUTHENTICATED_FULLY') %} #}
-							{# 
-														{% set users = item.ad.bookings.snapshot %}
-														{% set bookings = app.user.bookings.owner.bookings.snapshot %} #}
-
-							{# <pre>
-																																																																																											{{ dump(book) }}
-																																																																																											</pre> #}
-
-
-							{# <a href="{{ path('booking_edit', {'id' : book.0.reservation.id})}}" class="btn btn-primary btn-sm">
-																																				<i class="fas fa-edit"></i>
-																																			</a> #}
-
-								<a title="supprimer du panier" href="{{path('cart_remove', {'id': item.ad.id}) }}" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i>
+							<a title="supprimer du panier" href="{{path('cart_remove', {'id': item.booking.id}) }}" class="btn btn-danger btn-sm">
+								<i class="fas fa-trash"></i>
 							</a>
 						</td>
 					</tr>
@@ -56,8 +48,7 @@
 </tbody>
 <tfoot>
 	<tr>
-		<td colspan="3" class="text-right">Total :
-		</td>
+		<td colspan="5" class="text-right">Total :</td>
 		<td>
 			{{ total }}
 			&euro;

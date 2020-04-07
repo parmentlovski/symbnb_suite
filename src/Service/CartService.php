@@ -2,7 +2,9 @@
 
 namespace App\Service;
 
+use App\Entity\Booking;
 use App\Repository\AdRepository;
+use App\Repository\BookingRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Security;
 
@@ -11,11 +13,12 @@ class CartService
 
     private $security;
 
-    public function __construct(SessionInterface $session, AdRepository $adRepository, Security $security)
+    public function __construct(SessionInterface $session, AdRepository $adRepository, Security $security, BookingRepository $bookingRepository)
     {
         $this->session = $session;
         $this->adRepository = $adRepository;
         $this->security = $security;
+        $this->bookingRepository = $bookingRepository;
     }
 
     public function add(int $id)
@@ -52,11 +55,13 @@ class CartService
 
         foreach ($panier as $id => $quantity) {
             $panierWithData[] = [
-                'ad' => $this->adRepository->find($id),
+                // 'ad' => $this->adRepository->find($id),
+                'booking' => $this->bookingRepository->find($id),
                 'quantity' => $quantity,
                 'user' => $user
             ];
         }
+        // dd($panierWithData);
 
         return $panierWithData;
     }
@@ -65,10 +70,34 @@ class CartService
     {
         $total = 0;
 
+
+
         foreach ($this->getFullCart() as $item) {
-            $total += $item['ad']->getPrice() * $item['quantity'];
+            $total += $item['booking']->getAmount();
         }
 
         return $total;
+    }
+
+    public function isAlreadyInCart($id)
+    {
+        $booking =  $this->bookingRepository->find($id);
+
+        foreach ($this->getFullCart() as $item) {
+            // dump($item['booking']->getStartDate());
+            // dump($item['booking']->getEndDate());
+            // dump($booking->getStartDate());
+            // dump($booking->getEndDate());
+            // dump($item['booking']);
+
+            if (($booking->getStartDate() <= $item['booking']->getStartDate() && $booking->getStartDate() <= $item['booking']->getEndDate())) {
+
+                // dd('Pas possible');
+                return false;
+            } else {
+                // dd("Possible");
+                return true;
+            }
+        }
     }
 }
