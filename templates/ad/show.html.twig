@@ -20,7 +20,7 @@
 					&euro; / nuit</strong>
 			</p>
 			<a href="{{ path('booking_create', {'slug' : ad.slug, 'id': ad.id}) }}" class="btn btn-primary">Réserver !</a>
-		
+
 			{% if app.user and app.user == ad.author %}
 
 				<a href="{{ path('ads_edit', {'slug' : ad.slug }) }}" class="btn btn-secondary ml-4 mr-4">Modifier l'annonce</a>
