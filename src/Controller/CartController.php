@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
-use App\Repository\BookingRepository;
 use App\Service\CartService;
+use App\Repository\BookingRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CartController extends AbstractController
@@ -36,7 +40,7 @@ class CartController extends AbstractController
      */
     public function add($id, CartService $cartService)
     {
-        if ($cartService->isAlreadyInCart($id) == true) {
+        if ($cartService->isAlreadyInCart($id) == false) {
             $cartService->add($id);
         } else {
             $this->addFlash(
@@ -60,5 +64,39 @@ class CartController extends AbstractController
         $cartService->remove($id);
 
         return $this->redirectToRoute("cart_index");
+    }
+
+    /**
+     * Payement d'une réservation
+     *
+     * @Route("/payement", name="cart_payement")
+     * 
+     * @return Response
+     */
+    public function payment(Request $request)
+    {
+
+        $form = $this->get('form.factory')
+            ->createNamedBuilder('payment-form')
+            ->add('token', HiddenType::class, [
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('submit', SubmitType::class)
+            ->getForm();
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                // TODO: charge the card
+            }
+        }
+
+        return $this->render('cart/payement.html.twig', [
+            'form' => $form->createView(),
+            'stripe_public_key' => $this->getParameter('stripe_public_key'),
+        ]);
+
+        return $this->render('cart/payement.html.twig');
     }
 }

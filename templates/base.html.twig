@@ -10,6 +10,7 @@
 		<script src="https://unpkg.com/scrollreveal"></script>
 		{{ encore_entry_link_tags('css/app') }}
 		{% block stylesheets %}{% endblock %}
+		<script src="https://js.stripe.com/v3/"></script>
 	</head>
 	<body>
 		{% block header %}
@@ -24,6 +25,7 @@
 			{% include "partials/footer.html.twig" %}
 		{% endblock %}
 
+		<script src="https://js.stripe.com/v3/"></script>
 		{{ encore_entry_script_tags('js/app') }}
 		{% block javascripts %}{% endblock %}
 	</body>
