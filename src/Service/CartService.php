@@ -90,13 +90,13 @@ class CartService
             // dump($booking->getEndDate());
             // dump($item['booking']);
 
-            if (($booking->getStartDate() <= $item['booking']->getStartDate() && $booking->getStartDate() <= $item['booking']->getEndDate())) {
+            if ($item['booking']->getId() == $booking->getId() && $booking->getStartDate() <= $item['booking']->getStartDate() && $booking->getStartDate() <= $item['booking']->getEndDate()) {
 
                 // dd('Pas possible');
-                return false;
+                return true;
             } else {
                 // dd("Possible");
-                return true;
+                return false;
             }
         }
     }
