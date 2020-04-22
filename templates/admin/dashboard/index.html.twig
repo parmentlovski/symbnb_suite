@@ -5,16 +5,16 @@
 
 {% block body %}
 
-	<div class="container-fluid">
+	<div id="dashboard" class="container-fluid">
 		<div class="row">
 			<div class="col">
 				<div class="card bg-primary text-white mb-3 text-center">
 					<div class="card-body">
 						<div class="row">
 							<div class="col-4">
-								<i class="fas fa-users fa-3x"></i>
+								<i class="fas fa-users"></i>
 							</div>
-							<div class="col-8">
+							<div class="col-8 d-flex justify-content-center align-items-center">
 								<h4 class="card-title">{{ stats.users }}
 									utilisateurs</h4>
 							</div>
@@ -27,9 +27,9 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-4">
-								<i class="fas fa-hotel fa-3x"></i>
+								<i class="fas fa-hotel"></i>
 							</div>
-							<div class="col-8">
+							<div class="col-8 d-flex justify-content-center align-items-center">
 								<h4 class="card-title">{{ stats.ads }}
 									annonces</h4>
 							</div>
@@ -42,9 +42,9 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-4">
-								<i class="fas fa-folder fa-3x"></i>
+								<i class="fas fa-folder"></i>
 							</div>
-							<div class="col-8">
+							<div class="col-8 d-flex justify-content-center align-items-center">
 								<h4 class="card-title">{{ stats.bookings }}
 									réservations</h4>
 							</div>
@@ -57,9 +57,9 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-4">
-								<i class="fas fa-comments fa-3x"></i>
+								<i class="fas fa-comments"></i>
 							</div>
-							<div class="col-8">
+							<div class="col-8 d-flex justify-content-center align-items-center">
 								<h4 class="card-title">{{ stats.comments }}
 									avis</h4>
 							</div>
@@ -70,9 +70,9 @@
 		</div>
 		<hr>
 		<div class="row">
-			<div class="col-6">
+			<div class="col-12 col-md-6">
 				<div class="alert alert-success">
-					<h2 class="alert-heading my-3">
+					<h2 class="alert-heading my-3 text-center">
 						<i class="fas fa-arrow-up"></i>
 						Les annonces populaires
 					</h2>
@@ -91,9 +91,9 @@
 								<tr>
 									<td>{{ ad.title }}</td>
 									<td>
-										<img src="{{ ad.picture }}" alt="photo de l'annonce {{ ad.title }}" class="avatar avatar-micro">
 										{{ ad.firstName }}
 										{{ ad.lastName | upper}}
+										<img src="{{ ad.picture }}" alt="photo de l'annonce {{ ad.title }}" class="avatar avatar-dashboard">
 									</td>
 									<td class="text-center">
 										<span class="badge badge-dark">{{ ad.note | number_format(1, ',', '') }}</span>
@@ -104,9 +104,9 @@
 					</table>
 				</div>
 			</div>
-			<div class="col-6">
+			<div class="col-12 col-md-6">
 				<div class="alert alert-danger">
-					<h2 class="alert-heading my-3">
+					<h2 class="alert-heading my-3 text-center">
 						<i class="fas fa-arrow-down"></i>
 						Les pires annonces
 					</h2>
@@ -125,9 +125,9 @@
 								<tr>
 									<td>{{ ad.title }}</td>
 									<td>
-										<img src="{{ ad.picture }}" alt="photo de l'annonce {{ ad.title }}" class="avatar avatar-micro">
 										{{ ad.firstName }}
 										{{ ad.lastName | upper }}
+										<img src="{{ ad.picture }}" alt="photo de l'annonce {{ ad.title }}" class="avatar avatar-dashboard">
 									</td>
 									<td class="text-center">
 										<span class="badge badge-dark">{{ ad.note | number_format(1, ',', '') }}</span>

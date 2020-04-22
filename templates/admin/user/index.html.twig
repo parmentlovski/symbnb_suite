@@ -5,12 +5,12 @@
 
 {% block body %}
 	<div class="container-fluid">
-		<h1 class="my-5">Administration des utilisateurs</h1>
+		<h1 class="h1 my-5">Administration des utilisateurs</h1>
 
 		{# Affichage du bouton pour exports les données dans un fichier csv#}
 		{% include "admin/partials/exportcsv.html.twig" %}
 
-		<table class="table table-hover">
+		<table class="table table-hover administration">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -20,6 +20,7 @@
 					<th>Avatar</th>
 					<th class="text-center">Nombre d'annonces</th>
 					<th class="text-center">Nombre de réservations</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 

@@ -9,8 +9,8 @@
 {% block body %}
 	<div class="container">
 		<h1 class="my-5">
-			Modification de l'annonce
-			{{ ad.title }}
+			Modification de l'annonce : "<i>
+			{{ ad.title }}</i>"
 		</h1>
 
 		{{ form_start(form) }}
@@ -31,18 +31,18 @@
 				</div>
 			</div>
 			<div class="col">
-				<div class="card bg-light">
+				<div class="card bg-light mt-5 mt-md-0">
 					<div class="card-header">
 						<h4 class="card-title">Les réservations</h4>
 					</div>
 					<div class="card-body">
-						<table class="table">
+						<table class="table administration">
 							<thead>
 								<tr>
-									<th>Id</th>
+									<th class="delete">Id</th>
 									<th>Voyageurs</th>
 									<th>Date de réservations</th>
-									<th></th>
+									<th>Éditer</th>
 								</tr>
 							</thead>
 
@@ -52,7 +52,7 @@
 
 
 									<tr>
-										<td>{{ booking.id }}</td>
+										<td class="delete">{{ booking.id }}</td>
 										<td>{{ booking.booker.fullName }}</td>
 										<td>{{ booking.createdAt | date('d/m/Y H:i') }}</td>
 										<td>
@@ -71,14 +71,14 @@
 						<h4 class="card-title">Les commentaires</h4>
 					</div>
 					<div class="card-body">
-						<table class="table">
+						<table class="table administration">
 							<thead>
 								<tr>
-									<th>Id</th>
+									<th class="delete">Id</th>
 									<th>Voyageurs</th>
 									<th>Note</th>
 									<th>Commentaire</th>
-									<th></th>
+									<th>Éditer</th>
 								</tr>
 							</thead>
 
@@ -88,7 +88,7 @@
 
 
 									<tr>
-										<td>{{ comment.id }}</td>
+										<td class="delete">{{ comment.id }}</td>
 										<td>{{ comment.author.fullName }}</td>
 										<td>{{ comment.rating }}</td>
 										<td>{{ comment.content }}</td>
