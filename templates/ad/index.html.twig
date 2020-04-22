@@ -7,12 +7,14 @@
 
 	<div class="container">
 
-		<div class="row d-flex justify-content-between align-items-center my-3">
-			<h1 class="">Voici les annonces des hôtes !</h1>
-			<span>
-				<a href="{{path('ads_search')}}" class="btn btn-primary">Recherche avancée</a>
+		<h1 class="h1">Voici les annonces des hôtes</h1>
+
+		<div class="row">
+			<span class="mb-3">
+				<a href="{{path('ads_search')}}" class="plus-recherche hvr-icon-wobble-horizontal">Recherche avancée <i class="fas fa-search-plus hvr-icon"></i></a>
 			</span>
 		</div>
+
 
 		<div class="row">
 			{% for ad in ads %}
@@ -20,5 +22,6 @@
 			{% endfor %}
 		</div>
 	</div>
+
 
 {% endblock %}

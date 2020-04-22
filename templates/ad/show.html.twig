@@ -7,7 +7,7 @@
 {% block body %}
 
 	<div class="new-title" style="background-image: url({{ vich_uploader_asset(ad, 'imageFile') }});">
-
+		
 		<div class="container">
 			<h1>{{ ad.title }}</h1>
 			<p>{{ ad.introduction }}</p>
@@ -65,15 +65,15 @@
 				<hr>
 
 				{% if ad.comments | length > 0  %}
-					<h2 class="mb-3">Commentaires de nos voyageurs:</h2>
+					<h2 class="my-5 mt-md-3">Commentaires de nos voyageurs:</h2>
 
 					<div class="alert alert-info">
 						<h4 class="amert-heading text-center ">
 							<div class="row align-items-center">
-								<div class="col" style="color: black;">
+								<div class="col-12" style="color: black;">
 									Note globale donnée par nos voyageurs
 								</div>
-								<div class="col">
+								<div class="col-12 mt-3">
 									{% include "partials/rating.html.twig" with{'rating' : ad.avgRating} %}
 									<br>
 									<small>

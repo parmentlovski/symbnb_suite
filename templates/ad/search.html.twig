@@ -6,9 +6,9 @@
 
 {% block body %}
 	<div class="container">
-		<div class="row">
-			<div class="col-6 offset-3">
-				<h1 class="my-3 text-center">Effectuer une recherche</h1>
+		<div class="row d-flex justify-content-center">
+			<div class="col-10 col-md-6">
+				<h1 class="my-5 text-center">Effectuer une recherche</h1>
 
 				{{ form(search_form) }}
 
@@ -16,13 +16,13 @@
 			</div>
 			{% if app.request.method == 'POST' %}
 				<div class="row">
-					<div class="col-6 offset-3">
+					<div class="col-10 col-md-6">
 						{% if ads | length == 0 %}
 							<h2 class="my-5 text-center">Aucun résultat pour votre recherche</h2>
 						{% else %}
 							<h2 class="my-5 text-center">Résultats de la recherche</h2>
 						</div>
-						<div class="row d-flex justify-content-center">
+						<div class="col-12 d-flex justify-content-center">
 							{% for ad in ads %}
 								{% include "ad/_ad.html.twig" %}
 							{% endfor %}
