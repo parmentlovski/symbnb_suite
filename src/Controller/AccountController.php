@@ -105,7 +105,7 @@ class AccountController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre profile a bien été modifié'
+                'Votre profil a bien été modifié'
             );
         }
 
