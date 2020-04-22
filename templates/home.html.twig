@@ -6,53 +6,86 @@
 
 {% block body %}
 
-	<div class="container">
-		<div class="jumbotron mt-3">
-			<h1 class="display-3">Bienvenue sur SYMBNB</h1>
-			<p class="lead">
-				Nous mettons en relations les voyageurs et les propriétaires qui veulent profiter d'opportunités et gagner de l'argent en proposant leur bien à la location !
-			</p>
-			<hr class="my-4">
-			<p>
-				Vous êtes voyagaeurs ? Et vous voulez voir où vous pourrez loger pour votre
-			</p>
-			<p class="lead">
-				<a class="btn btn-primary btn-lg" href="{{ path('ads_index') }}" role="button">Voir nos annonces</a>
-			</p>
+	<div id="home">
+
+		<div class="jumbotron">
+			<div class="contenu-jumbotron">
+				<h1 class="display-3 text-center">Bienvenue sur SYMBNB</h1>
+				<p class="lead lead-one text-center mt-5">
+					Nous mettons en relations les voyageurs et les propriétaires qui veulent profiter d'opportunités et gagner de l'argent en proposant leur bien à la location !
+				</p>
+				<p class="lead lead-two text-center mt-lg-5">
+					<a class="voir-annonce hvr-icon-forward" href="{{ path('ads_index') }}" role="button">Voir nos annonces
+						<i class="delete fa fa-chevron-circle-right hvr-icon"></i>
+					</a>
+				</p>
+			</div>
 		</div>
-		<h2 class="h1 my-5">Nos appartements stars</h2>
+		<div class="container">
 
-		<div class="row">
-			{% for data in ads %}
-				{% include "ad/_ad.html.twig" with {'ad' : data.annonce} %}
-			{% endfor %}
-		</div>
+			<h2 class="h1">Nos appartements stars</h2>
 
-		<h2 class="h1 my-5">Nos propriétaires stars</h2>
+			<div class="row">
+				{% for data in ads %}
+					{% include "ad/_ad.html.twig" with {'ad' : data.annonce} %}
+				{% endfor %}
+			</div>
 
-		<div class="row">
-			{% for data in users %}
-				<div class="col">
-					<div class="card border-secondary mb-3">
-						<div class="card-body">
-							<h4 class="card-title">{{ data.user.fullName }}</h4>
-							<hr>
+			<h2 class="h1">Nos propriétaires stars</h2>
 
-							<div class="card-text">
-								<img src="{{ data.user.picture }}" alt="Avatar de {{ data.user.fullName }}" class="float-left mr-3 avatar avatar-micro">
-								<p>
-									{{ data.user.introduction }}
-								</p>
-								<a href="{{ path('user_show', {'slug' : data.user.slug}) }}" class="btn btn-success float-right">En savoir +</a>
+			<div class="row">
+				{% for data in users %}
+					<div class="col proprietaires">
+						<div class="card border-secondary mb-3">
+							<div class="card-body">
+								<h4 class="card-title">{{ data.user.fullName }}</h4>
+								<hr>
+
+								<div class="card-text">
+									<img src="{{ data.user.picture }}" alt="Avatar de {{ data.user.fullName }}" class="float-left mr-3 avatar avatar-macro">
+									<p class="text-center pt-3">
+										<i>
+											{{ data.user.introduction }}
+										</i>
+									</p>
+									<a href="{{ path('user_show', {'slug' : data.user.slug}) }}" class="plus hvr-icon-wobble-horizontal float-right mt-3">En savoir
+										<i class="fas fa-search-plus hvr-icon"></i>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
+
 {% endblock %}
 
+
 {% block javascripts %}
-	{{ encore_entry_script_tags('js/alert') }}
+	{# {{ encore_entry_script_tags('js/alert') }} #}
+	<script>
+		window.onload = function () {
+
+TweenMax.set('.contenu-jumbotron', {opacity: 1});
+let tl = new TimelineMax();
+
+if (window.matchMedia("(min-width: 768px)").matches) {
+tl.from('h1', 2, {
+opacity: 0
+}, 1.5).from('.lead-one', 2, {
+opacity: 0
+}, 2.5).from('.lead-two', 2, {
+opacity: 0
+}, 3.5)
+} else if (window.matchMedia("(max-width: 767px)").matches) { // silence is gold
+}
+}
+	</script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+ScrollReveal().reveal('.proprietaires', {delay: 250});
+});
+	</script>
 {% endblock %}
