@@ -389,17 +389,17 @@ h6 {
 
 .h1,
 h1 {
-    font-size: 2.5rem
+    font-size: 2.10rem
 }
 
 .h2,
 h2 {
-    font-size: 2rem
+    font-size: 1.90rem
 }
 
 .h3,
 h3 {
-    font-size: 1.75rem
+    font-size: 1.70rem
 }
 
 .h4,
@@ -5538,7 +5538,7 @@ a.badge-dark:focus {
     padding: 2rem 1rem;
     margin-bottom: 2rem;
     background-color: #e9ecef;
-    border-radius: .3rem
+    /* border-radius: .3rem */
 }
 
 @media (min-width:576px) {
@@ -7029,7 +7029,8 @@ a.close.disabled {
 }
 
 .bg-primary {
-    background-color: #007bff!important
+    /* background-color: #007bff!important */
+    background-color: #05304A!important;
 }
 
 a.bg-primary:focus,
