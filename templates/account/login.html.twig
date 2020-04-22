@@ -8,8 +8,9 @@
 		<div class="row">
 			<div class="col-md-3">&nbsp;</div>
 			<div class="col-md-6">
-				<div class="bg-light py-3 px-3">
-					<h1>Connectez-vous !</h1>
+				<div class="bg-light my-5 py-4 px-5 rounded box">
+					<h1 class="mt-3 mb-5 mb-md-5 text-center">
+						<strong>Connectez</strong>-vous</h1>
 
 					{% if hasError %}
 
@@ -22,18 +23,39 @@
 					<form action="{{ path('account_login') }}" method="post">
 						<div class="form-group">
 							<label for="email">Email</label>
-							<input type="text" name="_username" required id="email" class="form-control" placeholder="Adress mail" value="{{ username }}">
+							<input type="text" name="_username" required id="email" class="form-control" value="{{ username }}">
 						</div>
 						<div class="form-group">
 							<label for="password">Mot de passe</label>
-							<input type="password" name="_password" class="form-control" required id="password" placeholder="Mot de passe">
+							<input type="password" name="_password" class="form-control" required id="password">
 						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-success">Connexion</button>
+						<div class="form-group d-flex justify-content-center">
+							<button type="submit" class="mt-3 mt-md-5">CONNEXION</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+
+		<script>
+							const inputs = document.querySelectorAll('input');
+
+for (let i = 0; i < inputs.length; i++) {
+
+let field = inputs[i];
+
+field.addEventListener('input', (e) => {
+
+if (e.target.value != "") {
+e.target.parentNode.classList.add('animation');
+} else if (e.target.value == "") {
+e.target.parentNode.classList.remove('animation');
+}
+
+})
+
+}
+						</script>
+
 {% endblock %}
