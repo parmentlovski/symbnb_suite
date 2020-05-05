@@ -7,7 +7,7 @@
 {% block body %}
 
 	<div class="new-title" style="background-image: url({{ vich_uploader_asset(ad, 'imageFile') }});">
-		
+
 		<div class="container">
 			<h1>{{ ad.title }}</h1>
 			<p>{{ ad.introduction }}</p>
@@ -19,7 +19,7 @@
 				<strong>{{ad.price | number_format(2,',','')}}
 					&euro; / nuit</strong>
 			</p>
-			<a href="{{ path('booking_create', {'slug' : ad.slug, 'id': ad.id}) }}" class="btn btn-primary">Réserver !</a>
+			<a href="{{ path('booking_create', {'slug' : ad.slug, 'id': ad.id}) }}" class="btn btn-primary">Réserver </a>
 
 			{% if app.user and app.user == ad.author %}
 
@@ -32,6 +32,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 mb-3">
+				<h2 class="my-5 my-md-3">Description :</h2>
+
 				{{ ad.content | raw }}
 
 				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
