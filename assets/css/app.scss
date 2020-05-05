@@ -67,8 +67,56 @@ nav {
     }
 }
 
+// POP UP 
+
+// .adblock-class {
+//     opacity: 0;
+// }
+
+.container-class {
+    //info 
+       opacity: 0;
+
+
+    .popup-class {
+
+        position: absolute;
+        bottom: 0;
+        height: 65px;
+
+        .content-class {
+            color: white;
+            font-size: 0.9rem;
+            // padding-top: 15px;
+            height: 100%;
+            line-height: 50px;
+        }
+
+        button {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            font-size: 1em !important; 
+            padding: .3em 1em !important;
+
+            @media (max-width:1200px) {
+               position: inherit;
+            }
+        }
+
+        @media (max-width:767px) {
+            height: auto;
+        }
+    }
+}
+
+// .actions-class {
+//     display: none;
+// }
+
+// page d'accueil 
 #home {
-    // page d'accueil 
+
 
 
     .jumbotron {
@@ -77,7 +125,7 @@ nav {
         font-family: $rubik !important;
         height: 95vh;
         width: 100vw;
-        background-image: url(../../public/images/hut2.jpg);
+        background-image: url(../../public/images/hut.jpg);
         background-size: cover;
         background-position: center center;
 
@@ -262,7 +310,9 @@ span.rating i {
 
 
 
-#account { // la partie présentation du user 
+#account {
+
+    // la partie présentation du user 
     .infos {
 
         img,
@@ -277,7 +327,8 @@ span.rating i {
     }
 }
 
-#search_ad_recherche { // bouton de recherche d'annonces 
+#search_ad_recherche {
+    // bouton de recherche d'annonces 
     display: block;
     margin-top: 40px;
     margin-right: auto;
@@ -333,6 +384,7 @@ span.rating i {
         // bloc comprenant le label et input
         position: relative;
         display: flex;
+        justify-content: center;
         margin-bottom: 50px;
 
         label {
@@ -341,45 +393,60 @@ span.rating i {
             left: 0px;
             transform: translateY(-50%);
             color: #aaa;
-            font-size: 20px;
+            font-size: 16px;
             transition: 0.4s ease-out;
+            margin-left: 15%;
+
+            @media (max-width: 767px){
+                margin-left: inherit;
+            }
         }
 
         input {
             display: block;
-            width: 100%;
+            width: 70%;
             padding: 10px 0px;
             border: none;
             outline: none !important;
             background: none;
             border-bottom: 3px solid #aaa;
             color: #666;
-            font-size: 20px;
+            font-size: 16px;
             transition: 0.4s ease-out;
 
             &:focus {
                 box-shadow: none !important;
             }
+
+            @media (max-width: 767px){
+                width: 100%;
+            }
         }
 
         button {
             display: block;
-            width: auto;
+            width: 70%;
             padding: 10px 45px;
             border: 2px solid #3D6480;
-            border-radius: 999px;
-            background-image: linear-gradient(to right, #F8F9FA 50%, #3D6480 50%, $blueDark);
+            border-radius: 5px;
             background-size: 200%;
+            // background-color: #3D6480;
             color: #3D6480;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
-            transition: 0.2s ease-out;
+            transition: 0.4s ease-out;
 
             &:hover {
-                color: #fff;
+                // background-color: $blueDark;
+                // border-color: $blueDark;
                 background-position: 100%;
                 border: 2px solid #fff;
+                color: white;
+            }
+
+            @media (max-width: 767px){
+                width: 100%;
             }
         }
 
@@ -400,13 +467,27 @@ span.rating i {
     }
 }
 
+.link-register { // vous n'avez pas de compte ? 
+    
+    color: #3D6480;
+
+    &:hover {
+        color: $blueDark;
+        text-decoration: none;
+    }
+}
 
 .box {
     // form login user
-
+    background-color: white;
+    border-radius: .25rem !important;
+    box-shadow: 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
+    
     h1 {
         // connectez-vous
         color: #666;
+        font-size: 1.4rem;
+        font-weight: normal;
 
         strong {
             // connectez
@@ -414,6 +495,14 @@ span.rating i {
         }
     }
 
+    button {
+        background-image: linear-gradient(to right, white 50%, #3D6480 50%, $blueDark);
+    }
+
+   .email{
+           margin-top: 60px;
+    }
+   
 }
 
 #admin {
@@ -423,6 +512,10 @@ span.rating i {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
+
+    button {
+        background-image: linear-gradient(to right, #f8f9fa, #3D6480 50%, $blueDark) !important;
+    }
 
     .card-header {
         // block comprenant le titre connexion à administration 
@@ -473,6 +566,24 @@ span.rating i {
 
     @media (max-width: 767px) {
         width: 300px;
+    }
+}
+
+footer {
+
+    #mentions {
+        color: white;
+        text-decoration: none;
+       
+        span {
+            display:inline-block;
+            border-bottom:1px solid transparent;
+            padding-bottom:1px;
+            &:hover {
+                border-color: white;
+            }
+        }
+        
     }
 }
 
@@ -536,7 +647,7 @@ span.rating i {
     color: white;
     background-color: $or;
     padding: 25px;
-    border-radius: 24% 76% 31% 69% / 45% 35% 65% 55% ;
+    border-radius: 24% 76% 31% 69% / 45% 35% 65% 55%;
     // border-radius: 19% 81% 22% 78% / 72% 24% 76% 28% ;
     // border-radius: 62% 38% 43% 57% / 41% 22% 78% 59% ;
     // border-radius: 24% 76% 31% 69% / 45% 14% 86% 55% ;
@@ -553,7 +664,8 @@ span.rating i {
     }
 }
 
-.modifier { // bouton modifier annonce 
+.modifier {
+    // bouton modifier annonce 
     background-color: #5a6268;
     border-radius: 999px;
     padding: 8px 12px;
@@ -564,7 +676,8 @@ span.rating i {
     }
 }
 
-.reserver { // bouton je réserve 
+.reserver {
+    // bouton je réserve 
     background-color: #28a745;
     border-radius: 999px;
     padding: 8px 12px;
@@ -598,7 +711,7 @@ span.rating i {
     }
 }
 
-/* Icon Pulse Grow => animation bouton EN SAVOIR + sur les annonces */ 
+/* Icon Pulse Grow => animation bouton EN SAVOIR + sur les annonces */
 @-webkit-keyframes hvr-icon-pulse-grow {
     to {
         -webkit-transform: scale(1.3);
