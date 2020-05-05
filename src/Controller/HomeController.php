@@ -21,4 +21,20 @@ class HomeController extends AbstractController
             'users' => $userRepo->findBestUsers(2)
         ]);
     }
+
+     /**
+      * Retourne la page des mentions légales 
+     * @Route("/mentions", name="mentions")
+     * 
+     * @return avoid
+     */
+    public function mentions()
+    {
+
+        return $this->render('mentions.html.twig', [
+        ]);
+    }
+
+
+    
 }
