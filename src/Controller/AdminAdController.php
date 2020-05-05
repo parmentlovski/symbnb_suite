@@ -48,9 +48,9 @@ class AdminAdController extends AbstractController
      *
      * @return Response
      */
-    public function exportCsv(ExportCsvService $exportCsv, EntityManagerInterface $manager)
+    public function exportCsv(ExportCsvService $exportCsv, EntityManagerInterface $manager, AdRepository $adRepo)
     {
-        $ads = $manager->getRepository(Ad::class)->findAll();
+        $ads = $adRepo->findAll();
         $exportCsv->createCsv(
             [
                 'Titre',
