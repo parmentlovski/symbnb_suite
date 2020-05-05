@@ -16,17 +16,17 @@
 			</div>
 			{% if app.request.method == 'POST' %}
 				<div class="row">
-					<div class="col-10 col-md-6">
+					<div class="col-10 offset-1">
 						{% if ads | length == 0 %}
 							<h2 class="my-5 text-center">Aucun résultat pour votre recherche</h2>
 						{% else %}
 							<h2 class="my-5 text-center">Résultats de la recherche</h2>
+						<div class="row">
+								{% for ad in ads %}
+									{% include "ad/_ad.html.twig" %}
+								{% endfor %}
+							{% endif %}
 						</div>
-						<div class="col-12 d-flex justify-content-center">
-							{% for ad in ads %}
-								{% include "ad/_ad.html.twig" %}
-							{% endfor %}
-						{% endif %}
 					</div>
 				</div>
 			{% endif %}
