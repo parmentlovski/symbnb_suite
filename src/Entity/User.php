@@ -99,7 +99,17 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * Le captcha à remplir
+     *
+     */
     protected $captchaCode;
+
+    /**
+     * La case à cocher pour valider le formulaire
+     *
+     */
+    private $validate;
 
     /**
      * Affiche le nom complet
@@ -307,6 +317,17 @@ class User implements UserInterface
     {
       $this->captchaCode = $captchaCode;
     }
+
+    public function getvalidate()
+    {
+      return $this->validate;
+    }
+  
+    public function setvalidate($validate)
+    {
+      $this->validate = $validate;
+    }
+
 
     /**
      * @return Collection|Role[]

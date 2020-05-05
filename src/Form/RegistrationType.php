@@ -3,14 +3,15 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-use Gregwar\CaptchaBundle\Type\CaptchaType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 
 class RegistrationType extends ApplicationType
@@ -35,7 +36,14 @@ class RegistrationType extends ApplicationType
                 'attr' => [
                 'placeholder' => "Veuillez renseigner les caractères affichés sur le captcha"
                 ]
-            ));
+            ))
+            ->add('validate', CheckboxType::class, [
+                'invalid_message' => "Veuillez cocher la case",
+                'label' => 'En vous inscrivant vous acceptez les conditions générales',
+                'required' => true,
+            ])
+            ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
