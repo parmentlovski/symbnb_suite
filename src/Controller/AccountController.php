@@ -133,8 +133,6 @@ class AccountController extends AbstractController
 
         $form->handleRequest($request);
 
-        $test = $user->getHash();
-
         if ($form->isSubmitted() && $form->isValid()) {
             $oldPassword = $passwordUpdate->getoldPassword();
 

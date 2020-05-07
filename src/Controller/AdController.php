@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Form\AdType;
-use App\Entity\Image;
 use App\Form\SearchAdType;
 use App\Repository\AdRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -175,8 +174,9 @@ class AdController extends AbstractController
 
         $ads = [];
         $searchAdForm = $this->createForm(SearchAdType::class);
+        $searchAdForm->handleRequest($request);
 
-        if ($searchAdForm->handleRequest($request)->isSubmitted() && $searchAdForm->isValid()) {
+        if ($searchAdForm->isSubmitted() && $searchAdForm->isValid()) {
             $criteria = $searchAdForm->getData();
             $ads = $adRepository->search($criteria);
         }

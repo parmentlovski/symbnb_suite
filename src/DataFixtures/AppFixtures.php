@@ -26,6 +26,7 @@ class AppFixtures extends Fixture
     }
 
 
+
     public function load(ObjectManager $manager)
     {
 
@@ -36,6 +37,25 @@ class AppFixtures extends Fixture
 
         $adminRole->setTitle('ROLE_ADMIN');
         $manager->persist($adminRole);
+
+        $coverImage = [
+            "5e9c64280b800770531851.jpg",
+            "5e874e9f08dce497280698.jpg",
+            "5e8752f9bbf3e315524612.jpg",
+            "5e8753fb0ef7d154849501.jpg",
+            "5e8754a87651a631575390.jpg",
+            "5e87527b41361472037364.jpg",
+            "5e87538c20cb1621370172.jpg",
+            "5e87539ede6b7425252155.jpg",
+            "5e87544da8056745940176.jpg",
+            "5e875411da04e721586654.jpg",
+            "5e8753120e8ad854981769.jpg",
+            "5e8754590ee9b890191550.jpg",
+            "5e87546332fe4602826875.jpg",
+            "5e87549635e6f244202064.jpg",
+            "5e875406317ac071040650.jpg",
+            "5e87537518067630800359.jpg"
+        ];
 
         $adminUser = new User();
         $adminUser->setFirstName('Igali')
@@ -110,6 +130,7 @@ class AppFixtures extends Fixture
             $ad->setTitle($title)
                 ->setSlug($slug)
                 ->setIntroduction($introduction)
+                ->setFilename($faker->unique()->randomElement($coverImage))
                 ->setContent($content)
                 ->setPrice(mt_rand(40, 200))
                 ->setRooms(mt_rand(1, 5))

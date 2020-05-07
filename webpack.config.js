@@ -23,13 +23,13 @@ Encore
  * Each entry will result in one JavaScript file (e.g. app.js)
  * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
  */
-.addEntry('css/animation', './assets/css/animation.css')
+// .addEntry('css/animation', './assets/css/animation.css')
 .addEntry('css/app', './assets/css/app.scss')
-// .addEntry('css/pdf', './assets/css/pdf.scss')
+    // .addEntry('css/pdf', './assets/css/pdf.scss')
     // .addEntry('css/bootstrap', './assets/css/bootstrap.min.css')
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/ad', './assets/js/ad.js')
-    // .addEntry('js/alert', './assets/js/alert.js')
+    .addEntry('js/alert', './assets/js/alert.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 

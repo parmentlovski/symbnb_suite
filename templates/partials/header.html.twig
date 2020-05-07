@@ -12,14 +12,6 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{{path('ads_index')}}">Annonces</a>
 			</li>
-			{% if app.user %}
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('cart_index')}}">Panier</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('cart_payement')}}">Payement</a>
-				</li>
-			{% endif %}
 		</ul>
 		<ul class="navbar-nav ml-auto">
 			{% if app.user %}
@@ -34,6 +26,9 @@
 						<a href="{{ path('account_index', {'slug' : app.user.slug}) }}" class="dropdown-item">Mon compte</a>
 						<a href="{{ path('account_bookings') }}" class="dropdown-item">Mes réservations</a>
 						<a href="{{ path('account_profile', {'slug' : app.user.slug}) }}" class="dropdown-item">Modifier mon profil</a>
+						<div class="dropdown-divider"></div>
+						<a href="{{ path('cart_index')}}" class="dropdown-item">Panier</a>
+						<a href="#" class="dropdown-item">Paiement</a>
 						<div class="dropdown-divider"></div>
 						<a href="{{ path('account_logout') }}" class="dropdown-item text-danger">Déconnexion</a>
 					</div>

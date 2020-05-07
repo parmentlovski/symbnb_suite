@@ -300,12 +300,12 @@ class User implements UserInterface
 
     public function getCaptchaCode()
     {
-      return $this->captchaCode;
+        return $this->captchaCode;
     }
-  
+
     public function setCaptchaCode($captchaCode)
     {
-      $this->captchaCode = $captchaCode;
+        $this->captchaCode = $captchaCode;
     }
 
     /**

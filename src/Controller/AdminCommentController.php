@@ -5,6 +5,7 @@ namespace App\Controller;
 use League\Csv\Writer;
 use App\Entity\Comment;
 use App\Form\AdminCommentType;
+use App\Repository\CommentRepository;
 use App\Service\ExportCsvService;
 use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,7 +37,7 @@ class AdminCommentController extends AbstractController
             'export' => $export
         ]);
     }
-    
+
     /**
      * Permet d'exporter les données en fichier csv
      *
@@ -44,15 +45,17 @@ class AdminCommentController extends AbstractController
      *
      * @return Response
      */
-    public function exportCsv(ExportCsvService $exportCsv, EntityManagerInterface $manager)
+    public function exportCsv(ExportCsvService $exportCsv, EntityManagerInterface $manager, CommentRepository $commentRepo)
     {
-        $comments = $manager->getRepository(Comment::class)->findAll();
-        $exportCsv->createCsv([
-            'Date', 
-            'Auteur', 
-            'Commentaire', 
-            'Note', 
-            'Annonce']
+        $comments = $commentRepo->findAll();
+        $exportCsv->createCsv(
+            [
+                'Date',
+                'Auteur',
+                'Commentaire',
+                'Note',
+                'Annonce'
+            ]
         );
 
         foreach ($comments as $comment) {
