@@ -58,6 +58,11 @@ class Booking
     private $comment;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $payment=false;
+
+    /**
      * Callback appelé à chaque fois que l'on crée une réservation
      *
      * @ORM\PrePersist
@@ -213,6 +218,18 @@ class Booking
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getPayment(): ?bool
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(bool $payment): self
+    {
+        $this->payment = $payment;
 
         return $this;
     }
