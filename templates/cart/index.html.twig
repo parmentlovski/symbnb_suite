@@ -24,6 +24,7 @@
 			<tbody>
 
 				{% for item in items %}
+
 					<tr>
 						<td>{{item.booking.ad.title}}</td>
 						<td>{{item.booking.startDate | date('d/m/Y') }}</td>
@@ -39,13 +40,11 @@
 							</a>
 						</td>
 					</tr>
-				</td>
-			</tbody>
-		</tr>
-	{% endfor %}
+			
+				{% endfor %}
+				
+			</tbody>	
 
-
-</tbody>
 <tfoot>
 	<tr>
 		<td colspan="5" class="text-right">Total :</td>
@@ -53,8 +52,15 @@
 			{{ total }}
 			&euro;
 		</td>
-		<td></td>
+		<td>
+			<a href="{{path('cart_payment')}}" class="btn btn-success">Valider mon panier</a>
+		</td>	
 	</tr>
-</tfoot></table>{% else %}<p>Surprise, c'est vide !</p>{% endif %}<pre>
-	{{ dump(items) }}
-</pre>{% endblock %}
+</tfoot>
+</table>
+
+{% else %}<p>Surprise, c'est vide !</p>
+
+{% endif %}
+
+{% endblock %}
