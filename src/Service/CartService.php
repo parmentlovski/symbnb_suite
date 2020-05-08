@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Booking;
 use App\Repository\AdRepository;
 use App\Repository\BookingRepository;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Security;
 
@@ -100,4 +101,30 @@ class CartService
             }
         }
     }
+
+    /**
+     * Permet de savoir si les réservations de l'utilisateur a été payé
+     * 
+     * @return boolean
+     */
+     public function PaymentIsWaiting(): bool{
+
+        $books = $this->bookingRepository->findBookingByBooker($this->security->getUser());
+
+        foreach  ($books as $book) {
+
+
+            if($book['reservation']->getPayment(false)) {
+
+                return true;
+            }
+
+            else {
+
+                return false;
+            }
+            
+        }
+    }
+
 }

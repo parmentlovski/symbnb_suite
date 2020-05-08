@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Booking;
 use App\Service\CartService;
 use App\Repository\BookingRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,10 +13,16 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\Length;
+
+// Set your secret key. Remember to switch to your live secret key in production!
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+\Stripe\Stripe::setApiKey('sk_test_Gkb9vQtFUJoMRRu8whbUszAn00GYXF5MHT');
 
 class CartController extends AbstractController
 {
     /**
+     * Affiche les différentes réservations dont le paiement n'a pas été effectué
      * @Route("/panier", name="cart_index")
      */
     public function index(CartService $cartService, BookingRepository $repo, Security $security)
@@ -23,10 +31,15 @@ class CartController extends AbstractController
         $cartService->getFullCart();
 
         $cartService->getTotal();
+    
 
-        $book = $repo->findBookingByBooker($security->getUser());
+            $book = $repo->findBookingByBooker($security->getUser());
 
-        // dd($book);
+            for ($i=0; $i < $book ; $i++) { 
+                
+          dd($book);
+            }
+
 
         return $this->render('cart/index.html.twig', [
             'items' => $cartService->getFullCart(),
@@ -36,6 +49,7 @@ class CartController extends AbstractController
     }
 
     /**
+     * Permet d'ajouter un produit
      * @Route("/panier/add/{id}", name="cart_add")
      */
     public function add($id, CartService $cartService)
@@ -67,14 +81,16 @@ class CartController extends AbstractController
     }
 
     /**
-     * Payement d'une réservation
+     * Paiement d'une réservation
      *
-     * @Route("/payement", name="cart_payement")
+     * @Route("/paiement", name="cart_payment")
+     * 
      * 
      * @return Response
      */
-    public function payment(Request $request)
+    public function payment(Request $request, CartService $cartService, BookingRepository $repo, Security $security)
     {
+    
 
         $form = $this->get('form.factory')
             ->createNamedBuilder('payment-form')
@@ -87,16 +103,46 @@ class CartController extends AbstractController
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
+
+            if ($form->isSubmitted()) {
                 // TODO: charge the card
+                $token = $_POST['stripeToken'];
+                $charge = \Stripe\Charge::create([
+                    'amount' => 999,
+                    'currency' => 'usd',
+                    'description' => 'Example charge',
+                    'source' => $token,
+                ]);
+
+
+
+                // $booking->setPayment(true);
+
+                // $manager->persist($booking);
+                // $manager->flush();
+
+                $this->addFlash(
+                    'success',
+                    "Le paiement à été accepté"
+                );
+            } else {
+                $this->addFlash(
+                    'warning',
+                    "Il y'a une erreur"
+                );
             }
         }
 
-        return $this->render('cart/payement.html.twig', [
+        return $this->render('cart/payment.html.twig', [
             'form' => $form->createView(),
-            'stripe_public_key' => $this->getParameter('stripe_public_key'),
+            // 'books' => $books
+            // 'stripe_public_key' => $this->getParameter('stripe_public_key'),
         ]);
+        // }
 
-        return $this->render('cart/payement.html.twig');
-    }
+
+
+            return $this->render('cart/payment.html.twig');
+        }
+        // }
 }
