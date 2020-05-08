@@ -9,11 +9,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Validator\Constraints\Length;
 
 // Set your secret key. Remember to switch to your live secret key in production!
 // See your keys here: https://dashboard.stripe.com/account/apikeys
@@ -25,7 +25,7 @@ class CartController extends AbstractController
      * Affiche les différentes réservations dont le paiement n'a pas été effectué
      * @Route("/panier", name="cart_index")
      */
-    public function index(CartService $cartService, BookingRepository $repo, Security $security)
+    public function index(CartService $cartService, Security $security, BookingRepository $repo)
     {
 
         $cartService->getFullCart();
@@ -43,8 +43,7 @@ class CartController extends AbstractController
 
         return $this->render('cart/index.html.twig', [
             'items' => $cartService->getFullCart(),
-            'total' => $cartService->getTotal(),
-            'book' => $book
+            'total' => $cartService->getTotal()
         ]);
     }
 
@@ -56,6 +55,11 @@ class CartController extends AbstractController
     {
         if ($cartService->isAlreadyInCart($id) == false) {
             $cartService->add($id);
+
+            $this->addFlash(
+                'success',
+                "Votre réservation à bien été ajoutée à votre panier"
+            );
         } else {
             $this->addFlash(
                 'danger',
@@ -66,7 +70,7 @@ class CartController extends AbstractController
         }
 
 
-        return $this->redirectToRoute("cart_index");
+        return $this->redirectToRoute("account_bookings");
     }
 
     /**

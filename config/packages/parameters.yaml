@@ -1,9 +1,0 @@
-parameters:
-  # ...
-  stripe_public_key: pk_test_qNkq8heL9720EPALxhTjvUhO00rGI8m5Ds
-  stripe_secret_key: sk_test_fjr2kbOHxozw5wct1um5rNYG00gExB8C5Y
-
-  payment:
-    currency: GBP
-    decimal: true
-    premium_amount: 1

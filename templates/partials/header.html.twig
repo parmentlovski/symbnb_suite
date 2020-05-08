@@ -35,6 +35,9 @@
 						<a href="{{ path('account_bookings') }}" class="dropdown-item">Mes réservations</a>
 						<a href="{{ path('account_profile', {'slug' : app.user.slug}) }}" class="dropdown-item">Modifier mon profil</a>
 						<div class="dropdown-divider"></div>
+						<a href="{{ path('cart_index')}}" class="dropdown-item">Panier</a>
+						<a href="#" class="dropdown-item">Paiement</a>
+						<div class="dropdown-divider"></div>
 						<a href="{{ path('account_logout') }}" class="dropdown-item text-danger">Déconnexion</a>
 					</div>
 

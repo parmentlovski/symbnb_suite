@@ -89,6 +89,7 @@ class CartService
             // dump($item['booking']->getEndDate());
             // dump($booking->getStartDate());
             // dump($booking->getEndDate());
+
             // dump($item['booking']);
 
             if ($item['booking']->getId() == $booking->getId() && $booking->getStartDate() <= $item['booking']->getStartDate() && $booking->getStartDate() <= $item['booking']->getEndDate()) {
