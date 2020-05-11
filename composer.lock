@@ -3597,25 +3597,7 @@
             ],
             "description": "Symfony ExpressionLanguage Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
             "time": "2020-03-27T16:56:45+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-04-15T15:59:10+00:00"
->>>>>>> eb07a79d03794b6840392fa9ae00d04b2eccbccb
         },
         {
             "name": "symfony/filesystem",
@@ -4628,25 +4610,7 @@
                 "mime",
                 "mime-type"
             ],
-<<<<<<< HEAD
             "time": "2020-03-27T16:56:45+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-04-17T03:29:44+00:00"
->>>>>>> eb07a79d03794b6840392fa9ae00d04b2eccbccb
         },
         {
             "name": "symfony/monolog-bridge",
@@ -4900,25 +4864,7 @@
                 "configuration",
                 "options"
             ],
-<<<<<<< HEAD
             "time": "2020-03-27T16:56:45+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-04-06T10:40:56+00:00"
->>>>>>> eb07a79d03794b6840392fa9ae00d04b2eccbccb
         },
         {
             "name": "symfony/orm-pack",
@@ -5525,25 +5471,7 @@
                 "type",
                 "validator"
             ],
-<<<<<<< HEAD
             "time": "2020-03-27T16:56:45+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-04-06T10:40:56+00:00"
->>>>>>> eb07a79d03794b6840392fa9ae00d04b2eccbccb
         },
         {
             "name": "symfony/routing",
@@ -5930,25 +5858,7 @@
             ],
             "description": "Symfony Security Component - Guard",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
             "time": "2020-03-27T16:56:45+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-04-15T15:59:10+00:00"
->>>>>>> eb07a79d03794b6840392fa9ae00d04b2eccbccb
         },
         {
             "name": "symfony/security-http",
@@ -6947,25 +6857,7 @@
                 "instantiate",
                 "serialize"
             ],
-<<<<<<< HEAD
             "time": "2020-03-27T16:56:45+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-04-15T15:59:10+00:00"
->>>>>>> eb07a79d03794b6840392fa9ae00d04b2eccbccb
         },
         {
             "name": "symfony/web-link",
@@ -7152,25 +7044,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
             "time": "2020-03-30T11:42:42+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-04-28T17:58:55+00:00"
->>>>>>> eb07a79d03794b6840392fa9ae00d04b2eccbccb
         },
         {
             "name": "twig/extra-bundle",
@@ -8151,25 +8025,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
             "time": "2020-03-27T16:56:45+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-04-28T17:58:55+00:00"
->>>>>>> eb07a79d03794b6840392fa9ae00d04b2eccbccb
         },
         {
             "name": "symfony/profiler-pack",
