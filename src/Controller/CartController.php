@@ -28,19 +28,6 @@ class CartController extends AbstractController
     public function index(CartService $cartService, Security $security, BookingRepository $repo)
     {
 
-        $cartService->getFullCart();
-
-        $cartService->getTotal();
-    
-
-            $book = $repo->findBookingByBooker($security->getUser());
-
-            for ($i=0; $i < $book ; $i++) { 
-                
-          dd($book);
-            }
-
-
         return $this->render('cart/index.html.twig', [
             'items' => $cartService->getFullCart(),
             'total' => $cartService->getTotal()
@@ -53,14 +40,25 @@ class CartController extends AbstractController
      */
     public function add($id, CartService $cartService)
     {
-        if ($cartService->isAlreadyInCart($id) == false) {
+        if ($cartService->isAlreadyInCart($id) == false && $cartService->PaymentIsWaiting($id) == true) {
             $cartService->add($id);
 
             $this->addFlash(
                 'success',
-                "Votre réservation à bien été ajoutée à votre panier"
+                "Votre réservation a bien été ajoutée à votre panier"
             );
-        } else {
+        }
+        
+        else if ($cartService->isAlreadyInCart($id) == false && $cartService->PaymentIsWaiting($id) == false){
+            $this->addFlash(
+                'danger',
+                "Votre réservation à déja été payée"
+            );
+
+            return $this->redirectToRoute("account_bookings");
+        }
+        
+        else {
             $this->addFlash(
                 'danger',
                 "Cette réservation est déjà dans votre panier"
@@ -92,16 +90,15 @@ class CartController extends AbstractController
      * 
      * @return Response
      */
-    public function payment(Request $request, CartService $cartService, BookingRepository $repo, Security $security)
+    public function payment(Request $request, CartService $cartService)
     {
-    
 
         $form = $this->get('form.factory')
             ->createNamedBuilder('payment-form')
             ->add('token', HiddenType::class, [
                 'constraints' => [new NotBlank()],
             ])
-            ->add('submit', SubmitType::class)
+            ->add('Payer', SubmitType::class)
             ->getForm();
 
         if ($request->isMethod('POST')) {
@@ -109,21 +106,10 @@ class CartController extends AbstractController
 
 
             if ($form->isSubmitted()) {
-                // TODO: charge the card
-                $token = $_POST['stripeToken'];
-                $charge = \Stripe\Charge::create([
-                    'amount' => 999,
-                    'currency' => 'usd',
-                    'description' => 'Example charge',
-                    'source' => $token,
-                ]);
-
-
-
-                // $booking->setPayment(true);
-
-                // $manager->persist($booking);
-                // $manager->flush();
+                
+                $cartService->GetPaymentWithStripe();
+                $cartService->ChangeOfPaymentStatus();
+                $cartService->SetAndClearPanier();
 
                 $this->addFlash(
                     'success',
@@ -139,14 +125,11 @@ class CartController extends AbstractController
 
         return $this->render('cart/payment.html.twig', [
             'form' => $form->createView(),
-            // 'books' => $books
-            // 'stripe_public_key' => $this->getParameter('stripe_public_key'),
+            'bookings' => $cartService->getFullCart(),
+            'total' => $cartService->getTotal()
+    
         ]);
-        // }
-
-
-
-            return $this->render('cart/payment.html.twig');
+  
         }
-        // }
+     
 }
