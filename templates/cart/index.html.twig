@@ -4,63 +4,80 @@
 {% endblock %}
 
 {% block body %}
-	<div class="bg-light p-3">
-		<h1>Votre panier</h1>
-	</div>
 
-	{% if items | length > 0 %}
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Titre de l'annonce</th>
-					<th>Arrivée</th>
-					<th>Départ</th>
-					<th>Ville</th>
-					<th>Nombre de nuits</th>
-					<th>Prix</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
+	<div class="container">
+		<div class="bg-light my-5 p-5">
+			<h1 class="text-center">Votre panier</h1>
+		</div>
 
-				{% for item in items %}
-
+		{% if items | length > 0 %}
+			<table class="table">
+				<thead>
 					<tr>
-						<td>{{item.booking.ad.title}}</td>
-						<td>{{item.booking.startDate | date('d/m/Y') }}</td>
-						<td>{{item.booking.endDate | date('d/m/Y') }}</td>
-						<td>{{item.booking.ad.city}}</td>
-						<td>{{item.quantity}}</td>
-						<td>{{item.booking.amount}}
-							&euro;
-						</td>
-						<td>
-							<a title="supprimer du panier" href="{{path('cart_remove', {'id': item.booking.id}) }}" class="btn btn-danger btn-sm">
-								<i class="fas fa-trash"></i>
-							</a>
-						</td>
+						<th>Titre de l'annonce</th>
+						<th>Arrivée</th>
+						<th>Départ</th>
+						<th>Ville</th>
+						<th>Nombre de nuits</th>
+						<th>Prix</th>
+						<th></th>
 					</tr>
-			
-				{% endfor %}
-				
-			</tbody>	
+				</thead>
+				<tbody>
 
-<tfoot>
-	<tr>
-		<td colspan="5" class="text-right">Total :</td>
-		<td>
-			{{ total }}
-			&euro;
-		</td>
-		<td>
-			<a href="{{path('cart_payment')}}" class="btn btn-success">Valider mon panier</a>
-		</td>	
-	</tr>
-</tfoot>
-</table>
+					{% for item in items %}
 
-{% else %}<p>Surprise, c'est vide !</p>
+						{% if item.booking.payment == false %}
 
-{% endif %}
+							<tr>
+								<td>{{item.booking.ad.title}}</td>
+								<td>{{item.booking.startDate | date('d/m/Y') }}</td>
+								<td>{{item.booking.endDate | date('d/m/Y') }}</td>
+								<td>{{item.booking.ad.city}}</td>
+								<td>{{item.quantity}}</td>
+								<td>{{item.booking.amount}}
+									&euro;
+								</td>
+								<td>
+									<a title="supprimer du panier" href="{{path('cart_remove', {'id': item.booking.id}) }}" class="btn btn-danger btn-sm">
+										<i class="fas fa-trash"></i>
+									</a>
+								</td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="5" class="text-right">Total :</td>
+						<td>{{ total }}
+							&euro;</td>
+						<td></td>
+					</tr>
+				</tfoot>
+
+			</table>
+
+
+			<div class="alert-dark p-3">
+				<p>Avant de valider votre panier vérifiez bien que vous avez renseigné : les bonnes dates et le bon lieu.
+				</p>
+				<p>Si vous avez effectuer plusieurs réservations vérifiez également que les dates ne soient pas identiques.</p>
+			</div>
+
+			<div class="my-5 d-flex justify-content-center">
+
+				<a href="{{path('cart_payment')}}" class="btn btn-success">Valider mon panier</a>
+			</div>
+
+
+		{% else %}
+			<p>Surprise, c'est vide !</p>
+			<p>N'hésitez pas à faire un tour vers <a href="{{path('ads_index')}}" class="link-register">les annonces</a> pour remplir le panier.</p>
+			<p>Ou à utiliser notre formulaire de <a href="{{path('ads_search')}}" class="plus-recherche-panier">Recherche avancée</a>
+		{% endif %}
+
+	</div>
 
 {% endblock %}
