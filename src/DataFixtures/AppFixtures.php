@@ -196,6 +196,7 @@ class AppFixtures extends Fixture
                     ->setStartDate($startDate)
                     ->setEndDate($endDate)
                     ->setComment($comment)
+                    ->setPayment(1)
                     ->setAmount($amount);
 
                 $manager->persist($booking);

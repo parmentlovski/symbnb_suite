@@ -83,24 +83,20 @@ class CartService
         return $total;
     }
 
+    /**
+     * Evite les doublons dans le panier
+     * @return boolean
+     */
     public function isAlreadyInCart($id)
     {
         $booking =  $this->bookingRepository->find($id);
 
         foreach ($this->getFullCart() as $item) {
-            // dump($item['booking']->getStartDate());
-            // dump($item['booking']->getEndDate());
-            // dump($booking->getStartDate());
-            // dump($booking->getEndDate());
-
-            // dump($item['booking']);
 
             if ($item['booking']->getId() == $booking->getId() && $booking->getStartDate() <= $item['booking']->getStartDate() && $booking->getStartDate() <= $item['booking']->getEndDate()) {
 
-                // dd('Pas possible');
                 return true;
             } else {
-                // dd("Possible");
                 return false;
             }
         }
