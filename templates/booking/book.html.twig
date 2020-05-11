@@ -11,9 +11,9 @@
 {% block body %}
 
 	<div class="container">
-		<h1>Réserver pour l'annonce: <strong>{{ ad.title }}</strong></h1>
+		<h1 class="mt-5">Réserver pour l'annonce: <strong>{{ ad.title }}</strong></h1>
 
-		<p>
+		<p class="mb-5">
 			Vous êtes sur le point de réserver le bien de:
 			<strong>{{ ad.author.fullName }}</strong>
 			Dites nous tout, on s'occupe du reste !
@@ -43,11 +43,11 @@
 		</div>
 
 
-		<h2>Vous avez terminez ?
+		<h2 class="mt-4 text-center">Vous avez terminé ?
 		</h2>
-		<p>Vacances de rêve ? Hébergement pour le boulot ?  Peu importe, on est ensemble !</p>
+		<p class="text-center">Vacances de rêve ? Hébergement pour le boulot ?  Peu importe, on est ensemble !</p>
 
-		<button type="submit" class="btn btn-success">Je réserve !</button>
+		<button id="validate" type="submit" class="btn btn-success">Je réserve !</button>
 		{{ form_end(form) }}
 	</div>
 
