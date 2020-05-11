@@ -28,7 +28,7 @@ class CartService
     {
         $panier = $this->session->get('panier', []);
 
-   
+
         if (!empty($panier[$id])) {
             $panier[$id]++;
         } else {
@@ -75,7 +75,7 @@ class CartService
 
         foreach ($this->getFullCart() as $item) {
 
-            if($item['booking']->getPayment() == false) {
+            if ($item['booking']->getPayment() == false) {
                 $total += $item['booking']->getAmount();
             }
         }
@@ -106,31 +106,33 @@ class CartService
      * Permet de savoir si la réservation de l'utilisateur a déjà été payé
      * 
      */
-    public function PaymentIsWaiting($id){
+    public function PaymentIsWaiting($id)
+    {
 
         $booking =  $this->bookingRepository->find($id);
 
 
-            if ($booking->getPayment() == false) {
+        if ($booking->getPayment() == false) {
 
-                // dd('Pas possible');
-                return true;
-            } else {
-                // dd("Possible");
-                return false;
-            }
+            // dd('Pas possible');
+            return true;
+        } else {
+            // dd("Possible");
+            return false;
+        }
     }
-   
+
 
     /**
      * Permet de réaliser le paiement avec Stripe 
      * 
      * @return avoid
      */
-    public function GetPaymentWithStripe(){
+    public function GetPaymentWithStripe()
+    {
         $token = $_POST['stripeToken'];
         $charge = \Stripe\Charge::create([
-            'amount' => ($this->getTotal())*100,
+            'amount' => ($this->getTotal()) * 100,
             'currency' => 'eur',
             'description' => 'Example charge',
             'source' => $token,
@@ -142,13 +144,14 @@ class CartService
      * 
      * @return avoid
      */
-    public function ChangeOfPaymentStatus(){
-       
+    public function ChangeOfPaymentStatus()
+    {
+
         foreach ($this->getFullCart() as $id => $item) {
             $item['booking']->setPayment(true);
-             $this->manager->persist($item['booking']);
-             $this->manager->flush();
-         }
+            $this->manager->persist($item['booking']);
+            $this->manager->flush();
+        }
     }
 
     /**
@@ -156,8 +159,8 @@ class CartService
      * 
      * @return avoid
      */
-     public function SetAndClearPanier(){
+    public function UnsetPanier()
+    {
         unset($_SESSION['_sf2_attributes']['panier']);
-     }
-
+    }
 }

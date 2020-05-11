@@ -47,18 +47,14 @@ class CartController extends AbstractController
                 'success',
                 "Votre réservation a bien été ajoutée à votre panier"
             );
-        }
-        
-        else if ($cartService->isAlreadyInCart($id) == false && $cartService->PaymentIsWaiting($id) == false){
+        } else if ($cartService->isAlreadyInCart($id) == false && $cartService->PaymentIsWaiting($id) == false) {
             $this->addFlash(
                 'danger',
                 "Votre réservation à déja été payée"
             );
 
             return $this->redirectToRoute("account_bookings");
-        }
-        
-        else {
+        } else {
             $this->addFlash(
                 'danger',
                 "Cette réservation est déjà dans votre panier"
@@ -106,10 +102,10 @@ class CartController extends AbstractController
 
 
             if ($form->isSubmitted()) {
-                
+
                 $cartService->GetPaymentWithStripe();
                 $cartService->ChangeOfPaymentStatus();
-                $cartService->SetAndClearPanier();
+                $cartService->UnsetPanier();
 
                 $this->addFlash(
                     'success',
@@ -127,9 +123,7 @@ class CartController extends AbstractController
             'form' => $form->createView(),
             'bookings' => $cartService->getFullCart(),
             'total' => $cartService->getTotal()
-    
+
         ]);
-  
-        }
-     
+    }
 }
