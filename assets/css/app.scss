@@ -67,12 +67,6 @@ nav {
     }
 }
 
-// POP UP 
-
-// .adblock-class {
-//     opacity: 0;
-// }
-
 .container-class {
     //info 
        opacity: 0;
@@ -110,14 +104,7 @@ nav {
     }
 }
 
-// .actions-class {
-//     display: none;
-// }
-
-// page d'accueil 
 #home {
-
-
 
     .jumbotron {
         // encadré prenant toute la place avec la photo 
@@ -309,7 +296,6 @@ span.rating i {
 }
 
 
-
 #account {
 
     // la partie présentation du user 
@@ -327,8 +313,10 @@ span.rating i {
     }
 }
 
-#search_ad_recherche {
-    // bouton de recherche d'annonces 
+#search_ad_recherche, // bouton de recherche d'annonces 
+#payment-form_Payer,
+#validate // bouton Payer stripe de la page paiement 
+{   
     display: block;
     margin-top: 40px;
     margin-right: auto;
@@ -599,6 +587,15 @@ footer {
 
     &:hover {
         text-decoration: none;
+    }
+}
+
+.plus-recherche-panier {
+    color: #A0906B;
+
+    &:hover {
+        text-decoration: none;
+        color: $or;
     }
 }
 
