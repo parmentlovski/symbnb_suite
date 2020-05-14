@@ -2,33 +2,68 @@
 
 namespace App\Service;
 
-use App\Entity\Booking;
 use App\Repository\AdRepository;
 use App\Repository\BookingRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CartService
 {
-
+    /**
+     * Permet de sécuriser le paiement
+     *
+     * @var Security
+     */
     private $security;
 
-    public function __construct(SessionInterface $session, AdRepository $adRepository, Security $security, BookingRepository $bookingRepository, EntityManagerInterface $manager)
+    /**
+     * Donne accès aux informations concernant la session d'un utilisateur 
+     *
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
+     * Le dépôt des réservations
+     *
+     * @var BookingRepository
+     */
+    private $bookingRepository;
+
+    /**
+     * Le manager de Doctrine qui nous permet notamment de trouver le repository dont on a besoin
+     *
+     * @var EntityManagerInterface
+     */
+    private $manager;
+    
+    /**
+     * Constructeur du service de paiement qui sera appelé par Symfony
+     *
+     * @param SessionInterface $session
+     * @param Security $security
+     * @param BookingRepository $bookingRepository  
+     * @param EntityManagerInterface $manager
+     */
+    public function __construct(SessionInterface $session, Security $security, BookingRepository $bookingRepository, EntityManagerInterface $manager)
     {
         $this->session = $session;
-        $this->adRepository = $adRepository;
         $this->security = $security;
         $this->bookingRepository = $bookingRepository;
         $this->manager = $manager;
     }
 
-    public function add(int $id)
+    /**
+     * Pour ajouter une réservation d'annonce au panier 
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function add(int $id) : void
     {
         $panier = $this->session->get('panier', []);
 
-   
         if (!empty($panier[$id])) {
             $panier[$id]++;
         } else {
@@ -38,7 +73,13 @@ class CartService
         $this->session->set('panier', $panier);
     }
 
-    public function remove(int $id)
+    /**
+     * Pour supprimer une réservation d'annonce au panier 
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function remove(int $id): void
     {
         $panier = $this->session->get('panier', []);
 
@@ -49,6 +90,11 @@ class CartService
         $this->session->set('panier', $panier);
     }
 
+    /**
+     * Recevoir les informations relatives à un utilisateur et selon sa réservation 
+     *
+     * @return array
+     */
     public function getFullCart(): array
     {
         $panier = $this->session->get('panier', []);
@@ -68,6 +114,11 @@ class CartService
         return $panierWithData;
     }
 
+    /**
+     * Connaitre le total du panier 
+     *
+     * @return float
+     */
     public function getTotal(): float
     {
         $total = 0;
@@ -75,7 +126,7 @@ class CartService
 
         foreach ($this->getFullCart() as $item) {
 
-            if($item['booking']->getPayment() == false) {
+            if ($item['booking']->getPayment() == false) {
                 $total += $item['booking']->getAmount();
             }
         }
@@ -85,6 +136,8 @@ class CartService
 
     /**
      * Evite les doublons dans le panier
+     * 
+     * @param integer $id
      * @return boolean
      */
     public function isAlreadyInCart($id)
@@ -105,32 +158,36 @@ class CartService
     /**
      * Permet de savoir si la réservation de l'utilisateur a déjà été payé
      * 
+     * @param integer $id
+     * @return boolean
      */
-    public function PaymentIsWaiting($id){
-
+    public function PaymentIsWaiting($id): bool
+    {
         $booking =  $this->bookingRepository->find($id);
 
+        if ($booking->getPayment() == false) {
 
-            if ($booking->getPayment() == false) {
-
-                // dd('Pas possible');
-                return true;
-            } else {
-                // dd("Possible");
-                return false;
-            }
+            // dd('Pas possible');
+            return true;
+        } else {
+            // dd("Possible");
+            return false;
+        }
     }
-   
 
     /**
      * Permet de réaliser le paiement avec Stripe 
      * 
      * @return avoid
      */
-    public function GetPaymentWithStripe(){
+    public function GetPaymentWithStripe(): void
+    {
+        // Set your secret key. Remember to switch to your live secret key in production!
+        // See your keys here: https://dashboard.stripe.com/account/apikeys
+        \Stripe\Stripe::setApiKey('sk_test_Gkb9vQtFUJoMRRu8whbUszAn00GYXF5MHT');
         $token = $_POST['stripeToken'];
         $charge = \Stripe\Charge::create([
-            'amount' => ($this->getTotal())*100,
+            'amount' => ($this->getTotal()) * 100,
             'currency' => 'eur',
             'description' => 'Example charge',
             'source' => $token,
@@ -138,26 +195,26 @@ class CartService
     }
 
     /**
-     * Permet de modifier le statut du paiement de false à true
+     * Modifie le statut du paiement de false à true une fois la réservation payée
      * 
      * @return avoid
      */
-    public function ChangeOfPaymentStatus(){
-       
-        foreach ($this->getFullCart() as $id => $item) {
+    public function ChangeOfPaymentStatus(): void
+    {
+        foreach ($this->getFullCart() as $item) {
             $item['booking']->setPayment(true);
-             $this->manager->persist($item['booking']);
-             $this->manager->flush();
-         }
+            $this->manager->persist($item['booking']);
+            $this->manager->flush();
+        }
     }
 
     /**
-     * Vider la session du panier une fois que le paiement est validé 
+     * Vide la session du panier une fois que le paiement est validé 
      * 
      * @return avoid
      */
-     public function SetAndClearPanier(){
+    public function UnsetPanier(): void
+    {
         unset($_SESSION['_sf2_attributes']['panier']);
-     }
-
+    }
 }
