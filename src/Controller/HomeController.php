@@ -22,19 +22,15 @@ class HomeController extends AbstractController
         ]);
     }
 
-     /**
-      * Retourne la page des mentions légales 
+    /**
+     * Retourne la page des mentions légales 
      * @Route("/mentions", name="mentions")
      * 
-     * @return avoid
+     * @return void
      */
     public function mentions()
     {
 
-        return $this->render('mentions.html.twig', [
-        ]);
+        return $this->render('mentions.html.twig', []);
     }
-
-
-    
 }

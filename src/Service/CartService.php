@@ -126,7 +126,7 @@ class CartService
     /**
      * Permet de réaliser le paiement avec Stripe 
      * 
-     * @return avoid
+     * @return void
      */
     public function GetPaymentWithStripe()
     {
@@ -142,7 +142,7 @@ class CartService
     /**
      * Permet de modifier le statut du paiement de false à true
      * 
-     * @return avoid
+     * @return void
      */
     public function ChangeOfPaymentStatus()
     {
@@ -157,7 +157,7 @@ class CartService
     /**
      * Vider la session du panier une fois que le paiement est validé 
      * 
-     * @return avoid
+     * @return void
      */
     public function UnsetPanier()
     {

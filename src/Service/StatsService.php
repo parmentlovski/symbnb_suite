@@ -53,7 +53,7 @@ class StatsService
      */
     public function getUsersCount()
     {
-        return  $users = $this->manager->createQuery('SELECT COUNT(u) FROM App\Entity\User u')->getSingleScalarResult();
+        return $this->manager->createQuery('SELECT COUNT(u) FROM App\Entity\User u')->getSingleScalarResult();
     }
 
     /**
@@ -63,7 +63,7 @@ class StatsService
      */
     public function getAdsCount()
     {
-        return  $ads = $this->manager->createQuery('SELECT COUNT(a) FROM App\Entity\Ad a')->getSingleScalarResult();
+        return $this->manager->createQuery('SELECT COUNT(a) FROM App\Entity\Ad a')->getSingleScalarResult();
     }
 
     /**
@@ -73,7 +73,7 @@ class StatsService
      */
     public function getBookingsCount()
     {
-        return  $bookings = $this->manager->createQuery('SELECT COUNT(c) FROM App\Entity\Booking c')->getSingleScalarResult();
+        return $this->manager->createQuery('SELECT COUNT(c) FROM App\Entity\Booking c')->getSingleScalarResult();
     }
 
     /**
@@ -83,6 +83,6 @@ class StatsService
      */
     public function getCommentsCount()
     {
-        return  $comments = $this->manager->createQuery('SELECT COUNT(b) FROM App\Entity\Comment b')->getSingleScalarResult();
+        return $this->manager->createQuery('SELECT COUNT(b) FROM App\Entity\Comment b')->getSingleScalarResult();
     }
 }
