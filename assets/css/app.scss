@@ -502,7 +502,7 @@ span.rating i {
     width: 500px;
 
     button {
-        background-image: linear-gradient(to right, #f8f9fa, #3D6480 50%, $blueDark) !important;
+        background-image: linear-gradient(to right, #f8f9fa 50%, #3D6480 50%, $blueDark) !important;
     }
 
     .card-header {
@@ -536,12 +536,12 @@ span.rating i {
         flex-direction: column;
 
         button {
-            width: 50%;
+            // width: 50%;
             margin: auto;
 
-            @media (max-width: 767px) {
-                width: 80%;
-            }
+            // @media (max-width: 767px) {
+            //     width: 80%;
+            // }
         }
 
         a {
