@@ -7,6 +7,10 @@
 
 	<div class="container">
 		<h1 class="h1 my-5">Mes réservations</h1>
+		<div class="text-center">
+			<a href="{{ path('cart_index')}}" class="btn btn-primary text-center">Voir mon panier</a>
+		</div>
+
 		<p class="mt-5" style="margin-left: 8.3333%;">Retrouver ci-dessous toutes vos réservations passées et à venir :</p>
 
 		{% for booking in app.user.bookings %}
