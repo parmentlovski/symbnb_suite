@@ -2,32 +2,27 @@
 
 namespace App\Controller;
 
-use App\Entity\Booking;
 use App\Service\CartService;
-use App\Repository\BookingRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-// Set your secret key. Remember to switch to your live secret key in production!
-// See your keys here: https://dashboard.stripe.com/account/apikeys
-\Stripe\Stripe::setApiKey('sk_test_Gkb9vQtFUJoMRRu8whbUszAn00GYXF5MHT');
-
 class CartController extends AbstractController
 {
     /**
      * Affiche les différentes réservations dont le paiement n'a pas été effectué
+     * 
      * @Route("/panier", name="cart_index")
+     * 
+     * @param CartService $cartService
+     * 
+     * @return Response
      */
-    public function index(CartService $cartService, Security $security, BookingRepository $repo)
+    public function index(CartService $cartService)
     {
-
         return $this->render('cart/index.html.twig', [
             'items' => $cartService->getFullCart(),
             'total' => $cartService->getTotal()
@@ -36,7 +31,13 @@ class CartController extends AbstractController
 
     /**
      * Permet d'ajouter un produit
+     * 
      * @Route("/panier/add/{id}", name="cart_add")
+     * 
+     * @param Request $request
+     * @param CartService $cartService
+     * 
+     * @return Response
      */
     public function add($id, CartService $cartService)
     {
@@ -73,7 +74,13 @@ class CartController extends AbstractController
 
     /**
      * Permet de supprimer un produit
+     * 
      *  @Route("/panier/remove/{id}", name="cart_remove")
+     * 
+     * @param integer $id
+     * @param CartService $cartService
+     * 
+     * @return Response
      */
     public function remove($id, CartService $cartService)
     {
@@ -87,6 +94,8 @@ class CartController extends AbstractController
      *
      * @Route("/paiement", name="cart_payment")
      * 
+     * @param Request $request
+     * @param CartService $cartService
      * 
      * @return Response
      */
@@ -109,7 +118,7 @@ class CartController extends AbstractController
                 
                 $cartService->GetPaymentWithStripe();
                 $cartService->ChangeOfPaymentStatus();
-                $cartService->SetAndClearPanier();
+                $cartService->UnsetPanier();
 
                 $this->addFlash(
                     'success',
