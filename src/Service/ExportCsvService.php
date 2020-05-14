@@ -2,11 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Ad;
-use App\Entity\User;
 use League\Csv\Writer;
-use App\Entity\Booking;
-use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -23,13 +19,6 @@ class ExportCsvService
     private $entityClass;
 
     /**
-     * La function permettant de créer un fichier csv
-     *
-     * 
-     */
-    private $csv;
-
-    /**
      * Le manager de Doctrine qui nous permet notamment de trouver le repository dont on a besoin
      *
      * @var EntityManagerInterface
@@ -41,10 +30,8 @@ class ExportCsvService
      * 
      *  @param ObjectManager $manager
      */
-
     public function __construct(EntityManagerInterface $manager)
     {
-
         $this->manager = $manager;
         $this->csv = Writer::createFromString('');
     }
@@ -94,38 +81,35 @@ class ExportCsvService
             ->getRepository($this->entityClass)
             ->findAll();
     }
-
-   
     
       /**
      * Permet de créer un fichier csv et d'inclure un header
-     *
-     * @return void
+     * 
+     * @return avoid
      */
-    public function createCsv($header)
+    public function createCsv($header): void
     {
-        //insert the header
         $this->csv->insertOne($header);
     }
 
     /**
      * Permet d'insérer les données d'une entité quelconque 
-     *
-     * @return void
+     * 
+     * @return avoid
      */
-    public function insertCsv($insert)
+    public function insertCsv($insert): void
     {
-        return $this->csv->insertOne($insert);
+        $this->csv->insertOne($insert);
     }
 
     /**
      * Permet de récupérer le nom de fichier d'export csv
-     *
-     * @return void
+     * 
+     * @return avoid
      */
-    public function getOutput(string $output)
+    public function getOutput($output): void
     {
-        return $this->csv->output($output);
+        $this->csv->output($output);
     }
 
 }
