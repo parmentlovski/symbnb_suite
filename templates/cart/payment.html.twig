@@ -16,8 +16,8 @@
 			<p>Nous procédons les paiements avec Stripe rendant le service sécurisé.</p>
 		</div>
 		{# <pre>
-				  {{ dump(bookings) }}
-				</pre> #}
+						  {{ dump(bookings) }}
+						</pre> #}
 
 		<div class="my-5">
 			{{ form_start(form, {attr: {id: form.vars.id}}) }}
@@ -28,10 +28,10 @@
 				<div id="card-element" class="form-control my-3"></div>
 				<div id="card-errors" class="help-block" role="alert"></div>
 			</div>
-			<p>Vous devez :
+			<p>Somme à payer :
 				<strong>{{total}}
-				&euro;</strong>
-        </p>
+					&euro;</strong>
+			</p>
 
 			{{ form_widget(form.token) }}
 
