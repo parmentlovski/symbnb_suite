@@ -7,6 +7,10 @@
 
 	<div class="container">
 		<h1 class="h1 my-5">Mes réservations</h1>
+		<div class="text-center">
+			<a href="{{ path('cart_index')}}" class="btn btn-primary text-center">Voir mon panier</a>
+		</div>
+
 		<p class="mt-5" style="margin-left: 8.3333%;">Retrouver ci-dessous toutes vos réservations passées et à venir :</p>
 
 		{% for booking in app.user.bookings %}
@@ -41,7 +45,8 @@
 						<a href="{{path('cart_add', {'id' : booking.id}) }}" class="btn btn-success">Ajouter au panier
 							<i class="fas fa-shopping-basket"></i>
 						</a>
-						<a href="{{ path('booking_delete', {'id' : booking.id}) }}" class="btn btn-danger my-2">Annuler la réservation</a>
+						<a href="{{ path('booking_delete', {'id' : booking.id}) }}" class="btn annuler-reservation my-2">Annuler la réservation</a>
+
 					</div>
 
 					<div class="mt-3">

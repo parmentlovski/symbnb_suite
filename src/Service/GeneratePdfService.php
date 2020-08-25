@@ -8,19 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GeneratePdfService extends AbstractController
 {
-    /**
-     * Le nom de l'entité sur laquelle on veut utiliser
-     *
-     * @var string
-     */
-    private $entityClass;
-
-    /**
-     * Le chemin vers le template qui contient la page à transformer en PDF
-     *
-     * @var string
-     */
-    private $templatePath;
 
     /**
      * Permet de télécharger une page HTML en PDF

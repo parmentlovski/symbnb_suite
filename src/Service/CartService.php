@@ -161,12 +161,23 @@ class CartService
      * @param integer $id
      * @return boolean
      */
+<<<<<<< HEAD
     public function PaymentIsWaiting($id): bool
     {
+=======
+    public function PaymentIsWaiting($id)
+    {
+
+>>>>>>> dfcf6fcc5deb21fb758f88faef5b10ed5a15eb48
         $booking =  $this->bookingRepository->find($id);
 
         if ($booking->getPayment() == false) {
 
+<<<<<<< HEAD
+=======
+        if ($booking->getPayment() == false) {
+
+>>>>>>> dfcf6fcc5deb21fb758f88faef5b10ed5a15eb48
             // dd('Pas possible');
             return true;
         } else {
@@ -174,17 +185,26 @@ class CartService
             return false;
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> dfcf6fcc5deb21fb758f88faef5b10ed5a15eb48
 
     /**
      * Permet de réaliser le paiement avec Stripe 
      * 
      * @return void
      */
+<<<<<<< HEAD
     public function GetPaymentWithStripe(): void
     {
         // Set your secret key. Remember to switch to your live secret key in production!
         // See your keys here: https://dashboard.stripe.com/account/apikeys
         \Stripe\Stripe::setApiKey('sk_test_Gkb9vQtFUJoMRRu8whbUszAn00GYXF5MHT');
+=======
+    public function GetPaymentWithStripe()
+    {
+>>>>>>> dfcf6fcc5deb21fb758f88faef5b10ed5a15eb48
         $token = $_POST['stripeToken'];
         $charge = \Stripe\Charge::create([
             'amount' => ($this->getTotal()) * 100,
@@ -199,9 +219,16 @@ class CartService
      * 
      * @return void
      */
+<<<<<<< HEAD
     public function ChangeOfPaymentStatus(): void
     {
         foreach ($this->getFullCart() as $item) {
+=======
+    public function ChangeOfPaymentStatus()
+    {
+
+        foreach ($this->getFullCart() as $id => $item) {
+>>>>>>> dfcf6fcc5deb21fb758f88faef5b10ed5a15eb48
             $item['booking']->setPayment(true);
             $this->manager->persist($item['booking']);
             $this->manager->flush();
@@ -213,7 +240,11 @@ class CartService
      * 
      * @return void
      */
+<<<<<<< HEAD
     public function UnsetPanier(): void
+=======
+    public function UnsetPanier()
+>>>>>>> dfcf6fcc5deb21fb758f88faef5b10ed5a15eb48
     {
         unset($_SESSION['_sf2_attributes']['panier']);
     }

@@ -1,13 +1,10 @@
 @import url('./bootstrap.min.css');
-
-
 // Variables 
-
-$rubik : 'Rubik',
+$rouge: #b71540!important;
+$rubik: 'Rubik',
 sans-serif;
 $blueDark: #05304A;
 $or: #C0B293;
-
 *,
 ::before,
 ::after {
@@ -20,7 +17,6 @@ html {
     font-size: $rubik, Montserrat, sans-serif;
 }
 
-
 .h1 {
     // concerne tout les gros titres des pages 
     text-align: center;
@@ -32,22 +28,18 @@ html {
 
 .card {
     // cartes des annonces 
-
     .card-header {
         // le nom des villes (ad.city) + (ad.rooms)
         font-size: 1.10rem;
     }
-
     .card-title {
         // le titre de l'annonce (ad.title)
         font-size: 1.05rem;
         color: $blueDark;
     }
-
     .card-text {
         // le descriptif de l'annonce (ad.introduction)
         font-size: 0.90rem;
-
         p {
             // présentation d'un propriétaire 
             font-weight: lighter;
@@ -55,13 +47,10 @@ html {
     }
 }
 
-
 nav {
     // menu 
-
     min-height: 5vh;
     // background-color: #05304A !important;
-
     @media (max-width: 767px) {
         min-height: 9vh;
     }
@@ -69,15 +58,11 @@ nav {
 
 .container-class {
     //info 
-       opacity: 0;
-
-
+    opacity: 0;
     .popup-class {
-
         position: absolute;
         bottom: 0;
         height: 65px;
-
         .content-class {
             color: white;
             font-size: 0.9rem;
@@ -85,19 +70,16 @@ nav {
             height: 100%;
             line-height: 50px;
         }
-
         button {
             position: absolute;
             right: 0;
             bottom: 0;
-            font-size: 1em !important; 
+            font-size: 1em !important;
             padding: .3em 1em !important;
-
-            @media (max-width:1200px) {
-               position: inherit;
+            @media (max-width: 1200px) {
+                position: inherit;
             }
         }
-
         @media (max-width:767px) {
             height: auto;
         }
@@ -105,7 +87,6 @@ nav {
 }
 
 #home {
-
     .jumbotron {
         // encadré prenant toute la place avec la photo 
         position: relative;
@@ -115,37 +96,33 @@ nav {
         background-image: url(../../public/images/hut.jpg);
         background-size: cover;
         background-position: center center;
-
+        background-attachment: fixed;
+        background-repeat: no-repeat;
         @media (max-width: 767px) {
             max-height: 91vh;
         }
-
         .contenu-jumbotron {
             /* Technique de l'opacité pour l'animation TweenMax */
             opacity: 0;
         }
     }
-
     h1 {
         // bienvenue sur symbnb ma gueule !
         font-size: 80px;
         color: white;
-
         @media (max-width: 767px) {
             font-size: 40px;
             margin-top: 24px;
         }
     }
-
     .lead {
         // les phrases d'approches 
         color: white;
         font-size: 1.10rem;
         width: 80%;
         margin: auto;
-
         @media (max-width: 767px) {
-            :last-child {
+             :last-child {
                 position: absolute;
                 bottom: 60px;
                 margin-left: auto;
@@ -153,42 +130,32 @@ nav {
                 left: 0;
                 right: 0;
                 width: 60%;
-
             }
         }
-
     }
 }
 
 #dashboard {
     // page d'accueil de l'admin
-
     .alert {
-
         // les tableaux des annonces populaires et des pires annonces 
         @media (max-width: 767px) {
             padding: 0; // enlever padding sinon le tableau ressort de l'écran et déborde
         }
     }
-
     .card-body {
-
         i {
             font-size: 3em; // logo des statistiques en grosse taille et 
-
             @media (max-width: 767px) {
                 font-size: 1.5em; // en plus petite taille niveau smartphone 
             }
         }
-
         .card-title {
             // le titre des statistiques sur les utilisateurs, annonces, réservations et avis
             color: white;
             margin-bottom: 0;
         }
     }
-
-
 }
 
 div.container,
@@ -201,13 +168,11 @@ div.new-title {
     padding: 2em;
     background-size: cover;
     background-position: center center;
-
     h1,
     p {
         color: white;
         text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
     }
-
     .btn {
         margin-top: 2em;
         font-size: 1.5em;
@@ -220,7 +185,6 @@ div.carousel-caption {
 }
 
 .carousel-inner {
-
     // le slider qui affichent les images d'une annonce
     img {
         max-height: 350px; // diminution de la taille de l'image
@@ -231,27 +195,22 @@ div.carousel-caption {
     max-width: 128px;
     max-height: 128px;
     border-radius: 50%;
-
     &.avatar-macro {
         max-width: 100px;
         max-height: 100px;
     }
-
     &.avatar-medium {
         max-width: 64px;
         max-height: 64px;
     }
-
     &.avatar-dashboard {
         max-width: 45px;
         max-height: 45px;
     }
-
     &.avatar-mini {
         max-width: 24px;
         max-height: 24px;
     }
-
     &.avatar-micro {
         max-width: 20px;
         max-height: 20px;
@@ -271,7 +230,6 @@ span.rating i {
     a {
         text-decoration: none;
     }
-
     .btn {
         color: white;
     }
@@ -295,18 +253,14 @@ span.rating i {
     display: none;
 }
 
-
 #account {
-
     // la partie présentation du user 
     .infos {
-
         img,
         span {
             display: block;
             margin: auto;
         }
-
         span {
             width: 21%;
         }
@@ -316,7 +270,7 @@ span.rating i {
 #search_ad_recherche, // bouton de recherche d'annonces 
 #payment-form_Payer,
 #validate // bouton Payer stripe de la page paiement 
-{   
+{
     display: block;
     margin-top: 40px;
     margin-right: auto;
@@ -325,7 +279,6 @@ span.rating i {
 
 // PARTIE ADMINISTRATION 
 .administration {
-
     // concerne tout les tableaux de la partie admin ou il est possible d'exporter des données en fichier csv
     thead {
         tr {
@@ -336,14 +289,12 @@ span.rating i {
             }
         }
     }
-
     tbody {
         tr {
             td {
                 @media (max-width: 767px) {
                     font-size: 5px;
                 }
-
                 a {
                     i {
                         @media (max-width: 767px) {
@@ -352,9 +303,7 @@ span.rating i {
                     }
                 }
             }
-
             .little-size {
-
                 // pour les titres d'annonces prenant trop de place
                 @media (max-width: 767px) {
                     font-size: 4px;
@@ -367,14 +316,12 @@ span.rating i {
 // PARTIE CONNEXION LOGIN
 .box,
 #admin {
-
     .form-group {
         // bloc comprenant le label et input
         position: relative;
         display: flex;
         justify-content: center;
         margin-bottom: 50px;
-
         label {
             position: absolute;
             top: 50%;
@@ -384,12 +331,10 @@ span.rating i {
             font-size: 16px;
             transition: 0.4s ease-out;
             margin-left: 15%;
-
-            @media (max-width: 767px){
+            @media (max-width: 767px) {
                 margin-left: inherit;
             }
         }
-
         input {
             display: block;
             width: 70%;
@@ -401,16 +346,13 @@ span.rating i {
             color: #666;
             font-size: 16px;
             transition: 0.4s ease-out;
-
             &:focus {
                 box-shadow: none !important;
             }
-
-            @media (max-width: 767px){
+            @media (max-width: 767px) {
                 width: 100%;
             }
         }
-
         button {
             display: block;
             width: 70%;
@@ -424,7 +366,6 @@ span.rating i {
             font-weight: 500;
             cursor: pointer;
             transition: 0.4s ease-out;
-
             &:hover {
                 // background-color: $blueDark;
                 // border-color: $blueDark;
@@ -432,12 +373,10 @@ span.rating i {
                 border: 2px solid #fff;
                 color: white;
             }
-
-            @media (max-width: 767px){
+            @media (max-width: 767px) {
                 width: 100%;
             }
         }
-
         /* Animation */
         &:focus-within,
         &.animation {
@@ -446,19 +385,16 @@ span.rating i {
                 transform: translateY(-100%);
                 color: #3D6480;
             }
-
             input {
                 border-bottom-color: #3D6480;
             }
         }
-
     }
 }
 
-.link-register { // vous n'avez pas de compte ? 
-    
+.link-register {
+    // vous n'avez pas de compte ? 
     color: #3D6480;
-
     &:hover {
         color: $blueDark;
         text-decoration: none;
@@ -470,27 +406,22 @@ span.rating i {
     background-color: white;
     border-radius: .25rem !important;
     box-shadow: 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
-    
     h1 {
         // connectez-vous
         color: #666;
         font-size: 1.4rem;
         font-weight: normal;
-
         strong {
             // connectez
             color: #3D6480;
         }
     }
-
     button {
         background-image: linear-gradient(to right, white 50%, #3D6480 50%, $blueDark);
     }
-
-   .email{
-           margin-top: 60px;
+    .email {
+        margin-top: 60px;
     }
-   
 }
 
 #admin {
@@ -500,15 +431,12 @@ span.rating i {
     left: 50%;
     transform: translate(-50%, -50%);   
     width: 500px;
-
     button {
         background-image: linear-gradient(to right, #f8f9fa 50%, #3D6480 50%, $blueDark) !important;
     }
-
     .card-header {
         // block comprenant le titre connexion à administration 
         height: 50px;
-
         h4 {
             line-height: 50px;
             height: 100%;
@@ -516,25 +444,21 @@ span.rating i {
             justify-content: center;
             align-items: center;
             font-size: 1.15rem;
-
             i {
                 // le cadenas devant le titre
                 padding-right: 8px;
                 padding-bottom: 2px;
-
                 @media (max-width: 767px) {
                     padding-bottom: 5px;
                 }
             }
         }
     }
-
     .form-group:last-child {
         // block comprenant le button connexion et le lien retour au site
         position: relative;
         display: flex;
         flex-direction: column;
-
         button {
             // width: 50%;
             margin: auto;
@@ -543,35 +467,29 @@ span.rating i {
             //     width: 80%;
             // }
         }
-
         a {
             position: absolute;
             left: -10px;
             bottom: -70px;
         }
-
     }
-
     @media (max-width: 767px) {
         width: 300px;
     }
 }
 
 footer {
-
     #mentions {
         color: white;
         text-decoration: none;
-       
         span {
-            display:inline-block;
-            border-bottom:1px solid transparent;
-            padding-bottom:1px;
+            display: inline-block;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 1px;
             &:hover {
                 border-color: white;
             }
         }
-        
     }
 }
 
@@ -581,18 +499,33 @@ footer {
 .plus-recherche,
 .voir-annonce,
 .modifier,
-.reserver {
+.reserver,
+.annuler-reservation {
     font-weight: 500;
     font-size: 1rem;
-
     &:hover {
         text-decoration: none;
     }
 }
 
+.btn {
+    border-radius: 50px!important;
+}
+
+.annuler-reservation,
+.btn-danger {
+    background-color: $rouge;
+    color: white!important;
+    border-radius: 50px!important;
+}
+
+.btn-info,
+.btn-primary {
+    background-color: $blueDark!important;
+}
+
 .plus-recherche-panier {
     color: #A0906B;
-
     &:hover {
         text-decoration: none;
         color: $or;
@@ -606,13 +539,10 @@ footer {
     border-radius: 999px;
     padding: 8px 12px;
     color: white;
-
     &:hover {
         color: white;
         background-color: $blueDark;
-
     }
-
     .fa-plus-circle {
         padding-left: 2px;
     }
@@ -622,7 +552,6 @@ footer {
     // pour les buttons en savoir plus pour les propriétaires stars 
     color: #28a745;
     font-size: 1rem;
-
     &:hover {
         color: #28a745;
     }
@@ -633,7 +562,6 @@ footer {
     color: #A0906B;
     font-size: 1.2rem;
     margin-left: 20px;
-
     &:hover {
         color: $or;
     }
@@ -648,12 +576,10 @@ footer {
     // border-radius: 19% 81% 22% 78% / 72% 24% 76% 28% ;
     // border-radius: 62% 38% 43% 57% / 41% 22% 78% 59% ;
     // border-radius: 24% 76% 31% 69% / 45% 14% 86% 55% ;
-
     &:hover {
         color: white;
         background-color: #A0906B;
     }
-
     @media (max-width: 767px) {
         .delete {
             display: none;
@@ -667,7 +593,6 @@ footer {
     border-radius: 999px;
     padding: 8px 12px;
     color: white;
-
     &:hover {
         color: white;
     }
@@ -679,17 +604,14 @@ footer {
     border-radius: 999px;
     padding: 8px 12px;
     color: white;
-
     .fa-exclamation-circle {
         padding-left: 2px;
     }
-
     &:hover {
         color: white;
         background-color: #128C2D;
     }
 }
-
 
 .register {
     // button pour confirmer l'inscription 
@@ -702,13 +624,14 @@ footer {
     color: white;
     border-radius: 999px;
     border: none;
-
     &:hover {
         background-color: #A0906B;
     }
 }
 
+
 /* Icon Pulse Grow => animation bouton EN SAVOIR + sur les annonces */
+
 @-webkit-keyframes hvr-icon-pulse-grow {
     to {
         -webkit-transform: scale(1.3);
@@ -755,32 +678,28 @@ footer {
 
 
 /* Icon Wobble Horizontal => Animation boutons EN SAVOIR + sur les propriétaires et RECHERCHE AVANCÉE */
+
 @-webkit-keyframes hvr-icon-wobble-horizontal {
     16.65% {
         -webkit-transform: translateX(6px);
         transform: translateX(6px);
     }
-
     33.3% {
         -webkit-transform: translateX(-5px);
         transform: translateX(-5px);
     }
-
     49.95% {
         -webkit-transform: translateX(4px);
         transform: translateX(4px);
     }
-
     66.6% {
         -webkit-transform: translateX(-2px);
         transform: translateX(-2px);
     }
-
     83.25% {
         -webkit-transform: translateX(1px);
         transform: translateX(1px);
     }
-
     100% {
         -webkit-transform: translateX(0);
         transform: translateX(0);
@@ -792,27 +711,22 @@ footer {
         -webkit-transform: translateX(6px);
         transform: translateX(6px);
     }
-
     33.3% {
         -webkit-transform: translateX(-5px);
         transform: translateX(-5px);
     }
-
     49.95% {
         -webkit-transform: translateX(4px);
         transform: translateX(4px);
     }
-
     66.6% {
         -webkit-transform: translateX(-2px);
         transform: translateX(-2px);
     }
-
     83.25% {
         -webkit-transform: translateX(1px);
         transform: translateX(1px);
     }
-
     100% {
         -webkit-transform: translateX(0);
         transform: translateX(0);
@@ -849,6 +763,7 @@ footer {
 
 
 /* Icon Forward => Bouton VOIR NOS ANNONCES de la page d'accueil*/
+
 .hvr-icon-forward {
     display: inline-block;
     vertical-align: middle;
@@ -877,7 +792,9 @@ footer {
     transform: translateX(4px);
 }
 
+
 /* Icon Rotate => Bouton CRÉER NOUVELLE ANNONCE */
+
 .hvr-icon-rotate {
     display: inline-block;
     vertical-align: middle;
@@ -906,7 +823,9 @@ footer {
     transform: rotate(-20deg);
 }
 
+
 /* Icon Spin  => Bouton MODIFIER ANNONCE */
+
 .hvr-icon-spin {
     display: inline-block;
     vertical-align: middle;
@@ -931,13 +850,14 @@ footer {
     transform: rotate(360deg);
 }
 
+
 /* Icon Buzz => Bouton JE RÉSERVE */
+
 @-webkit-keyframes hvr-icon-buzz {
     50% {
         -webkit-transform: translateX(3px) rotate(2deg);
         transform: translateX(3px) rotate(2deg);
     }
-
     100% {
         -webkit-transform: translateX(-3px) rotate(-2deg);
         transform: translateX(-3px) rotate(-2deg);
@@ -949,7 +869,6 @@ footer {
         -webkit-transform: translateX(3px) rotate(2deg);
         transform: translateX(3px) rotate(2deg);
     }
-
     100% {
         -webkit-transform: translateX(-3px) rotate(-2deg);
         transform: translateX(-3px) rotate(-2deg);

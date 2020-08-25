@@ -9,7 +9,12 @@
 	{% set author = ad.author %}
 
 	<div class="container d-flex flex-column align-items center">
-		<h1 class="my-5">Votre réservation (n°{{ booking.id }})</h1>
+		<div class="d-flex justify-content-between align-items-center">
+			<h1 class="my-5">Votre réservation (n°{{ booking.id }})</h1>
+			<a title="Télécharger ma réservation" href="{{ path('booking_pdf', { 'id' : booking.id }) }}" class="btn btn-info">
+				<i class="fas fa-download"></i>
+			</a>
+		</div>
 
 		{% if app.request.query.get('success') %}
 			<div class="alert alert-success">
@@ -123,15 +128,19 @@
 						{{ ad.content | raw }}
 					</div>
 
-					<div class="d-flex justify-content-between">
-						<a href="{{ path('ads_show', { 'slug' : ad.slug }) }}" class="btn btn-primary">Plus d'informations</a>
-						<a title="Télécharger ma réservation" href="{{ path('booking_pdf', { 'id' : booking.id }) }}" class="btn btn-info">
-							<i class="fas fa-download"></i>
+					<div
+						class="d-flex justify-content-between">
+						{# <a href="{{ path('ads_show', { 'slug' : ad.slug }) }}" class="btn btn-primary">Plus d'informations</a> #}
+
+						<a href="{{ path('ads_show', { 'slug' : ad.slug }) }}" class="more float-left hvr-icon-pulse-grow">En savoir
+
+							<i class="fas fa-plus-circle hvr-icon"></i>
 						</a>
+
 					</div>
 					<div class="mt-4 d-flex justify-content-between">
-						<a href="{{ path('booking_delete', {'id' : booking.id}) }}" class="btn btn-danger">Annuler la réservation</a>
-						<a href="#" class="btn btn-info">Valider et payer la réservation</a>
+						<a href="{{ path('booking_delete', {'id' : booking.id}) }}" class=" btn btn-danger annuler-reservation">Annuler la réservation</a>
+						<a href="#" class="btn btn-success">Valider et payer la réservation</a>
 					</div>
 				</div>
 			</div>

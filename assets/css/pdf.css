@@ -1,0 +1,64 @@
+#pdf #title {
+  text-align: center;
+  background-color: #158cba;
+  color: white;
+  border-radius: 2px;
+}
+
+#pdf #content-pdf #reservation,
+#pdf #content-pdf #hote,
+#pdf #content-pdf #hebergement {
+  color: #818182;
+}
+
+#pdf #content-pdf #reservation .little-title,
+#pdf #content-pdf #hote .little-title,
+#pdf #content-pdf #hebergement .little-title {
+  color: black;
+}
+
+#pdf #content-pdf #hote {
+  width: 100%;
+}
+
+#pdf #content-pdf #hote .hote-content {
+  width: 100%;
+  margin-left: 39%;
+}
+
+#pdf #content-pdf #hote .hote-content .avatar {
+  border-radius: 100%;
+}
+
+#pdf #content-pdf #hote .hote-content .annonce {
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-left: 30px;
+}
+
+#pdf #content-pdf #hebergement .hebergement-title {
+  text-align: center;
+  padding-top: 30px;
+}
+
+#pdf #content-pdf #hebergement .hebergement-content {
+  width: 100%;
+  position: relative;
+}
+
+#pdf #content-pdf #hebergement .hebergement-content img {
+  max-width: 80%;
+  max-height: 50%;
+  position: absolute;
+  top: 50px;
+  left: 30px;
+}
+
+#pdf #content-pdf #hebergement .hebergement-content .espacement {
+  width: 60%;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/*# sourceMappingURL=pdf.css.map */
