@@ -29,21 +29,22 @@ class RegistrationType extends ApplicationType
             ->add('introduction', TextType::class, $this->getConfiguration("Introduction", "Présentez-vous en quelques mots"))
             ->add('description', TextType::class, $this->getConfiguration("Description détaillée", "C'est le moment de vous présentez
             "))
-            ->add('captcha', CaptchaType::class, 
-            array(
-                'invalid_message' => "Le captcha est invalide, veuillez réessayer",
-                'label' => 'Captcha',
-                'attr' => [
-                'placeholder' => "Veuillez renseigner les caractères affichés sur le captcha"
-                ]
-            ))
+            ->add(
+                'captcha',
+                CaptchaType::class,
+                array(
+                    'invalid_message' => "Le captcha est invalide, veuillez réessayer",
+                    'label' => 'Captcha',
+                    'attr' => [
+                        'placeholder' => "Veuillez renseigner les caractères affichés sur le captcha"
+                    ]
+                )
+            )
             ->add('validate', CheckboxType::class, [
                 'invalid_message' => "Veuillez cocher la case",
                 'label' => 'En vous inscrivant vous acceptez les conditions générales',
                 'required' => true,
-            ])
-            ;
-
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

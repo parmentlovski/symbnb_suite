@@ -320,12 +320,12 @@ class User implements UserInterface
 
     public function getvalidate()
     {
-      return $this->validate;
+        return $this->validate;
     }
-  
+
     public function setvalidate($validate)
     {
-      $this->validate = $validate;
+        $this->validate = $validate;
     }
 
 
@@ -416,6 +416,53 @@ class User implements UserInterface
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime
+     */
+    private $passwordRequestedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /*
+     * Get passwordRequestedAt
+     */
+    public function getPasswordRequestedAt()
+    {
+        return $this->passwordRequestedAt;
+    }
+
+    /*
+     * Set passwordRequestedAt
+     */
+    public function setPasswordRequestedAt($passwordRequestedAt)
+    {
+        $this->passwordRequestedAt = $passwordRequestedAt;
+        return $this;
+    }
+
+    /*
+     * Get token
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /*
+     * Set token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
         return $this;
     }
 }

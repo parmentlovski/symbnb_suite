@@ -26,11 +26,21 @@ class UserRepository extends ServiceEntityRepository
             ->join('a.comments', 'c')
             ->select('u as user, AVG(c.rating) as avgRatings, COUNT(c) as sumComments')
             ->groupBy('u')
-            ->having('sumComments > 3')
+            // TODO: remmetre la limite à 3
+            ->having('sumComments > 1')
             ->orderBy('avgRatings', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+    }
+
+    public function loadUserByUsername($username)
+    {
+        return $this->createQueryBuilder('u')
+            ->where(' u.email = :email')
+            ->setParameter('email', $username)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     // /**

@@ -1,0 +1,6 @@
+swiftmailer:
+    url: "%env(MAILER_URL)%"
+    spool: { type: "memory" }
+    #ajout
+    disable_delivery: true
+    delivery_addresses: ["igalilmi32-04d1a0@inbox.mailtrap.io"]
