@@ -10,8 +10,8 @@ use App\Entity\Image;
 use App\Entity\Booking;
 use App\Entity\Comment;
 use Cocur\Slugify\Slugify;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
