@@ -38,10 +38,10 @@ class AppFixtures extends Fixture
         $manager->persist($adminRole);
 
         $adminUser = new User();
-        $adminUser->setFirstName('Igali')
-            ->setLastName('ILMI AMIR')
-            ->setEmail('igali@gmail.com')
-            ->setHash($this->encoder->encodePassword($adminUser, 'password'))
+        $adminUser->setFirstName('John')
+            ->setLastName('DOE')
+            ->setEmail('test@yahoo.com')
+            ->setHash($this->encoder->encodePassword($adminUser, 'test'))
             ->setPicture('https://randomuser.me/api/portraits/men/54.jpg')
             ->setIntroduction($faker->sentence())
             ->setDescription(('<p>' . join('</p><p>', $faker->paragraphs(5)) . '</p>'))
@@ -125,6 +125,7 @@ class AppFixtures extends Fixture
             $introduction = $faker->paragraph(2);
             $content    = '<p>' . join('</p><p>', $faker->paragraphs(5)) . '</p>';
             $user = $users[mt_rand(0, count($users) - 1)];
+
 
             $ad->setTitle($title)
                 ->setSlug($slug)
