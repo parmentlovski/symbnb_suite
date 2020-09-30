@@ -41,11 +41,11 @@
         "symfony/web-profiler-bundle": "5.0.*",
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "5.0.*",
-        "vich/uploader-bundle": "^1.13"
+        "vich/uploader-bundle": "^1.13",
+        "symfony/dotenv": "5.0.*"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.21",
-        "symfony/dotenv": "5.0.*",
         "symfony/debug-pack": "*",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*"
