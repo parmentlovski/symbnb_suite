@@ -20,10 +20,10 @@ final class Version20200327152946 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        // $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE ad DROP cover_image, CHANGE filename filename VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE user CHANGE picture picture VARCHAR(255) DEFAULT NULL');
+        // $this->addSql('ALTER TABLE ad DROP cover_image, CHANGE filename filename VARCHAR(255) DEFAULT NULL');
+        // $this->addSql('ALTER TABLE user CHANGE picture picture VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
