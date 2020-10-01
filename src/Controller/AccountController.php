@@ -10,7 +10,7 @@ use App\Service\MailerService;
 use App\Form\PasswordUpdateType;
 use App\Repository\UserRepository;
 use App\Form\PasswordForgottenType;
-// use App\Form\ResettingType;
+use App\Form\ResettingType;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\AuthenticityAccountService;
@@ -197,109 +197,109 @@ class AccountController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * Permet de recréer un mot de passe
-    //  * 
-    //  * TODO: trouver une solution pour avoir cette URL "/account/passwordForgotten" sans rentrer en conflit avec la route "account_index"
-    //  * @Route("/passwordForgotten", name="account_passwordForgotten")
-    //  *
-    //  * @return Response
-    //  */
-    // public function passwordForgotten(Request $request, UserRepository $userRepo, AuthenticityAccountService $authenticityAccountService, TokenGeneratorInterface $tokenGenerator, EntityManagerInterface $manager, MailerService $mailer)
-    // {
+    /**
+     * Permet de recréer un mot de passe
+     * 
+     * TODO: trouver une solution pour avoir cette URL "/account/passwordForgotten" sans rentrer en conflit avec la route "account_index"
+     * @Route("/passwordForgotten", name="account_passwordForgotten")
+     *
+     * @return Response
+     */
+    public function passwordForgotten(Request $request, UserRepository $userRepo, AuthenticityAccountService $authenticityAccountService, TokenGeneratorInterface $tokenGenerator, EntityManagerInterface $manager, MailerService $mailer)
+    {
 
-    //     $form = $this->createForm(PasswordForgottenType::class);
+        $form = $this->createForm(PasswordForgottenType::class);
 
-    //     $form->handleRequest($request);
+        $form->handleRequest($request);
 
-    //     $user = $userRepo->loadUserByUsername($form->getData()['email']);
+        $user = $userRepo->loadUserByUsername($form->getData()['email']);
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         dd($form['email']->getData());
-    //         if ($authenticityAccountService->checkEmail($form['email']->getData()) == true) {
-    //             // dump("Vrai");
+        if ($form->isSubmitted() && $form->isValid()) {
+            dd($form['email']->getData());
+            if ($authenticityAccountService->checkEmail($form['email']->getData()) == true) {
+                // dump("Vrai");
 
-    //             // création du token
-    //             $user->setToken($tokenGenerator->generateToken());
-    //             // enregistrement de la date de création du token
-    //             $user->setPasswordRequestedAt(new \Datetime());
-    //             $manager->flush();
+                // création du token
+                $user->setToken($tokenGenerator->generateToken());
+                // enregistrement de la date de création du token
+                $user->setPasswordRequestedAt(new \Datetime());
+                $manager->flush();
 
-    //             // on utilise le service Mailer créé précédemment
-    //             $bodyMail = $mailer->createBodyMail('account/mail.html.twig', [
-    //                 'user' => $user
-    //             ]);
-    //             $mailer->sendMessage('from@email.com', $user->getEmail(), 'renouvellement du mot de passe', $bodyMail);
-    //             $this->addFlash(
-    //                 'success',
-    //                 "Un mail va vous être envoyé afin que vous puissiez renouveller votre mot de passe. Le lien que vous recevrez sera valide 24h."
-    //             );
+                // on utilise le service Mailer créé précédemment
+                $bodyMail = $mailer->createBodyMail('account/mail.html.twig', [
+                    'user' => $user
+                ]);
+                $mailer->sendMessage('from@email.com', $user->getEmail(), 'renouvellement du mot de passe', $bodyMail);
+                $this->addFlash(
+                    'success',
+                    "Un mail va vous être envoyé afin que vous puissiez renouveller votre mot de passe. Le lien que vous recevrez sera valide 24h."
+                );
 
-    //             return $this->redirectToRoute("account_login");
-    //         } else {
-    //             $this->addFlash(
-    //                 'danger',
-    //                 "Adresse mail invalide"
-    //             );
-    //         }
-    //     }
+                return $this->redirectToRoute("account_login");
+            } else {
+                $this->addFlash(
+                    'danger',
+                    "Adresse mail invalide"
+                );
+            }
+        }
 
-    //     return $this->render('account/passwordForgotten.html.twig', [
-    //         'form' => $form->createView()
-    //     ]);
-    // }
+        return $this->render('account/passwordForgotten.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 
     // si supérieur à 10min, retourne false
     // sinon retourne false
-    // private function isRequestInTime(\Datetime $passwordRequestedAt = null)
-    // {
-    //     if ($passwordRequestedAt === null) {
-    //         return false;
-    //     }
+    private function isRequestInTime(\Datetime $passwordRequestedAt = null)
+    {
+        if ($passwordRequestedAt === null) {
+            return false;
+        }
 
-    //     $now = new \DateTime();
-    //     $interval = $now->getTimestamp() - $passwordRequestedAt->getTimestamp();
+        $now = new \DateTime();
+        $interval = $now->getTimestamp() - $passwordRequestedAt->getTimestamp();
 
-    //     $daySeconds = 60 * 10;
-    //     $response = $interval > $daySeconds ? false : $reponse = true;
-    //     return $response;
-    // }
+        $daySeconds = 60 * 10;
+        $response = $interval > $daySeconds ? false : $reponse = true;
+        return $response;
+    }
 
     /**
      * @Route("/account_resetting/{id}/{token}", name="resetting")
      */
-    // public function resetting(User $user, $token, Request $request, UserPasswordEncoderInterface $passwordEncoder)
-    // {
-    //     // interdit l'accès à la page si:
-    //     // le token associé au membre est null
-    //     // le token enregistré en base et le token présent dans l'url ne sont pas égaux
-    //     // le token date de plus de 10 minutes
-    //     if ($user->getToken() === null || $token !== $user->getToken() || !$this->isRequestInTime($user->getPasswordRequestedAt())) {
-    //         throw new AccessDeniedHttpException();
-    //     }
+    public function resetting(User $user, $token, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        // interdit l'accès à la page si:
+        // le token associé au membre est null
+        // le token enregistré en base et le token présent dans l'url ne sont pas égaux
+        // le token date de plus de 10 minutes
+        if ($user->getToken() === null || $token !== $user->getToken() || !$this->isRequestInTime($user->getPasswordRequestedAt())) {
+            throw new AccessDeniedHttpException();
+        }
 
-    //     $form = $this->createForm(ResettingType::class, $user);
-    //     $form->handleRequest($request);
+        $form = $this->createForm(ResettingType::class, $user);
+        $form->handleRequest($request);
 
-    //     // if ($form->isSubmitted() && $form->isValid()) {
-    //     //     $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-    //     //     $user->setHash($password);
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+        //     $user->setHash($password);
 
-    //     //     // réinitialisation du token à null pour qu'il ne soit plus réutilisable
-    //     //     $user->setToken(null);
-    //     //     $user->setPasswordRequestedAt(null);
+        //     // réinitialisation du token à null pour qu'il ne soit plus réutilisable
+        //     $user->setToken(null);
+        //     $user->setPasswordRequestedAt(null);
 
-    //     //     $em = $this->getDoctrine()->getManager();
-    //     //     $em->persist($user);
-    //     //     $em->flush();
+        //     $em = $this->getDoctrine()->getManager();
+        //     $em->persist($user);
+        //     $em->flush();
 
-    //     //     $request->getSession()->getFlashBag()->add('success', "Votre mot de passe a été renouvelé.");
+        //     $request->getSession()->getFlashBag()->add('success', "Votre mot de passe a été renouvelé.");
 
-    //     //     return $this->redirectToRoute('connexion');
-    //     // }
+        //     return $this->redirectToRoute('connexion');
+        // }
 
-    //     return $this->render('resetting/index.html.twig', [
-    //         'form' => $form->createView()
-    //     ]);
-    // }
+        return $this->render('resetting/index.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
