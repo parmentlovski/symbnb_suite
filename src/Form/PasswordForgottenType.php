@@ -10,7 +10,7 @@ use App\Form\ApplicationType;
 // use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class PasswordForgottenType extends ApplicationType
-// {
+{
 //     public function buildForm(FormBuilderInterface $builder, array $options)
 //     {
 //         $builder
