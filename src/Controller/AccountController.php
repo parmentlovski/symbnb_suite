@@ -197,57 +197,57 @@ class AccountController extends AbstractController
         ]);
     }
 
-    /**
-     * Permet de recréer un mot de passe
-     * 
-     * TODO: trouver une solution pour avoir cette URL "/account/passwordForgotten" sans rentrer en conflit avec la route "account_index"
-     * @Route("/passwordForgotten", name="account_passwordForgotten")
-     *
-     * @return Response
-     */
-    public function passwordForgotten(Request $request, UserRepository $userRepo, AuthenticityAccountService $authenticityAccountService, TokenGeneratorInterface $tokenGenerator, EntityManagerInterface $manager, MailerService $mailer)
-    {
+    // /**
+    //  * Permet de recréer un mot de passe
+    //  * 
+    //  * TODO: trouver une solution pour avoir cette URL "/account/passwordForgotten" sans rentrer en conflit avec la route "account_index"
+    //  * @Route("/passwordForgotten", name="account_passwordForgotten")
+    //  *
+    //  * @return Response
+    //  */
+    // public function passwordForgotten(Request $request, UserRepository $userRepo, AuthenticityAccountService $authenticityAccountService, TokenGeneratorInterface $tokenGenerator, EntityManagerInterface $manager, MailerService $mailer)
+    // {
 
-        $form = $this->createForm(PasswordForgottenType::class);
+    //     $form = $this->createForm(PasswordForgottenType::class);
 
-        $form->handleRequest($request);
+    //     $form->handleRequest($request);
 
-        $user = $userRepo->loadUserByUsername($form->getData()['email']);
+    //     $user = $userRepo->loadUserByUsername($form->getData()['email']);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            dd($form['email']->getData());
-            if ($authenticityAccountService->checkEmail($form['email']->getData()) == true) {
-                // dump("Vrai");
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         dd($form['email']->getData());
+    //         if ($authenticityAccountService->checkEmail($form['email']->getData()) == true) {
+    //             // dump("Vrai");
 
-                // création du token
-                $user->setToken($tokenGenerator->generateToken());
-                // enregistrement de la date de création du token
-                $user->setPasswordRequestedAt(new \Datetime());
-                $manager->flush();
+    //             // création du token
+    //             $user->setToken($tokenGenerator->generateToken());
+    //             // enregistrement de la date de création du token
+    //             $user->setPasswordRequestedAt(new \Datetime());
+    //             $manager->flush();
 
-                // on utilise le service Mailer créé précédemment
-                $bodyMail = $mailer->createBodyMail('account/mail.html.twig', [
-                    'user' => $user
-                ]);
-                $mailer->sendMessage('from@email.com', $user->getEmail(), 'renouvellement du mot de passe', $bodyMail);
-                $this->addFlash(
-                    'success',
-                    "Un mail va vous être envoyé afin que vous puissiez renouveller votre mot de passe. Le lien que vous recevrez sera valide 24h."
-                );
+    //             // on utilise le service Mailer créé précédemment
+    //             $bodyMail = $mailer->createBodyMail('account/mail.html.twig', [
+    //                 'user' => $user
+    //             ]);
+    //             $mailer->sendMessage('from@email.com', $user->getEmail(), 'renouvellement du mot de passe', $bodyMail);
+    //             $this->addFlash(
+    //                 'success',
+    //                 "Un mail va vous être envoyé afin que vous puissiez renouveller votre mot de passe. Le lien que vous recevrez sera valide 24h."
+    //             );
 
-                return $this->redirectToRoute("account_login");
-            } else {
-                $this->addFlash(
-                    'danger',
-                    "Adresse mail invalide"
-                );
-            }
-        }
+    //             return $this->redirectToRoute("account_login");
+    //         } else {
+    //             $this->addFlash(
+    //                 'danger',
+    //                 "Adresse mail invalide"
+    //             );
+    //         }
+    //     }
 
-        return $this->render('account/passwordForgotten.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
+    //     return $this->render('account/passwordForgotten.html.twig', [
+    //         'form' => $form->createView()
+    //     ]);
+    // }
 
     // si supérieur à 10min, retourne false
     // sinon retourne false
