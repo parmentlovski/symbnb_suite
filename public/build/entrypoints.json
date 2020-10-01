@@ -1,0 +1,41 @@
+{
+  "entrypoints": {
+    "css/app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/css/app.js"
+      ],
+      "css": [
+        "/build/css/app.css"
+      ]
+    },
+    "js/app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~js/app.js",
+        "/build/js/app.js"
+      ]
+    },
+    "js/ad": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~js/ad.js",
+        "/build/js/ad.js"
+      ]
+    },
+    "js/alert": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~js/alert~js/info.js",
+        "/build/js/alert.js"
+      ]
+    },
+    "js/info": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~js/alert~js/info.js",
+        "/build/js/info.js"
+      ]
+    }
+  }
+}
