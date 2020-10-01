@@ -23,7 +23,7 @@ final class Version20200508160813 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE ad CHANGE filename filename VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE booking ADD payment TINYINT(1) NOT NULL');
+        // $this->addSql('ALTER TABLE booking ADD payment TINYINT(1) NOT NULL');
         $this->addSql('ALTER TABLE user CHANGE picture picture VARCHAR(255) DEFAULT NULL');
     }
 
