@@ -21,7 +21,7 @@ final class Version20200930150327 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE migration_versions');
-        $this->addSql('ALTER TABLE ad DROP cover_image');
+        // $this->addSql('ALTER TABLE ad DROP cover_image');
         $this->addSql('ALTER TABLE booking ADD payment TINYINT(1) NOT NULL');
     }
 
