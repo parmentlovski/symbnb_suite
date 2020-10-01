@@ -1,11 +1,11 @@
 <?php
 
-// namespace App\Service;
+namespace App\Service;
 
-// use App\Repository\UserRepository;
+use App\Repository\UserRepository;
 
-// class AuthenticityAccountService
-// {
+class AuthenticityAccountService
+{
 
 //     public function __construct(UserRepository $userRepo)
 //     {
@@ -28,4 +28,4 @@
 //             }
 //         }
 //     }
-// } 
+} 
