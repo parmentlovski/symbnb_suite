@@ -19,6 +19,7 @@
         "symfony/asset": "5.0.*",
         "symfony/console": "5.0.*",
         "symfony/debug-bundle": "5.0.*",
+        "symfony/dotenv": "5.0.*",
         "symfony/expression-language": "5.0.*",
         "symfony/flex": "^1.3.1",
         "symfony/form": "5.0.*",
@@ -26,6 +27,7 @@
         "symfony/http-client": "5.0.*",
         "symfony/intl": "5.0.*",
         "symfony/mailer": "5.0.*",
+        "symfony/maker-bundle": "^1.21",
         "symfony/monolog-bundle": "^3.1",
         "symfony/notifier": "5.0.*",
         "symfony/orm-pack": "*",
@@ -41,11 +43,9 @@
         "symfony/web-profiler-bundle": "5.0.*",
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "5.0.*",
-        "symfony/maker-bundle": "^1.21",
         "vich/uploader-bundle": "^1.13"
     },
     "require-dev": {
-        "symfony/dotenv": "5.0.*",
         "symfony/debug-pack": "*",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*"
