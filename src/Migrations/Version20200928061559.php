@@ -21,7 +21,7 @@ final class Version20200928061559 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE ad CHANGE filename filename VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE user DROP password_requested_at, DROP token, CHANGE picture picture VARCHAR(255) DEFAULT NULL');
+        // $this->addSql('ALTER TABLE user DROP password_requested_at, DROP token, CHANGE picture picture VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
