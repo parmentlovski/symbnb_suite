@@ -10,7 +10,7 @@ use App\Service\MailerService;
 use App\Form\PasswordUpdateType;
 use App\Repository\UserRepository;
 use App\Form\PasswordForgottenType;
-use App\Form\ResettingType;
+// use App\Form\ResettingType;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\AuthenticityAccountService;
@@ -251,55 +251,55 @@ class AccountController extends AbstractController
 
     // si supérieur à 10min, retourne false
     // sinon retourne false
-    private function isRequestInTime(\Datetime $passwordRequestedAt = null)
-    {
-        if ($passwordRequestedAt === null) {
-            return false;
-        }
+    // private function isRequestInTime(\Datetime $passwordRequestedAt = null)
+    // {
+    //     if ($passwordRequestedAt === null) {
+    //         return false;
+    //     }
 
-        $now = new \DateTime();
-        $interval = $now->getTimestamp() - $passwordRequestedAt->getTimestamp();
+    //     $now = new \DateTime();
+    //     $interval = $now->getTimestamp() - $passwordRequestedAt->getTimestamp();
 
-        $daySeconds = 60 * 10;
-        $response = $interval > $daySeconds ? false : $reponse = true;
-        return $response;
-    }
+    //     $daySeconds = 60 * 10;
+    //     $response = $interval > $daySeconds ? false : $reponse = true;
+    //     return $response;
+    // }
 
     /**
      * @Route("/account_resetting/{id}/{token}", name="resetting")
      */
-    public function resetting(User $user, $token, Request $request, UserPasswordEncoderInterface $passwordEncoder)
-    {
-        // interdit l'accès à la page si:
-        // le token associé au membre est null
-        // le token enregistré en base et le token présent dans l'url ne sont pas égaux
-        // le token date de plus de 10 minutes
-        if ($user->getToken() === null || $token !== $user->getToken() || !$this->isRequestInTime($user->getPasswordRequestedAt())) {
-            throw new AccessDeniedHttpException();
-        }
+    // public function resetting(User $user, $token, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    // {
+    //     // interdit l'accès à la page si:
+    //     // le token associé au membre est null
+    //     // le token enregistré en base et le token présent dans l'url ne sont pas égaux
+    //     // le token date de plus de 10 minutes
+    //     if ($user->getToken() === null || $token !== $user->getToken() || !$this->isRequestInTime($user->getPasswordRequestedAt())) {
+    //         throw new AccessDeniedHttpException();
+    //     }
 
-        $form = $this->createForm(ResettingType::class, $user);
-        $form->handleRequest($request);
+    //     $form = $this->createForm(ResettingType::class, $user);
+    //     $form->handleRequest($request);
 
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-        //     $user->setHash($password);
+    //     // if ($form->isSubmitted() && $form->isValid()) {
+    //     //     $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+    //     //     $user->setHash($password);
 
-        //     // réinitialisation du token à null pour qu'il ne soit plus réutilisable
-        //     $user->setToken(null);
-        //     $user->setPasswordRequestedAt(null);
+    //     //     // réinitialisation du token à null pour qu'il ne soit plus réutilisable
+    //     //     $user->setToken(null);
+    //     //     $user->setPasswordRequestedAt(null);
 
-        //     $em = $this->getDoctrine()->getManager();
-        //     $em->persist($user);
-        //     $em->flush();
+    //     //     $em = $this->getDoctrine()->getManager();
+    //     //     $em->persist($user);
+    //     //     $em->flush();
 
-        //     $request->getSession()->getFlashBag()->add('success', "Votre mot de passe a été renouvelé.");
+    //     //     $request->getSession()->getFlashBag()->add('success', "Votre mot de passe a été renouvelé.");
 
-        //     return $this->redirectToRoute('connexion');
-        // }
+    //     //     return $this->redirectToRoute('connexion');
+    //     // }
 
-        return $this->render('resetting/index.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
+    //     return $this->render('resetting/index.html.twig', [
+    //         'form' => $form->createView()
+    //     ]);
+    // }
 }
